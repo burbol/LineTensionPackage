@@ -48,6 +48,5 @@ with open(outputfile, 'w') as myfile:
         print >> myfile, cell['source']
         print >> myfile, " \n",  " \n",  " \n"
         
-        /Users/burbol2/GitHub/scripts/Python/topfile_creation-cuda.ipynb
 
 
