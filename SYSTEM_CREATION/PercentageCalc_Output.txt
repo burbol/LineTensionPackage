@@ -1,0 +1,568 @@
+False 4 16 16.0 0.2
+total number of oxygens =  16.0
+total number of carbons =  64
+Number of carbons in x-direction = Nx =  4
+Number of carbons in y-direction = Ny =  16
+Exact percentage =  0.2
+Rounded percentage =  0.2
+for n =  1 the percentage is =  1.25
+for n =  2 the percentage is =  2.5
+for n =  3 the percentage is =  3.75
+for n =  4 the percentage is =  5.0
+for n =  5 the percentage is =  6.25
+for n =  6 the percentage is =  7.5
+for n =  7 the percentage is =  8.75
+for n =  8 the percentage is =  10.0
+for n =  9 the percentage is =  11.25
+for n =  10 the percentage is =  12.5
+for n =  11 the percentage is =  13.75
+for n =  12 the percentage is =  15.0
+for n =  13 the percentage is =  16.25
+for n =  14 the percentage is =  17.5
+for n =  15 the percentage is =  18.75
+for n =  16 the percentage is =  20.0
+for n =  17 the percentage is =  21.25
+for n =  18 the percentage is =  22.5
+for n =  19 the percentage is =  23.75
+for n =  20 the percentage is =  25.0
+for n =  21 the percentage is =  26.25
+for n =  22 the percentage is =  27.5
+for n =  23 the percentage is =  28.75
+for n =  24 the percentage is =  30.0
+for n =  25 the percentage is =  31.25
+for n =  26 the percentage is =  32.5
+for n =  27 the percentage is =  33.75
+for n =  28 the percentage is =  35.0
+for n =  29 the percentage is =  36.25
+for n =  30 the percentage is =  37.5
+for n =  31 the percentage is =  38.75
+for n =  32 the percentage is =  40.0
+for n =  33 the percentage is =  41.25
+for n =  34 the percentage is =  42.5
+for n =  35 the percentage is =  43.75
+for n =  36 the percentage is =  45.0
+for n =  37 the percentage is =  46.25
+for n =  38 the percentage is =  47.5
+for n =  39 the percentage is =  48.75
+for n =  40 the percentage is =  50.0
+for n =  41 the percentage is =  51.25
+for n =  42 the percentage is =  52.5
+for n =  43 the percentage is =  53.75
+for n =  44 the percentage is =  55.0
+for n =  45 the percentage is =  56.25
+for n =  46 the percentage is =  57.5
+for n =  47 the percentage is =  58.75
+for n =  48 the percentage is =  60.0
+99.0 1.0
+49.0 2.0
+24.0 4.0
+19.0 5.0
+9.0 10.0
+8.09090909091 11.0
+4.0 20.0
+3.0 25.0
+2.0303030303 33.0
+1.94117647059 34.0
+1.08333333333 48.0
+1.04081632653 49.0
+1.0 50.0
+0.960784313725 51.0
+0.923076923077 52.0
+197.014925373 5
+set([1, 197])
+197
+[1, 2, 3, 6, 9, 18]
+i*j= 4  for i= 2  and j= 2
+i*j= 8  for i= 2  and j= 4
+i*j= 10  for i= 2  and j= 5
+i*j= 16  for i= 2  and j= 8
+i*j= 20  for i= 2  and j= 10
+i*j= 32  for i= 2  and j= 16
+i*j= 40  for i= 2  and j= 20
+i*j= 80  for i= 2  and j= 40
+i*j= 8  for i= 4  and j= 2
+i*j= 16  for i= 4  and j= 4
+i*j= 20  for i= 4  and j= 5
+i*j= 32  for i= 4  and j= 8
+i*j= 40  for i= 4  and j= 10
+i*j= 64  for i= 4  and j= 16
+i*j= 80  for i= 4  and j= 20
+i*j= 10  for i= 5  and j= 2
+i*j= 20  for i= 5  and j= 4
+i*j= 25  for i= 5  and j= 5
+i*j= 40  for i= 5  and j= 8
+i*j= 50  for i= 5  and j= 10
+i*j= 80  for i= 5  and j= 16
+i*j= 16  for i= 8  and j= 2
+i*j= 32  for i= 8  and j= 4
+i*j= 40  for i= 8  and j= 5
+i*j= 64  for i= 8  and j= 8
+i*j= 80  for i= 8  and j= 10
+i*j= 20  for i= 10  and j= 2
+i*j= 40  for i= 10  and j= 4
+i*j= 50  for i= 10  and j= 5
+i*j= 80  for i= 10  and j= 8
+i*j= 32  for i= 16  and j= 2
+i*j= 64  for i= 16  and j= 4
+i*j= 80  for i= 16  and j= 5
+i*j= 40  for i= 20  and j= 2
+i*j= 80  for i= 20  and j= 4
+i*j= 80  for i= 40  and j= 2
+for percentage =  1 i is =  100.0
+for percentage =  2 i is =  50.0
+for percentage =  3 i is =  33.3333333333
+for percentage =  4 i is =  25.0
+for percentage =  5 i is =  20.0
+for percentage =  6 i is =  16.6666666667
+for percentage =  7 i is =  14.2857142857
+for percentage =  8 i is =  12.5
+for percentage =  9 i is =  11.1111111111
+for percentage =  10 i is =  10.0
+for percentage =  11 i is =  9.09090909091
+for percentage =  12 i is =  8.33333333333
+for percentage =  13 i is =  7.69230769231
+for percentage =  14 i is =  7.14285714286
+for percentage =  15 i is =  6.66666666667
+for percentage =  16 i is =  6.25
+for percentage =  17 i is =  5.88235294118
+for percentage =  18 i is =  5.55555555556
+for percentage =  19 i is =  5.26315789474
+for percentage =  20 i is =  5.0
+for percentage =  21 i is =  4.7619047619
+for percentage =  22 i is =  4.54545454545
+for percentage =  23 i is =  4.34782608696
+for percentage =  24 i is =  4.16666666667
+for percentage =  25 i is =  4.0
+for percentage =  26 i is =  3.84615384615
+for percentage =  27 i is =  3.7037037037
+for percentage =  28 i is =  3.57142857143
+for percentage =  29 i is =  3.44827586207
+for percentage =  30 i is =  3.33333333333
+for percentage =  31 i is =  3.22580645161
+for percentage =  32 i is =  3.125
+for percentage =  33 i is =  3.0303030303
+for percentage =  34 i is =  2.94117647059
+for percentage =  35 i is =  2.85714285714
+for percentage =  36 i is =  2.77777777778
+for percentage =  37 i is =  2.7027027027
+for percentage =  38 i is =  2.63157894737
+for percentage =  39 i is =  2.5641025641
+for percentage =  40 i is =  2.5
+for percentage =  41 i is =  2.43902439024
+for percentage =  42 i is =  2.38095238095
+for percentage =  43 i is =  2.32558139535
+for percentage =  44 i is =  2.27272727273
+for percentage =  45 i is =  2.22222222222
+for percentage =  46 i is =  2.17391304348
+for percentage =  47 i is =  2.12765957447
+for percentage =  48 i is =  2.08333333333
+for percentage =  49 i is =  2.04081632653
+for percentage =  50 i is =  2.0
+for percentage =  51 i is =  1.96078431373
+for percentage =  52 i is =  1.92307692308
+for percentage =  53 i is =  1.88679245283
+for percentage =  54 i is =  1.85185185185
+for percentage =  55 i is =  1.81818181818
+for percentage =  56 i is =  1.78571428571
+for percentage =  57 i is =  1.75438596491
+for percentage =  58 i is =  1.72413793103
+for percentage =  59 i is =  1.69491525424
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  54
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  54
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 3 exact p= 0.0  and carbons=  54
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 6 exact p= 0.0  and carbons=  54
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 9 exact p= 0.0  and carbons=  54
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 18 exact p= 0.0  and carbons=  54
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  55
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 5 exact p= 0.0  and carbons=  55
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 11 exact p= 0.0  and carbons=  55
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  56
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  56
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 4 exact p= 0.0  and carbons=  56
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 7 exact p= 0.0  and carbons=  56
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 8 exact p= 0.0  and carbons=  56
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 14 exact p= 0.0  and carbons=  56
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  57
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 3 exact p= 0.0  and carbons=  57
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 19 exact p= 0.0  and carbons=  57
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  58
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  58
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  59
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  60
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  60
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 3 exact p= 0.0  and carbons=  60
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 4 exact p= 0.0  and carbons=  60
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 5 exact p= 0.0  and carbons=  60
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 6 exact p= 0.0  and carbons=  60
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 10 exact p= 0.0  and carbons=  60
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 12 exact p= 0.0  and carbons=  60
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 15 exact p= 0.0  and carbons=  60
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 20 exact p= 0.0  and carbons=  60
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  61
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  62
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  62
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  63
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 3 exact p= 0.0  and carbons=  63
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 7 exact p= 0.0  and carbons=  63
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 9 exact p= 0.0  and carbons=  63
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 21 exact p= 0.0  and carbons=  63
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  64
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  64
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 4 exact p= 0.0  and carbons=  64
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 8 exact p= 0.0  and carbons=  64
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 16 exact p= 0.0  and carbons=  64
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  65
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 5 exact p= 0.0  and carbons=  65
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 13 exact p= 0.0  and carbons=  65
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  66
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  66
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 3 exact p= 0.0  and carbons=  66
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 6 exact p= 0.0  and carbons=  66
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 11 exact p= 0.0  and carbons=  66
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 22 exact p= 0.0  and carbons=  66
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  67
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  68
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  68
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 4 exact p= 0.0  and carbons=  68
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 17 exact p= 0.0  and carbons=  68
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  69
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 3 exact p= 0.0  and carbons=  69
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 23 exact p= 0.0  and carbons=  69
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  70
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  70
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 5 exact p= 0.0  and carbons=  70
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 7 exact p= 0.0  and carbons=  70
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 10 exact p= 0.0  and carbons=  70
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 14 exact p= 0.0  and carbons=  70
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  71
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  72
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  72
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 3 exact p= 0.0  and carbons=  72
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 4 exact p= 0.0  and carbons=  72
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 6 exact p= 0.0  and carbons=  72
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 8 exact p= 0.0  and carbons=  72
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 9 exact p= 0.0  and carbons=  72
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 12 exact p= 0.0  and carbons=  72
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 18 exact p= 0.0  and carbons=  72
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 24 exact p= 0.0  and carbons=  72
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  73
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  74
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  74
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  75
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 3 exact p= 0.0  and carbons=  75
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 5 exact p= 0.0  and carbons=  75
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 15 exact p= 0.0  and carbons=  75
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 25 exact p= 0.0  and carbons=  75
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  76
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  76
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 4 exact p= 0.0  and carbons=  76
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 19 exact p= 0.0  and carbons=  76
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  77
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 7 exact p= 0.0  and carbons=  77
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 11 exact p= 0.0  and carbons=  77
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  78
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  78
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 3 exact p= 0.0  and carbons=  78
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 6 exact p= 0.0  and carbons=  78
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 13 exact p= 0.0  and carbons=  78
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 26 exact p= 0.0  and carbons=  78
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  79
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  80
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  80
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 4 exact p= 0.0  and carbons=  80
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 5 exact p= 0.0  and carbons=  80
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 8 exact p= 0.0  and carbons=  80
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 10 exact p= 0.0  and carbons=  80
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 16 exact p= 0.0  and carbons=  80
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 20 exact p= 0.0  and carbons=  80
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  81
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 3 exact p= 0.0  and carbons=  81
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 9 exact p= 0.0  and carbons=  81
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 27 exact p= 0.0  and carbons=  81
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  82
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  82
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  83
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  84
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  84
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 3 exact p= 0.0  and carbons=  84
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 4 exact p= 0.0  and carbons=  84
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 6 exact p= 0.0  and carbons=  84
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 7 exact p= 0.0  and carbons=  84
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 12 exact p= 0.0  and carbons=  84
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 14 exact p= 0.0  and carbons=  84
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 21 exact p= 0.0  and carbons=  84
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 28 exact p= 0.0  and carbons=  84
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  85
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 5 exact p= 0.0  and carbons=  85
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 17 exact p= 0.0  and carbons=  85
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  86
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  86
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  87
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 3 exact p= 0.0  and carbons=  87
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 29 exact p= 0.0  and carbons=  87
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  88
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 2 exact p= 0.0  and carbons=  88
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 4 exact p= 0.0  and carbons=  88
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 8 exact p= 0.0  and carbons=  88
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 11 exact p= 0.0  and carbons=  88
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 22 exact p= 0.0  and carbons=  88
+oxygens= 0.0 nxoxy= 0.0 nyoxy= 1 exact p= 0.0  and carbons=  89
+oxygens= 2.01 nxoxy= 2.01 nyoxy= 1 exact p= 0.03  and carbons=  67
+oxygens= 3.0 nxoxy= 3.0 nyoxy= 1 exact p= 0.04  and carbons=  75
+oxygens= 3.0 nxoxy= 1.0 nyoxy= 3 exact p= 0.04  and carbons=  75
+oxygens= 3.0 nxoxy= 3.0 nyoxy= 1 exact p= 0.05  and carbons=  60
+oxygens= 3.0 nxoxy= 1.0 nyoxy= 3 exact p= 0.05  and carbons=  60
+oxygens= 4.0 nxoxy= 4.0 nyoxy= 1 exact p= 0.05  and carbons=  80
+oxygens= 4.0 nxoxy= 2.0 nyoxy= 2 exact p= 0.05  and carbons=  80
+oxygens= 4.0 nxoxy= 1.0 nyoxy= 4 exact p= 0.05  and carbons=  80
+oxygens= 3.99 nxoxy= 3.99 nyoxy= 1 exact p= 0.07  and carbons=  57
+oxygens= 6.02 nxoxy= 3.01 nyoxy= 2 exact p= 0.07  and carbons=  86
+oxygens= 6.0 nxoxy= 6.0 nyoxy= 1 exact p= 0.08  and carbons=  75
+oxygens= 6.0 nxoxy= 2.0 nyoxy= 3 exact p= 0.08  and carbons=  75
+oxygens= 8.01 nxoxy= 8.01 nyoxy= 1 exact p= 0.09  and carbons=  89
+oxygens= 6.0 nxoxy= 6.0 nyoxy= 1 exact p= 0.1  and carbons=  60
+oxygens= 6.0 nxoxy= 3.0 nyoxy= 2 exact p= 0.1  and carbons=  60
+oxygens= 6.0 nxoxy= 2.0 nyoxy= 3 exact p= 0.1  and carbons=  60
+oxygens= 6.0 nxoxy= 1.0 nyoxy= 6 exact p= 0.1  and carbons=  60
+oxygens= 7.0 nxoxy= 7.0 nyoxy= 1 exact p= 0.1  and carbons=  70
+oxygens= 7.0 nxoxy= 1.0 nyoxy= 7 exact p= 0.1  and carbons=  70
+oxygens= 8.0 nxoxy= 8.0 nyoxy= 1 exact p= 0.1  and carbons=  80
+oxygens= 8.0 nxoxy= 4.0 nyoxy= 2 exact p= 0.1  and carbons=  80
+oxygens= 8.0 nxoxy= 2.0 nyoxy= 4 exact p= 0.1  and carbons=  80
+oxygens= 8.0 nxoxy= 1.0 nyoxy= 8 exact p= 0.1  and carbons=  80
+oxygens= 9.0 nxoxy= 9.0 nyoxy= 1 exact p= 0.12  and carbons=  75
+oxygens= 9.0 nxoxy= 3.0 nyoxy= 3 exact p= 0.12  and carbons=  75
+oxygens= 8.97 nxoxy= 2.99 nyoxy= 3 exact p= 0.13  and carbons=  69
+oxygens= 10.01 nxoxy= 10.01 nyoxy= 1 exact p= 0.13  and carbons=  77
+oxygens= 9.0 nxoxy= 9.0 nyoxy= 1 exact p= 0.15  and carbons=  60
+oxygens= 9.0 nxoxy= 3.0 nyoxy= 3 exact p= 0.15  and carbons=  60
+oxygens= 12.0 nxoxy= 12.0 nyoxy= 1 exact p= 0.15  and carbons=  80
+oxygens= 12.0 nxoxy= 6.0 nyoxy= 2 exact p= 0.15  and carbons=  80
+oxygens= 12.0 nxoxy= 3.0 nyoxy= 4 exact p= 0.15  and carbons=  80
+oxygens= 12.0 nxoxy= 12.0 nyoxy= 1 exact p= 0.16  and carbons=  75
+oxygens= 12.0 nxoxy= 4.0 nyoxy= 3 exact p= 0.16  and carbons=  75
+oxygens= 11.97 nxoxy= 3.99 nyoxy= 3 exact p= 0.19  and carbons=  63
+oxygens= 15.01 nxoxy= 15.01 nyoxy= 1 exact p= 0.19  and carbons=  79
+oxygens= 15.96 nxoxy= 3.99 nyoxy= 4 exact p= 0.19  and carbons=  84
+oxygens= 11.0 nxoxy= 11.0 nyoxy= 1 exact p= 0.2  and carbons=  55
+oxygens= 11.0 nxoxy= 1.0 nyoxy= 11 exact p= 0.2  and carbons=  55
+oxygens= 12.0 nxoxy= 12.0 nyoxy= 1 exact p= 0.2  and carbons=  60
+oxygens= 12.0 nxoxy= 6.0 nyoxy= 2 exact p= 0.2  and carbons=  60
+oxygens= 12.0 nxoxy= 4.0 nyoxy= 3 exact p= 0.2  and carbons=  60
+oxygens= 12.0 nxoxy= 3.0 nyoxy= 4 exact p= 0.2  and carbons=  60
+oxygens= 12.0 nxoxy= 2.0 nyoxy= 6 exact p= 0.2  and carbons=  60
+oxygens= 12.0 nxoxy= 1.0 nyoxy= 12 exact p= 0.2  and carbons=  60
+oxygens= 13.0 nxoxy= 13.0 nyoxy= 1 exact p= 0.2  and carbons=  65
+oxygens= 13.0 nxoxy= 1.0 nyoxy= 13 exact p= 0.2  and carbons=  65
+oxygens= 14.0 nxoxy= 14.0 nyoxy= 1 exact p= 0.2  and carbons=  70
+oxygens= 14.0 nxoxy= 7.0 nyoxy= 2 exact p= 0.2  and carbons=  70
+oxygens= 14.0 nxoxy= 2.0 nyoxy= 7 exact p= 0.2  and carbons=  70
+oxygens= 14.0 nxoxy= 1.0 nyoxy= 14 exact p= 0.2  and carbons=  70
+oxygens= 15.0 nxoxy= 15.0 nyoxy= 1 exact p= 0.2  and carbons=  75
+oxygens= 15.0 nxoxy= 5.0 nyoxy= 3 exact p= 0.2  and carbons=  75
+oxygens= 15.0 nxoxy= 3.0 nyoxy= 5 exact p= 0.2  and carbons=  75
+oxygens= 15.0 nxoxy= 1.0 nyoxy= 15 exact p= 0.2  and carbons=  75
+oxygens= 16.0 nxoxy= 16.0 nyoxy= 1 exact p= 0.2  and carbons=  80
+oxygens= 16.0 nxoxy= 8.0 nyoxy= 2 exact p= 0.2  and carbons=  80
+oxygens= 16.0 nxoxy= 4.0 nyoxy= 4 exact p= 0.2  and carbons=  80
+oxygens= 16.0 nxoxy= 2.0 nyoxy= 8 exact p= 0.2  and carbons=  80
+oxygens= 16.0 nxoxy= 1.0 nyoxy= 16 exact p= 0.2  and carbons=  80
+oxygens= 17.0 nxoxy= 17.0 nyoxy= 1 exact p= 0.2  and carbons=  85
+oxygens= 17.0 nxoxy= 1.0 nyoxy= 17 exact p= 0.2  and carbons=  85
+oxygens= 11.97 nxoxy= 3.99 nyoxy= 3 exact p= 0.21  and carbons=  57
+oxygens= 15.96 nxoxy= 3.99 nyoxy= 4 exact p= 0.21  and carbons=  76
+oxygens= 14.95 nxoxy= 2.99 nyoxy= 5 exact p= 0.23  and carbons=  65
+oxygens= 17.94 nxoxy= 2.99 nyoxy= 6 exact p= 0.23  and carbons=  78
+oxygens= 18.0 nxoxy= 18.0 nyoxy= 1 exact p= 0.24  and carbons=  75
+oxygens= 18.0 nxoxy= 6.0 nyoxy= 3 exact p= 0.24  and carbons=  75
+oxygens= 14.0 nxoxy= 14.0 nyoxy= 1 exact p= 0.25  and carbons=  56
+oxygens= 14.0 nxoxy= 7.0 nyoxy= 2 exact p= 0.25  and carbons=  56
+oxygens= 14.0 nxoxy= 2.0 nyoxy= 7 exact p= 0.25  and carbons=  56
+oxygens= 14.0 nxoxy= 1.0 nyoxy= 14 exact p= 0.25  and carbons=  56
+oxygens= 15.0 nxoxy= 15.0 nyoxy= 1 exact p= 0.25  and carbons=  60
+oxygens= 15.0 nxoxy= 5.0 nyoxy= 3 exact p= 0.25  and carbons=  60
+oxygens= 15.0 nxoxy= 3.0 nyoxy= 5 exact p= 0.25  and carbons=  60
+oxygens= 15.0 nxoxy= 1.0 nyoxy= 15 exact p= 0.25  and carbons=  60
+oxygens= 16.0 nxoxy= 16.0 nyoxy= 1 exact p= 0.25  and carbons=  64
+oxygens= 16.0 nxoxy= 8.0 nyoxy= 2 exact p= 0.25  and carbons=  64
+oxygens= 16.0 nxoxy= 4.0 nyoxy= 4 exact p= 0.25  and carbons=  64
+oxygens= 16.0 nxoxy= 2.0 nyoxy= 8 exact p= 0.25  and carbons=  64
+oxygens= 16.0 nxoxy= 1.0 nyoxy= 16 exact p= 0.25  and carbons=  64
+oxygens= 17.0 nxoxy= 17.0 nyoxy= 1 exact p= 0.25  and carbons=  68
+oxygens= 17.0 nxoxy= 1.0 nyoxy= 17 exact p= 0.25  and carbons=  68
+oxygens= 18.0 nxoxy= 18.0 nyoxy= 1 exact p= 0.25  and carbons=  72
+oxygens= 18.0 nxoxy= 9.0 nyoxy= 2 exact p= 0.25  and carbons=  72
+oxygens= 18.0 nxoxy= 6.0 nyoxy= 3 exact p= 0.25  and carbons=  72
+oxygens= 18.0 nxoxy= 3.0 nyoxy= 6 exact p= 0.25  and carbons=  72
+oxygens= 18.0 nxoxy= 2.0 nyoxy= 9 exact p= 0.25  and carbons=  72
+oxygens= 18.0 nxoxy= 1.0 nyoxy= 18 exact p= 0.25  and carbons=  72
+oxygens= 19.0 nxoxy= 19.0 nyoxy= 1 exact p= 0.25  and carbons=  76
+oxygens= 19.0 nxoxy= 1.0 nyoxy= 19 exact p= 0.25  and carbons=  76
+oxygens= 20.0 nxoxy= 20.0 nyoxy= 1 exact p= 0.25  and carbons=  80
+oxygens= 20.0 nxoxy= 10.0 nyoxy= 2 exact p= 0.25  and carbons=  80
+oxygens= 20.0 nxoxy= 5.0 nyoxy= 4 exact p= 0.25  and carbons=  80
+oxygens= 20.0 nxoxy= 4.0 nyoxy= 5 exact p= 0.25  and carbons=  80
+oxygens= 20.0 nxoxy= 2.0 nyoxy= 10 exact p= 0.25  and carbons=  80
+oxygens= 20.0 nxoxy= 1.0 nyoxy= 20 exact p= 0.25  and carbons=  80
+oxygens= 21.0 nxoxy= 21.0 nyoxy= 1 exact p= 0.25  and carbons=  84
+oxygens= 21.0 nxoxy= 7.0 nyoxy= 3 exact p= 0.25  and carbons=  84
+oxygens= 21.0 nxoxy= 3.0 nyoxy= 7 exact p= 0.25  and carbons=  84
+oxygens= 21.0 nxoxy= 1.0 nyoxy= 21 exact p= 0.25  and carbons=  84
+oxygens= 22.0 nxoxy= 22.0 nyoxy= 1 exact p= 0.25  and carbons=  88
+oxygens= 22.0 nxoxy= 11.0 nyoxy= 2 exact p= 0.25  and carbons=  88
+oxygens= 22.0 nxoxy= 2.0 nyoxy= 11 exact p= 0.25  and carbons=  88
+oxygens= 22.0 nxoxy= 1.0 nyoxy= 22 exact p= 0.25  and carbons=  88
+oxygens= 19.98 nxoxy= 9.99 nyoxy= 2 exact p= 0.27  and carbons=  74
+oxygens= 21.0 nxoxy= 21.0 nyoxy= 1 exact p= 0.28  and carbons=  75
+oxygens= 21.0 nxoxy= 7.0 nyoxy= 3 exact p= 0.28  and carbons=  75
+oxygens= 17.98 nxoxy= 8.99 nyoxy= 2 exact p= 0.29  and carbons=  62
+oxygens= 18.0 nxoxy= 18.0 nyoxy= 1 exact p= 0.3  and carbons=  60
+oxygens= 18.0 nxoxy= 9.0 nyoxy= 2 exact p= 0.3  and carbons=  60
+oxygens= 18.0 nxoxy= 6.0 nyoxy= 3 exact p= 0.3  and carbons=  60
+oxygens= 18.0 nxoxy= 3.0 nyoxy= 6 exact p= 0.3  and carbons=  60
+oxygens= 21.0 nxoxy= 21.0 nyoxy= 1 exact p= 0.3  and carbons=  70
+oxygens= 21.0 nxoxy= 3.0 nyoxy= 7 exact p= 0.3  and carbons=  70
+oxygens= 24.0 nxoxy= 24.0 nyoxy= 1 exact p= 0.3  and carbons=  80
+oxygens= 24.0 nxoxy= 12.0 nyoxy= 2 exact p= 0.3  and carbons=  80
+oxygens= 24.0 nxoxy= 6.0 nyoxy= 4 exact p= 0.3  and carbons=  80
+oxygens= 24.0 nxoxy= 3.0 nyoxy= 8 exact p= 0.3  and carbons=  80
+oxygens= 17.98 nxoxy= 8.99 nyoxy= 2 exact p= 0.31  and carbons=  58
+oxygens= 26.97 nxoxy= 8.99 nyoxy= 3 exact p= 0.31  and carbons=  87
+oxygens= 24.0 nxoxy= 24.0 nyoxy= 1 exact p= 0.32  and carbons=  75
+oxygens= 24.0 nxoxy= 8.0 nyoxy= 3 exact p= 0.32  and carbons=  75
+ and carbons=  5.0 nxoxy=nx= 1.0 oxygens= 1.0 exact p= 0.2
+ and carbons=  20.0 nxoxy=nx= 2.0 oxygens= 4.0 exact p= 0.2
+ and carbons=  45.0 nxoxy=nx= 3.0 oxygens= 9.0 exact p= 0.2
+ and carbons=  80.0 nxoxy=nx= 4.0 oxygens= 16.0 exact p= 0.2
+ and carbons=  75.81 nxoxy=nx= 3.99 oxygens= 15.9201 exact p= 0.21
+ and carbons=  38.87 nxoxy=nx= 2.99 oxygens= 8.9401 exact p= 0.23
+ and carbons=  4.0 nxoxy=nx= 1.0 oxygens= 1.0 exact p= 0.25
+ and carbons=  16.0 nxoxy=nx= 2.0 oxygens= 4.0 exact p= 0.25
+ and carbons=  36.0 nxoxy=nx= 3.0 oxygens= 9.0 exact p= 0.25
+ and carbons=  64.0 nxoxy=nx= 4.0 oxygens= 16.0 exact p= 0.25
+ and carbons=  100.0 nxoxy=nx= 5.0 oxygens= 25.0 exact p= 0.25
+ and carbons=  144.0 nxoxy=nx= 6.0 oxygens= 36.0 exact p= 0.25
+ and carbons=  30.0 nxoxy=nx= 3.0 oxygens= 9.0 exact p= 0.3
+ and carbons=  120.0 nxoxy=nx= 6.0 oxygens= 36.0 exact p= 0.3
+ and carbons=  140.0 nxoxy=nx= 7.0 oxygens= 49.0 exact p= 0.35
+ and carbons=  10.0 nxoxy=nx= 2.0 oxygens= 4.0 exact p= 0.4
+ and carbons=  40.0 nxoxy=nx= 4.0 oxygens= 16.0 exact p= 0.4
+ and carbons=  90.0 nxoxy=nx= 6.0 oxygens= 36.0 exact p= 0.4
+ and carbons=  160.0 nxoxy=nx= 8.0 oxygens= 64.0 exact p= 0.4
+ and carbons=  21.07 nxoxy=nx= 3.01 oxygens= 9.0601 exact p= 0.43
+ and carbons=  180.0 nxoxy=nx= 9.0 oxygens= 81.0 exact p= 0.45
+ and carbons=  135.83 nxoxy=nx= 7.99 oxygens= 63.8401 exact p= 0.47
+ and carbons=  2.0 nxoxy=nx= 1.0 oxygens= 1.0 exact p= 0.5
+ and carbons=  8.0 nxoxy=nx= 2.0 oxygens= 4.0 exact p= 0.5
+ and carbons=  18.0 nxoxy=nx= 3.0 oxygens= 9.0 exact p= 0.5
+ and carbons=  32.0 nxoxy=nx= 4.0 oxygens= 16.0 exact p= 0.5
+ and carbons=  50.0 nxoxy=nx= 5.0 oxygens= 25.0 exact p= 0.5
+ and carbons=  72.0 nxoxy=nx= 6.0 oxygens= 36.0 exact p= 0.5
+ and carbons=  98.0 nxoxy=nx= 7.0 oxygens= 49.0 exact p= 0.5
+ and carbons=  128.0 nxoxy=nx= 8.0 oxygens= 64.0 exact p= 0.5
+ and carbons=  162.0 nxoxy=nx= 9.0 oxygens= 81.0 exact p= 0.5
+ and carbons=  200.0 nxoxy=nx= 10.0 oxygens= 100.0 exact p= 0.5
+ and carbons=  242.0 nxoxy=nx= 11.0 oxygens= 121.0 exact p= 0.5
+ and carbons=  288.0 nxoxy=nx= 12.0 oxygens= 144.0 exact p= 0.5
+ and carbons=  153.17 nxoxy=nx= 9.01 oxygens= 81.1801 exact p= 0.53
+ and carbons=  220.0 nxoxy=nx= 11.0 oxygens= 121.0 exact p= 0.55
+ and carbons=  27.93 nxoxy=nx= 3.99 oxygens= 15.9201 exact p= 0.57
+carbons= 20  Nyoxy= 4.0  Nxoxy= 1 perc= 0.2
+carbons= 40  Nyoxy= 8.0  Nxoxy= 2 perc= 0.4
+carbons= 60  Nyoxy= 12.0  Nxoxy= 3 perc= 0.6
+carbons= 80  Nyoxy= 16.0  Nxoxy= 4 perc= 0.8
+carbons= 100  Nyoxy= 20.0  Nxoxy= 5 perc= 1.0
+carbons= 120  Nyoxy= 24.0  Nxoxy= 6 perc= 1.2
+carbons= 140  Nyoxy= 28.0  Nxoxy= 7 perc= 1.4
+carbons= 160  Nyoxy= 32.0  Nxoxy= 8 perc= 1.6
+carbons= 180  Nyoxy= 36.0  Nxoxy= 9 perc= 1.8
+carbons= 200  Nyoxy= 40.0  Nxoxy= 10 perc= 2.0
+Ny=  5.0 Nx= 4  Carbons=  20.0 x= 2 oxygens= 4 exact p= 0.2
+Ny=  10.0 Nx= 8  Carbons=  80.0 x= 4 oxygens= 16 exact p= 0.2
+Ny=  15.0 Nx= 12  Carbons=  180.0 x= 6 oxygens= 36 exact p= 0.2
+Ny=  20.0 Nx= 16  Carbons=  320.0 x= 8 oxygens= 64 exact p= 0.2
+Ny=  25.0 Nx= 20  Carbons=  500.0 x= 10 oxygens= 100 exact p= 0.2
+Ny=  30.0 Nx= 24  Carbons=  720.0 x= 12 oxygens= 144 exact p= 0.2
+Ny=  35.0 Nx= 28  Carbons=  980.0 x= 14 oxygens= 196 exact p= 0.2
+Ny=  25.0 Nx= 22  Carbons=  550.0 x= 11 oxygens= 121 exact p= 0.22
+Ny=  25.0 Nx= 24  Carbons=  600.0 x= 12 oxygens= 144 exact p= 0.24
+Ny=  4.0 Nx= 4  Carbons=  16.0 x= 2 oxygens= 4 exact p= 0.25
+Ny=  6.0 Nx= 6  Carbons=  36.0 x= 3 oxygens= 9 exact p= 0.25
+Ny=  8.0 Nx= 8  Carbons=  64.0 x= 4 oxygens= 16 exact p= 0.25
+Ny=  10.0 Nx= 10  Carbons=  100.0 x= 5 oxygens= 25 exact p= 0.25
+Ny=  12.0 Nx= 12  Carbons=  144.0 x= 6 oxygens= 36 exact p= 0.25
+Ny=  14.0 Nx= 14  Carbons=  196.0 x= 7 oxygens= 49 exact p= 0.25
+Ny=  16.0 Nx= 16  Carbons=  256.0 x= 8 oxygens= 64 exact p= 0.25
+Ny=  18.0 Nx= 18  Carbons=  324.0 x= 9 oxygens= 81 exact p= 0.25
+Ny=  20.0 Nx= 20  Carbons=  400.0 x= 10 oxygens= 100 exact p= 0.25
+Ny=  22.0 Nx= 22  Carbons=  484.0 x= 11 oxygens= 121 exact p= 0.25
+Ny=  24.0 Nx= 24  Carbons=  576.0 x= 12 oxygens= 144 exact p= 0.25
+Ny=  26.0 Nx= 26  Carbons=  676.0 x= 13 oxygens= 169 exact p= 0.25
+Ny=  28.0 Nx= 28  Carbons=  784.0 x= 14 oxygens= 196 exact p= 0.25
+Ny=  30.0 Nx= 30  Carbons=  900.0 x= 15 oxygens= 225 exact p= 0.25
+Ny=  25.0 Nx= 26  Carbons=  650.0 x= 13 oxygens= 169 exact p= 0.26
+Ny=  25.0 Nx= 28  Carbons=  700.0 x= 14 oxygens= 196 exact p= 0.28
+Ny=  5.0 Nx= 6  Carbons=  30.0 x= 3 oxygens= 9 exact p= 0.3
+Ny=  10.0 Nx= 12  Carbons=  120.0 x= 6 oxygens= 36 exact p= 0.3
+Ny=  15.0 Nx= 18  Carbons=  270.0 x= 9 oxygens= 81 exact p= 0.3
+Ny=  20.0 Nx= 24  Carbons=  480.0 x= 12 oxygens= 144 exact p= 0.3
+Ny=  25.0 Nx= 30  Carbons=  750.0 x= 15 oxygens= 225 exact p= 0.3
+Ny=  25.0 Nx= 32  Carbons=  800.0 x= 16 oxygens= 256 exact p= 0.32
+Ny=  25.0 Nx= 34  Carbons=  850.0 x= 17 oxygens= 289 exact p= 0.34
+Ny=  10.0 Nx= 14  Carbons=  140.0 x= 7 oxygens= 49 exact p= 0.35
+Ny=  20.0 Nx= 28  Carbons=  560.0 x= 14 oxygens= 196 exact p= 0.35
+Ny=  25.0 Nx= 36  Carbons=  900.0 x= 18 oxygens= 324 exact p= 0.36
+Ny=  25.0 Nx= 38  Carbons=  950.0 x= 19 oxygens= 361 exact p= 0.38
+Ny=  5.0 Nx= 8  Carbons=  40.0 x= 4 oxygens= 16 exact p= 0.4
+Ny=  10.0 Nx= 16  Carbons=  160.0 x= 8 oxygens= 64 exact p= 0.4
+Ny=  15.0 Nx= 24  Carbons=  360.0 x= 12 oxygens= 144 exact p= 0.4
+Ny=  20.0 Nx= 32  Carbons=  640.0 x= 16 oxygens= 256 exact p= 0.4
+Ny=  10.0 Nx= 18  Carbons=  180.0 x= 9 oxygens= 81 exact p= 0.45
+Ny=  20.0 Nx= 36  Carbons=  720.0 x= 18 oxygens= 324 exact p= 0.45
+Ny=  2.0 Nx= 4  Carbons=  8.0 x= 2 oxygens= 4 exact p= 0.5
+Ny=  3.0 Nx= 6  Carbons=  18.0 x= 3 oxygens= 9 exact p= 0.5
+Ny=  4.0 Nx= 8  Carbons=  32.0 x= 4 oxygens= 16 exact p= 0.5
+Ny=  5.0 Nx= 10  Carbons=  50.0 x= 5 oxygens= 25 exact p= 0.5
+Ny=  6.0 Nx= 12  Carbons=  72.0 x= 6 oxygens= 36 exact p= 0.5
+Ny=  7.0 Nx= 14  Carbons=  98.0 x= 7 oxygens= 49 exact p= 0.5
+Ny=  8.0 Nx= 16  Carbons=  128.0 x= 8 oxygens= 64 exact p= 0.5
+Ny=  9.0 Nx= 18  Carbons=  162.0 x= 9 oxygens= 81 exact p= 0.5
+Ny=  10.0 Nx= 20  Carbons=  200.0 x= 10 oxygens= 100 exact p= 0.5
+Ny=  11.0 Nx= 22  Carbons=  242.0 x= 11 oxygens= 121 exact p= 0.5
+Ny=  12.0 Nx= 24  Carbons=  288.0 x= 12 oxygens= 144 exact p= 0.5
+Ny=  13.0 Nx= 26  Carbons=  338.0 x= 13 oxygens= 169 exact p= 0.5
+Ny=  14.0 Nx= 28  Carbons=  392.0 x= 14 oxygens= 196 exact p= 0.5
+Ny=  15.0 Nx= 30  Carbons=  450.0 x= 15 oxygens= 225 exact p= 0.5
+Ny=  16.0 Nx= 32  Carbons=  512.0 x= 16 oxygens= 256 exact p= 0.5
+Ny=  17.0 Nx= 34  Carbons=  578.0 x= 17 oxygens= 289 exact p= 0.5
+Ny=  18.0 Nx= 36  Carbons=  648.0 x= 18 oxygens= 324 exact p= 0.5
+Ny=  19.0 Nx= 38  Carbons=  722.0 x= 19 oxygens= 361 exact p= 0.5
+Ny=  20.0 Nx= 40  Carbons=  800.0 x= 20 oxygens= 400 exact p= 0.5
+Ny=  21.0 Nx= 42  Carbons=  882.0 x= 21 oxygens= 441 exact p= 0.5
+Ny=  22.0 Nx= 44  Carbons=  968.0 x= 22 oxygens= 484 exact p= 0.5
+Ny=  10.0 Nx= 22  Carbons=  220.0 x= 11 oxygens= 121 exact p= 0.55
+Ny=  20.0 Nx= 44  Carbons=  880.0 x= 22 oxygens= 484 exact p= 0.55
+1.0 4.34782608696
+2.0 8.69565217391
+3.0 13.0434782609
+4.0 17.3913043478
+5.0 21.7391304348
+6.0 26.0869565217
+7.0 30.4347826087
+8.0 34.7826086957
+9.0 39.1304347826
+10.0 43.4782608696
+11.0 47.8260869565
+12.0 52.1739130435
+13.0 56.5217391304
+14.0 60.8695652174
+15.0 65.2173913043
+16.0 69.5652173913
+17.0 73.9130434783
+18.0 78.2608695652
+19.0 82.6086956522
+20.0 86.9565217391
+oxygens=  24.5 Noxy=  4.94974746831 carbons= 49 N=  7 perc=  0.5 exact pc= 0.510204081633
+oxygens=  50.0 Noxy=  7.07106781187 carbons= 100 N=  10 perc=  0.5 exact pc= 0.49
+oxygens=  98.0 Noxy=  9.89949493661 carbons= 196 N=  14 perc=  0.5 exact pc= 0.510204081633
+oxygens=  144.5 Noxy=  12.0208152802 carbons= 289 N=  17 perc=  0.5 exact pc= 0.498269896194

@@ -1,0 +1,60 @@
+# Configuration of upper superface of SAMs with differente polarities or percentage 
+# of OH headgroups
+
+carbons = 100
+Nx=10
+Ny=10
+
+
+# Type 1 of loop
+
+n = 0
+for k in range(0,Nx,yinterval*2):
+    for l in range(0,Ny,xinterval*2):
+        pType[k,l] = 'O' 
+        n = n+1
+for k in range(yinterval,Nx,xinterval*2):
+    for l in range(xinterval,Ny,xinterval*2):
+        pType[k,l] = 'O' 
+        n = n+1
+       
+
+pc = 21
+xinterval = 2
+yinterval = 1
+    
+        
+pc=  28
+xinterval = 2
+yinterval = 2
+
+
+
+        
+# Type 2 of Loop
+
+n = 0
+for l in range(0,Ny,yinterval):
+    for k in range(0,Nx,xinterval-1):
+        pType[k,l] = 'O' 
+        n = n+1
+        
+pc = 20
+xinterval = 3
+yinterval = 3
+        
+pc = 25
+xinterval = 3
+yinterval = 2
+
+
+# set particle positions
+for j in range(Ny):
+    for i in range(Nx):
+        xPos[i,j] = i*Vx + j*Wx +12.68
+        yPos[i,j] = i*Vy + j*Wy 
+
+for j in range(Ny):
+    for i in range(Nx):
+        if xPos[i,j]>xPos[-1,1]:
+           xPos[i,j] = xPos[i-Nx+1,j-2]

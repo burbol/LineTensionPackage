@@ -1,0 +1,91 @@
+# We define the functions needed to write the particle positions along the chains
+
+def writeC(xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC):
+    atomtype = 'C'
+    atomnum=str(atomtype)+str(indexC)
+    printline(totalpos, atomnum, chaintype, chainNum,xoldC,yoldC,zoldC) # C
+    xnew = xoldC + xLength
+    ynew = yoldC + yLength
+    znew = zoldC + zLength
+    totalpos = totalpos + 1
+    indexC = indexC + 1
+    return xnew,ynew,znew,totalpos,indexC
+    
+def writeH(xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH):
+    atomtype = 'H'
+    atomnum=str(atomtype)+str(indexH)
+    xnew = xoldC + xLength
+    ynew = yoldC + yLength
+    znew = zoldC + zLength
+    printline(totalpos, atomnum, chaintype, chainNum, xnew,ynew,znew) #H 
+    totalpos = totalpos + 1
+    indexH = indexH + 1
+    return totalpos,indexH
+    
+def writeO(xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO): 
+    atomtype = 'O'
+    atomnum=str(atomtype)+str(indexO)
+    printline(totalpos, atomnum, chaintype, chainNum, xoldC,yoldC,zoldC)  # O
+    xnew = xoldC + xLength
+    ynew = yoldC + yLength
+    znew = zoldC + zLength
+    totalpos = totalpos + 1
+    indexC = indexO + 1
+    return xnew,ynew,znew,totalpos,indexO
+def writeOH(chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO,indexH):
+    ####### OXYGEN ######
+    xnew,ynew,znew,totalpos,indexO = writeO(xLengthCO,yLengthCO,zLengthCO,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO)
+    ####### H1 ######
+    totalpos,indexH = writeH(xLengthOH,yLengthOH,zLengthOH,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
+    
+    return xnew,ynew,znew,totalpos,indexO,indexH
+
+def writeCHa(chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
+    
+    ####### CARBON ######
+    xnew,ynew,znew,totalpos,indexC = writeC(xLengthCCb,yLengthCCb,zLengthCCb,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC)
+    ####### H1 ######
+    totalpos,indexH = writeH(xLengthCH1a,yLengthCH1a,zLengthCH1a,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
+    #Second H atom (H2)
+    totalpos,indexH = writeH(xLengthCH2a,yLengthCH2a,zLengthCH2a,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
+            
+    return xnew,ynew,znew,totalpos,indexC,indexH
+        
+def writeCHb(chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
+    
+    ####### CARBON ######
+    xnew,ynew,znew,totalpos,indexC = writeC(xLengthCCa,yLengthCCa,zLengthCCa,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC)
+    ####### H1 ######
+    totalpos,indexH = writeH(xLengthCH1b,yLengthCH1b,zLengthCH1b,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
+    ####### H2 ######
+    totalpos,indexH = writeH(xLengthCH2b,yLengthCH2b,zLengthCH2b,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
+            
+    return xnew,ynew,znew,totalpos,indexC,indexH
+
+
+def writeCHBOTTOM(chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
+    
+    ####### CARBON ######
+    xnew,ynew,znew,totalpos,indexC = writeC(xLengthCCb,yLengthCCb,zLengthCCb,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC)
+    ####### H1 ######
+    totalpos,indexH = writeH(xLengthCH1a,yLengthCH1a,zLengthCH1a,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
+    ####### H2 ######
+    totalpos,indexH = writeH(xLengthCH2a,yLengthCH2a,zLengthCH2a,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
+    ####### H3 ######
+    totalpos,indexH = writeH(xLengthCHBOTTOM,yLengthCHBOTTOM,zLengthCHBOTTOM,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
+                        
+    return xnew,ynew,znew,totalpos,indexC,indexH
+
+def writeCHTOP(chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
+    
+    ####### CARBON ######
+    xnew,ynew,znew,totalpos,indexC = writeC(xLengthCCb,yLengthCCb,zLengthCCb,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC)
+    ####### H1 ######
+    totalpos,indexH = writeH(xLengthCH1b,yLengthCH1a,zLengthCH1a,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
+    ####### H2 ######
+    totalpos,indexH = writeH(xLengthCH2b,yLengthCH2a,zLengthCH2a,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
+    ####### H3 ######
+    totalpos,indexH = writeH(xLengthCHTOP,yLengthCHTOP,zLengthCHTOP,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
+            
+    return xnew,ynew,znew,totalpos,indexC,indexH
+
