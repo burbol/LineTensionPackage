@@ -1,7 +1,9 @@
-# We define the functions needed to write the particle positions along the chains
+# Functions to write the particle positions along the chains
+# Old configuration
 
 ################# Basis Vectors  ##################
 
+a0 = 5.0
 #V = (Vx,Vy) first basis vector 
 Vx = a0
 Vy = 0
@@ -64,7 +66,13 @@ zLengthCHBOTTOM = -0.99
 
 ################# Functions  ##################
 
-
+    
+def printline(totalpos, atomnum, chaintype, chainNum, x, y, z):
+    occupancy=1.00
+    temp=0.00
+    # save the particle types and positions
+    f.write( "%-6s%5d %4s%1s%3s %1s%4d%1s   %8.3f%8.3f%8.3f%6.2f%6.2f          %2s%2s"%("ATOM ", totalpos, atomnum, '',chaintype,'',chainNum,'', x, y, z, occupancy, temp,'','' + '\n'))
+  
 ################# Write atoms  ##################
 
 

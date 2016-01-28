@@ -1,0 +1,12 @@
+#include "gromos53a6.ff/forcefield.itp"
+#include "repelOH.itp"
+#include "c10oh.itp"
+#include "posre.itp"
+#include "gromos53a6.ff/spce.itp"
+
+[ system ]
+Decanol SAM in water
+
+[molecules]
+XOH              200
+SOL   1163
