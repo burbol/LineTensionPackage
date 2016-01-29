@@ -1,4 +1,7 @@
-# We define the functions needed to write the particle positions along the chains
+# Functions for writing particle coordinates along the SAM chains
+
+import numpy as np
+import math
 
 ################# Basis Vectors  ##################
 
@@ -69,13 +72,19 @@ zLengthCH2b = -0.29
 
 ################# Functions  ##################
 
+def printline(openfile,totalpos, atomnum, chaintype, chainNum, x, y, z):
+    occupancy=1.00
+    temp=0.00
+    # save the particle types and positions
+    openfile.write( "%-6s%5d %4s%1s%3s %1s%4d%1s   %8.3f%8.3f%8.3f%6.2f%6.2f          %2s%2s"%("ATOM ", totalpos, atomnum, '',chaintype,'',chainNum,'', x, y, z, occupancy, temp,'','' + '\n'))
+ 
 ################# New Functions  ##################
 
 """ OH head group """  
-def writeO(xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO): 
+def writeO(openfile,xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO): 
     atomtype = 'O'
     atomnum=str(atomtype)+str(indexO)
-    printline(totalpos, atomnum, chaintype, chainNum, xoldC,yoldC,zoldC)  # O
+    printline(openfile,totalpos, atomnum, chaintype, chainNum, xoldC,yoldC,zoldC)  # O
     xnew = xoldC + xLength
     ynew = yoldC + yLength
     znew = zoldC + zLength
@@ -83,30 +92,30 @@ def writeO(xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos
     indexC = indexO + 1
     return xnew,ynew,znew,totalpos,indexO
 
-def writeH(xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH):
+def writeH(openfile,xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH):
     atomtype = 'H'
     atomnum=str(atomtype)+str(indexH)
     xnew = xoldC + xLength
     ynew = yoldC + yLength
     znew = zoldC + zLength
-    printline(totalpos, atomnum, chaintype, chainNum, xnew,ynew,znew) # H 
+    printline(openfile,totalpos, atomnum, chaintype, chainNum, xnew,ynew,znew) # H 
     totalpos = totalpos + 1
     indexH = indexH + 1
     return totalpos,indexH
     
-def writeOH(chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO,indexH):
+def writeOH(openfile,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO,indexH):
     ####### OXYGEN ######
-    xnew,ynew,znew,totalpos,indexO = writeO(xLengthCO,yLengthCO,zLengthCO,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO)
+    xnew,ynew,znew,totalpos,indexO = writeO(openfile,xLengthCO,yLengthCO,zLengthCO,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO)
     ####### H1 ######
-    totalpos,indexH = writeH(xLengthOH,yLengthOH,zLengthOH,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
+    totalpos,indexH = writeH(openfile,xLengthOH,yLengthOH,zLengthOH,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
     
     return xnew,ynew,znew,totalpos,indexO,indexH
 
 """ For CH2 and CH3"""    
-def writeC(xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC):
+def writeC(openfile,xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC):
     atomtype = 'CHA'
     atomnum=str(atomtype)+str(indexC)
-    printline(totalpos, atomnum, chaintype, chainNum,xoldC,yoldC,zoldC) # C
+    printline(openfile,totalpos, atomnum, chaintype, chainNum,xoldC,yoldC,zoldC) # C
     xnew = xoldC + xLength
     ynew = yoldC + yLength
     znew = zoldC + zLength
@@ -115,10 +124,10 @@ def writeC(xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos
     return xnew,ynew,znew,totalpos,indexC
    
         
-def writeCHa(chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
+def writeCHa(openfile,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
     
     ####### CARBON ######
-    xnew,ynew,znew,totalpos,indexC = writeC(xLengthCCb,yLengthCCb,zLengthCCb,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC)
+    xnew,ynew,znew,totalpos,indexC = writeC(openfile,xLengthCCb,yLengthCCb,zLengthCCb,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC)
     """ Not needed anymore
     ####### H1 ######
     totalpos,indexH = writeH(xLengthCH1a,yLengthCH1a,zLengthCH1a,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
@@ -128,10 +137,10 @@ def writeCHa(chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
     return xnew,ynew,znew,totalpos,indexC,indexH
    
    
-def writeCHb(chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
+def writeCHb(openfile,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
     
     ####### CARBON ######
-    xnew,ynew,znew,totalpos,indexC = writeC(xLengthCCa,yLengthCCa,zLengthCCa,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC)
+    xnew,ynew,znew,totalpos,indexC = writeC(openfile,xLengthCCa,yLengthCCa,zLengthCCa,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC)
     """ Not needed anymore
     ####### H1 ######
     totalpos,indexH = writeH(xLengthCH1b,yLengthCH1b,zLengthCH1b,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
@@ -140,10 +149,10 @@ def writeCHb(chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
     """     
     return xnew,ynew,znew,totalpos,indexC,indexH
     
-def writeCHTOP(chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
+def writeCHTOP(openfile,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
     
     ####### CARBON ######
-    xnew,ynew,znew,totalpos,indexC = writeC(xLengthCCb,yLengthCCb,zLengthCCb,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC)
+    xnew,ynew,znew,totalpos,indexC = writeC(openfile,xLengthCCb,yLengthCCb,zLengthCCb,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC)
     """ Not needed anymore
     ####### H1 ######
     totalpos,indexH = writeH(xLengthCH1b,yLengthCH1a,zLengthCH1a,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
@@ -154,10 +163,10 @@ def writeCHTOP(chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
     """      
     return xnew,ynew,znew,totalpos,indexC,indexH
 
-def writeCHBOTTOM(chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
+def writeCHBOTTOM(openfile,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC,indexH):
     
     ####### CARBON ######
-    xnew,ynew,znew,totalpos,indexC = writeC(xLengthCCb,yLengthCCb,zLengthCCb,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC)
+    xnew,ynew,znew,totalpos,indexC = writeC(openfile,xLengthCCb,yLengthCCb,zLengthCCb,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC)
     """ Not needed anymore
     ####### H1 ######
     totalpos,indexH = writeH(xLengthCH1a,yLengthCH1a,zLengthCH1a,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
