@@ -77,13 +77,14 @@ def printline(openfile,totalpos, atomnum, chaintype, chainNum, x, y, z):
     temp=0.00
     # save the particle types and positions
     openfile.write( "%-6s%5d %4s%1s%3s %1s%4d%1s   %8.3f%8.3f%8.3f%6.2f%6.2f          %2s%2s"%("ATOM ", totalpos, atomnum, '',chaintype,'',chainNum,'', x, y, z, occupancy, temp,'','' + '\n'))
- 
+
 ################# New Functions  ##################
 
 """ OH head group """  
 def writeO(openfile,xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO): 
     atomtype = 'O'
-    atomnum=str(atomtype)+str(indexO)
+    #atomnum=str(atomtype)+str(indexO)
+    atomnum=str(atomtype)
     printline(openfile,totalpos, atomnum, chaintype, chainNum, xoldC,yoldC,zoldC)  # O
     xnew = xoldC + xLength
     ynew = yoldC + yLength
@@ -94,7 +95,8 @@ def writeO(openfile,xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC
 
 def writeH(openfile,xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH):
     atomtype = 'H'
-    atomnum=str(atomtype)+str(indexH)
+    #atomnum=str(atomtype)+str(indexH)
+    atomnum=str(atomtype)
     xnew = xoldC + xLength
     ynew = yoldC + yLength
     znew = zoldC + zLength
@@ -114,7 +116,8 @@ def writeOH(openfile,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO,indexH
 """ For CH2 and CH3"""    
 def writeC(openfile,xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexC):
     atomtype = 'CHA'
-    atomnum=str(atomtype)+str(indexC)
+    #atomnum=str(atomtype)+str(indexC)
+    atomnum=str(atomtype)
     printline(openfile,totalpos, atomnum, chaintype, chainNum,xoldC,yoldC,zoldC) # C
     xnew = xoldC + xLength
     ynew = yoldC + yLength
