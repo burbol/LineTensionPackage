@@ -5,12 +5,14 @@ import math
 
 ################# Basis Vectors  ##################
 
+# Lattice vector
 a0 = 5.0
-#V = (Vx,Vy) first basis vector 
+
+# First basis vector V = (Vx,Vy)
 Vx = a0
 Vy = 0
 
-# W = (Wx,Wy) second basis vector 
+# Second basis vector W = (Wx,Wy) 
 Wx = a0*np.sin(np.pi/6)
 Wy = a0*np.cos(np.pi/6)
 
