@@ -1,0 +1,511 @@
+{
+  "nbformat" : 3,
+  "nbformat_minor" : 0,
+  "metadata" : {
+
+  },
+  "worksheets" : [
+    {
+      "cells" : [
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "# Testing configuration of upper interface of SAMs with different OH- headgroups percentages\n",
+            "# (polarities). The surface is configured as a grid of atoms (C and O)\n",
+            "import numpy as np\n",
+            "import math\n",
+            "import matplotlib.pyplot as plt\n",
+            "import sys\n",
+            "\n",
+            "%pylab inline"
+          ],
+          "prompt_number" : 1,
+          "outputs" : [
+            {
+              "stream" : "stdout",
+              "text" : [
+                "Populating the interactive namespace from numpy and matplotlib\n"
+              ],
+              "output_type" : "stream"
+            }
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "########################### SET PARAMETERS FOR THE SIZE ###############################\n",
+            "xcopies = 1\n",
+            "ycopies = 1\n",
+            "\n",
+            "Nx = 10 # number of gridpoints in x-direction (carbons)\n",
+            "Ny = 10 # number of gridpoints in y-direction (carbons)\n",
+            "\n",
+            "Nx = Nx*xcopies # number of gridpoints in x-direction (carbons)\n",
+            "Ny = Ny*ycopies # number of gridpoints in y-direction (carbons)\n",
+            "\n",
+            "a0 = 5.0 #"
+          ],
+          "prompt_number" : 3,
+          "outputs" : [
+
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "\n",
+            "########################### FUNCTION SET ALL PARTICLE TYPES TO 'C' ###############################\n",
+            "\n",
+            "def C_restart(Nx,Ny):\n",
+            "    pType = np.zeros([Nx,Ny],dtype=str) # particle type\n",
+            "\n",
+            "    # set standard particle type as Carbon\n",
+            "    for i in range(Nx):\n",
+            "        for j in range(Ny):\n",
+            "            pType[i,j] = 'C'\n",
+            "    return pType"
+          ],
+          "prompt_number" : 4,
+          "outputs" : [
+
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "########################### FUNCTION TO CREATE GRID ###########################\n",
+            "def creategrid(a0):\n",
+            "    # set particle x- and y- coordinates\n",
+            "    # !!!! later move to create_top_surface.ipynb !!!\n",
+            "\n",
+            "\n",
+            "    # First basis vector V = (Vx,Vy)\n",
+            "    Vx = a0\n",
+            "    Vy = 0\n",
+            "    # Second basis vector W = (Wx,Wy) \n",
+            "    Wx = a0*np.sin(np.pi\/6)\n",
+            "    Wy = a0*np.cos(np.pi\/6)\n",
+            "\n",
+            "    # create arrays that hold particle positions\n",
+            "    xPos = np.zeros([Nx,Ny],dtype=float) # x positions of particles\n",
+            "    yPos = np.zeros([Nx,Ny],dtype=float) # y positions of particles\n",
+            "    zlastPos = np.zeros([Nx,Ny],dtype=float) # zlastPos ONLY will serve to calculate the box height (z)\n",
+            "    \n",
+            "    ########################### TYPE 1 OF GRID #############################################\n",
+            "\n",
+            "    for j in range(Ny):\n",
+            "        for i in range(Nx):\n",
+            "            xPos[i,j] = i*Vx + j*Wx\n",
+            "            yPos[i,j] = i*Vy + j*Wy \n",
+            "            \n",
+            "    for j in range(1,Ny):\n",
+            "        for i in range(Nx):  # Here we move the last particles of almost each line to get a more rectangular surface shape\n",
+            "            if xPos[i,j]>xPos[-1,1]:\n",
+            "                xPos[i,j] = xPos[i-Nx+1,j-2]\n",
+            "\n",
+            "    return xPos, yPos, zlastPos"
+          ],
+          "prompt_number" : 5,
+          "outputs" : [
+
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "################################## FUNCTION TO PLOT HEAT MAP  ######################################\n",
+            "def plotheat(pType):\n",
+            "    # HEATMAP\n",
+            "    #   create array with 0s where there is O\n",
+            "    #   and ones where there is C:\n",
+            "    Z = np.zeros([Nx,Ny],dtype=int)\n",
+            "    for i in range(Nx):\n",
+            "        for j in range(Ny):\n",
+            "            if pType[i,j] == 'C':\n",
+            "                Z[i,j] = 1\n",
+            "    \n",
+            "    # plot the heatmap\n",
+            "    fig, ax = plt.subplots()\n",
+            "    ax.imshow(Z, cmap=plt.cm.winter, interpolation='nearest')\n",
+            "    fig.savefig('output_' + str(Percentage) + '_heatmap.pdf',format='pdf')\n",
+            " "
+          ],
+          "prompt_number" : 6,
+          "outputs" : [
+
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "################################## FUNCTION TO PLOT GRID  ######################################\n",
+            "def plotgrid(pType, a0):\n",
+            "    \n",
+            "    xPos, yPos, zlastPos = creategrid(a0)\n",
+            "    \n",
+            "    SizeOfDots = 8\n",
+            "    fig, ax = plt.subplots()\n",
+            "    for i in range(Nx):\n",
+            "        for j in range(Ny):\n",
+            "            if pType[i,j] == 'O':\n",
+            "                ax.plot([xPos[i,j]],[yPos[i,j]],marker='o',markersize=SizeOfDots,color='blue')\n",
+            "            else:\n",
+            "                ax.plot([xPos[i,j]],[yPos[i,j]],marker='o',markersize=SizeOfDots,color='green')\n",
+            "    text = '%, Grid '+ str(Nx)+'x'+str(Ny)    \n",
+            "    pc = float(n_oxys)\/float(Nx*Ny)\n",
+            "    plt.title(\"Percentage = \" + str(int(pc*100))+text, fontsize= 14)\n",
+            "    plt.grid()\n",
+            "    plt.show()\n",
+            "    #fig.savefig('output_' + str(Percentage) + '_positions.pdf',format='pdf')\n",
+            " "
+          ],
+          "prompt_number" : 7,
+          "outputs" : [
+
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "\n",
+            "########################### EXCHANGE CARBONS WITH OXYGENS #############################"
+          ],
+          "prompt_number" : 8,
+          "outputs" : [
+
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "for xinterval in range(1,3):\n",
+            "\tfor yinterval in range(1,3):\n",
+            "\t\tpType = C_restart(Nx,Ny)\n",
+            "\n",
+            "\t\tn_oxys = 0\n",
+            "\t\tfor k in range(0,Nx,yinterval*2):\n",
+            "    \t\t for l in range(0,Ny,xinterval*2):\n",
+            "        \t\tpType[k,l] = 'O' \n",
+            "        \t\tn_oxys = n_oxys + 1\n",
+            "\t\tfor k in range(yinterval,Nx,xinterval*2):\n",
+            "    \t\t for l in range(xinterval,Ny,xinterval*2):\n",
+            "        \t\tpType[k,l] = 'O' \n",
+            "        \t\tn_oxys = n_oxys + 1\n",
+            "\n",
+            "\t\tplotgrid(pType, a0)"
+          ],
+          "prompt_number" : 13,
+          "outputs" : [
+
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "########################### TYPE 1 OF LOOP #############################################\n",
+            "\n",
+            "pc = 8 # Good!\n",
+            "xinterval = 3\n",
+            "yinterval = 3\n",
+            "\n",
+            "pc = 14 #(not evenly distributed)\n",
+            "xinterval = 3\n",
+            "yinterval = 1\n",
+            "\n",
+            "pc = 10 #(not evenly distributed)\n",
+            "xinterval = 3\n",
+            "yinterval = 2\n",
+            "\n",
+            "pc = 21 # Old SAM distribution\n",
+            "xinterval = 2\n",
+            "yinterval = 1\n",
+            "\n",
+            "pc = 35 #(not evenly distributed)\n",
+            "xinterval = 1\n",
+            "yinterval = 2\n",
+            "\n",
+            "pc=  13 #Good!\n",
+            "xinterval = 2\n",
+            "yinterval = 2\n",
+            "\n",
+            "pc = 50 # not evenly distributed!\n",
+            "xinterval = 1\n",
+            "yinterval = 1\n",
+            "\n",
+            "pType = C_restart(Nx,Ny)\n",
+            "n_oxys = 0\n",
+            "for k in range(0,Nx,yinterval*2):\n",
+            "    for l in range(0,Ny,xinterval*2):\n",
+            "        pType[k,l] = 'O' \n",
+            "        n_oxys = n_oxys + 1\n",
+            "for k in range(yinterval,Nx,xinterval*2):\n",
+            "    for l in range(xinterval,Ny,xinterval*2):\n",
+            "        pType[k,l] = 'O' \n",
+            "        n_oxys = n_oxys + 1\n",
+            "\n",
+            "plotgrid(pType, a0)"
+          ],
+          "prompt_number" : 8,
+          "outputs" : [
+            {
+              "text" : [
+
+              ],
+              "png" : "iVBORw0KGgoAAAANSUhEUgAAADQAAAAkCAYAAADGrhlwAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABxpRE9UAAAAAgAAAAAAAAASAAAAKAAAABIAAAASAAAG4w8vBP4AAAavSURBVFgJ3FdrU1NXFO2\/bKH+gNLpTJ3+hH6wD1+tMiq1rTrT2naqAkl5CIpUq0CAiDxCnhIgIQkmQXJfSe5NVvfaNzcQsTP6tWdy7nnts9fZz3PyAf5n5YP3kccwDDx69AiJRALZbBa5XE7bra0tbGxsgC3ndnZ2kM\/n4TgOyuUyqtUqlpeXEY1G8fTpU6TTaYVlu7m5qftisRiKxSIymQzW1tYUY3d3V9e5z7btdzqqCmRZFkqlEjzPQ6vV6m5k3\/Nanbm2HKyMmZkZ3Lt3DzMPZxCZj2B0dBRTU1OYnJxEODyMP\/\/8Hbdu3cLs7KzyXFtZw+uD15iensbExATm5p5JfxyFQkEFHB8fR2QhgtBICC9fvsTCwgIePHggdQL\/\/PNE2oe4f\/8+Dl8f6rl4pqACbZlr95xZBYrH43ooaiaZSGL071GMPBpRTabTKcTjCfz00xIikZjMcRzH4soiroeuYzO+2aW7ezeK3357hufPo2qxVCqFm5M3MRedA\/uskcgmfvxxEevr61pp7eHZYYRmQ7pO3rHYpuLNz28In3XFI48bYzeQTCa7eCMjK6LQF7IeU6+gxF2Xo9Rk1mq2MDQ7hMGHg6oRfmy7iU8+2RZXMGQkFhTFrOXWMPDLAJyG06UbHCzh+vV9Hbuui0azgYFfBxDNRrs00WgNn366g0bDg+s2df7i1EX8\/OTnLo3juBgY2BE8U+ZoBSCSieCz25\/JHlfH\/AwOFjE0VJI5S4XkXFcgDqh9+r0Wn4\/f16\/X6dMlO255guZord3u0HdIjzGSrr\/WpTnBh9TvjseQYeyxqEAMXLrJwsJzVCqHaLcFQX6mbSJTzGhstds8WVsC15SA9y3VbrV1LV1Mw3REm7KPdLVaXQAO1LcDXsWDIgrVQpeG8ZpKHcCyGrqHdOTRi9fC3p6pmFQi8WihdCENu27rOYl3eHio7npMoIpkk3Ux31MJ5lwXYD45j1PXTsGwDD044OLSpW2cObMle12dM0wD\/df6MZec6wB4ePz4FU6dSoirOv4+Uc6FsQv4NvytKsrzXDmEhf7+hGS\/iuzz9LDEIy\/ypMDE+OqrLL77blv6nsy1UD2sov9KP1azq7qHdMyijC2WHpeLxRIwDEsX+HEF+MA86I7ZMYy6WuD4JGlIG5Rm05N0fcSH82bd1BrQsC2XTdH4kU++DY\/WJmZQaEniea3AJSFWfsPlgjSYSiVRrzsSR67WgAnbml1TJjQxq+e1RbDGcRJ1gyBJtFq+gKShZoNCjZIXS0Bj22\/Bs3rxKLhh9OIRi\/WEQLwMmet5BzQaNZw\/n8PXX+8KpO9WNbOGD699iMX0Ilp6LzWwtFTFRx+lRSjbdw8585nQGVycuKiuQMVYlo2+vrRcpuWuWz1LPEPfUB9MyxTl1WW+iS+\/3BZXzgke3cpTl+u71ncMrymhUMbHH2c0adFlmZe+CX+DC5MXYBt2r8vxFubFyrvBtnnJOnLx8WZmkEvgi3kZiJZjKSAZWlZTsqJoUQQMAn+vsgcGP8eNRkOTQiZjdDTrJxrDMZQXvYI0tHY+b2F\/\/yQek4TnUkhXFNeURGN0Eo1II+yYZEoHJZiG+R9pO5VG3TnyV5FIhfJb\/8tMw9pb3hyLAo\/FRmenNL10J2lIeeSeHL0LnmlKdsxkSO4nBVqoUq7g9vRtLCQWdIGflZUaTp\/eFjP7FyDnbv59E1emr7CrhWukefHCjwtOLr1cwhe3v0CzGexry+ugiB9+KMqqLxStffqX04jlYsqHn9XVwxN4V6ev4sbsjS4NY\/Lzz7PiYrw6\/HJCID40nzx+gtB0COmdtMYJzZzLGRgbK6mv83CMn6XUEubic9rnnCMWJQ3vJu6hi+zu72JsaUxdivcGg39xsSrPnqrS+PschBfDKFQKXbfK503lRZ4BHrGISWy+LCyrjr\/+KklYMEP6MV6pVPQxS\/E0bTMQWVPJ1FtcrqOG9216vet9d78X\/QkLBbt5ObkNFxMvJhCKhoJp0bSL778vyF8FS4OYQZ99lcWlB5f0vRYQhkJljI9XdEjtNUWjlx9eBl8SQUmnTVy+XBQL8C3np\/bh5WFMrU4FJILnCU0BW1tHePG9OAZnBlXxAWE4XBG8qtC\/cQ\/RZPw\/s7KygobTwOjyKO5E7mi2YjZyZO7s2bxkko5biTV5yLMTZ+FIeiYNhbxzZ19ev690zAzGx+m5yXNI5BM6R7p4vIZz5\/Lixk0Rys+Ef8z\/gXA0fAyvqTSp1BHeRm4D5++f912xg3f3LvHKcj7JnPLfiuVfAAAA\/\/9hxekIAAAGQElEQVTVV2tPE1sU9WeKJBgD\/grRj2p8oISIUaIXY4KYXK6KV\/TGq4SUomBoAbE8WjoU+qS00\/dzpuvudaZnpgTk+z3JdGb2WWevvc9+zOkFyEilUlhbW5MrgEqlRJEaHbuj7pZlyd1Cp8Or5Vwn5gAH6+Bsuy2YBpx1stRWatQPdVCXM9cAsXrYtgO0z+DTOrRO2yKWumyYpolwOKzUXNDKeP\/y5RciEdMVxXNxTH+fRtvySP3+PObncy6Gc8TE83FXFotV8epVWoz1PPFt+7CwteBiWi0bU1Np2cy6K0vkE6f4yLW4mHcxjVYDU0tTyBQzrqxarWJvb0+9K4dITM9nZn4iEDh2gaF4CNdnrqPZarqy168zmJxMue\/NZhPDfw0jlAi5so2NIm7ciKHd9jaCRrz0v3Qx9Xobw8Mx7O5WXNlWYgvDM8OgTj1evEhhetozvlKv4Nqf17CXcRwg7pRDiUQCS0vfsLr6A+VyUSC2Si862bE6sNoSWsk+vltWQwyty53GyrsYrTDEShrysqyWYGpdh7imDaYIL5UySle7i2EKO+n8Oz5yaj5ukrZJpbnoyufz2NnZoW9QEapUKshkMtjc3BRvKzCMiqReWaUMo0clASOAQqWgntvtFgqFhkST75aLi6QjiGaiymjuMueCwYIQslbEIbny5TyC+0Glhxg6EQ6XhPM0n1kxu3xt5HINqfGCwmtd5DMyBsql8tk1xMKy7TrGxlIYGUkqj\/lTrVcx8GwAa7G1rswW5SUMDBiyAa2uDLj38R7GPo+pdxraaLRw+bKBlZWCi1nZW8Hl55dRbzLKLOoObt9O4PFjL42rDYePjjvDht9v4sqVfbRaXhqP\/DOi+NrN9skaqtfrsuMFbG9tixFOd+Lu9g7WUafjpJRKLXluNj1niGWDUA2EKdVdTwM6Ha85UIeuSY0hl+Ocx3iazz7hjObjulM1ZBgGvn79Cp\/fh2wuq5QzrWq1Bo6OyqKINdFW93wxj+PCcVfWUndiiG2L8byqtSpS2VQPpi0bVpWr5sgEQ53JbFLWsdao\/2w+cpHTsYF8TWVTve7w0aHj4+OTNURjeU1+nMTCptdal5cL6O+PCqnXdUY\/jeLmu5vuVnLu0qUolpe9dr+4s4j+J\/1uJJhW9+8ncOdOQtZJ+GSUa2X0jfchaOi0gkrNvr6o7LjHd2v2FsipB2v34sU9\/PzJ5uUM9oATbVtPbPzagFn0DKvVLPCb0juyhSwyptdGOUcMsXqwBmJHMf2q7tkso91wZUy9\/fS+qiUtrNdP85GLnHrY0kXJ12h4fGc6FI\/Hsb6+3k0BJ2J6N1XeS72o7tJtv3zWee7gOirKjDTxrA9dL8Q6o6N0sPZYVwojBuoM8fhE97l81KbXWSiVStKVI4rCPSkcHBxI2iyjUW1g\/PM4Hn58qMjZ\/0ulGgYHo9Km81JfLWVIIBrA4LNBlOSoxDzmEebBg0M8ehSX55ZqLhX5BAz9MYTl8LLSZduWcORE154csWpitNPO7364iyf\/Puny0cAahob2hM8U3U5rX9xexNXJq2AD03yjo3GMjyclRU35QO+edIhvFLLL8VsSSTkeU84wr64WUSx2oyQ7XqwVsWqsKiOI4YhEKohGa+qZu25LFPj9MoVQD9NsiaFFFT1iOHZTuzCODPXMn7P48hXn+8Wo66H56vJZiUajSuxGiG\/hsOOQXnD2nQp1Cp2NoNQ5hP5+njO9B9PfI8nnOXEWjp3yVFPY2dnC27c+\/Pixi3Q6iXQyjWAoiIkPEzg8PASPR5TPzYXw7t2mnCySSsY5Yta21tSpnZhAIILnz4NqXq1LpfHe\/x6zvlmk5TmRTODgII6JiVXpVoasSyKVlBO\/6KCug8MDtZYcs7Mhxan59mP7ePr3U2zubKo11M\/oGIahfHUjxPOQ3\/9dOkhcvhcmCmYBx7ljJI+S6njOIzrlPt83LCwsuTLKiSGWa4gJhbZlc+bURqh1Is9kM+oihrJ0OoM3b+bkxLF+ii9v5hWGNn369AXz84suH2Xky+Vzio+6gsGg2LQgdVlxznI6jPS296Sr5b13J1reX4XeOf2cy+UkBSLn6mJhRyJhOaN5f0X0+t57TCLCDnzeoA7WP213I3Tegv\/T3H9pWpBOwX\/R2wAAAABJRU5ErkJggg==",
+              "output_type" : "display_data"
+            }
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "plotheat(pType)"
+          ],
+          "prompt_number" : 9,
+          "outputs" : [
+            {
+              "text" : [
+
+              ],
+              "png" : "iVBORw0KGgoAAAANSUhEUgAAACMAAAAiCAYAAADVhWD8AAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABxpRE9UAAAAAgAAAAAAAAARAAAAKAAAABEAAAARAAAE+JrLsgEAAATESURBVFgJjJXbb1RVFMY31IEiRo2X6H+gD6h4QdO+YHwy0cooGklUCt4eTNAYEAVBRIQXohUoVS5KW7AQlDbYJmrSBFp6o7S0tJZpiW21INqqNdAbnWm7\/H1nzzinCUZPsrLO\/tb+1ll7XfZxNu2Jsxr3kpjkdcqLJdK43lN4nD2p\/dLTOCFfYY72\/AvHYQmerq5+W7y4zRYtOmvRZzotemy\/RbvzvWyusmjOOaTLoptOpPGaQosuiVn0iQ6LPgtH64Czw6IBh\/3ibDme5lQV4x9sERx9p6YI207LiW23IJi+vl4rKak25wYQM5eRMHcyH+M7Xl5o9rhsS1rA3vZ4e565OVe8LROtdcBZbS7MyT2V5jTzUfkPvhM317YN2xpzo6vQPENDl+z779ptdsYfftOsCXNNOzGu9bIsFMzzrZ4s21kcXTfuOXPRWgccDrH8tMf10Rfh64OyneGQ8i98NkF17AB\/11ycA\/gimTX8eM4iB3eZKz9grgxZjoPHu5BOc1u\/NVdR5OUj3gMc21KydORLOMVeLyWAq3HElx\/ZlrGnDM43+82VouVD+KNt6WDqL\/xgkWGliugn15mb\/2v6ZIVHwN\/ycuDrNH4HmRx9H5yyjaG11okl+0rTnC94T+Hz+vG\/HhvZm9gA5\/ekjSylMlN\/nmAG2DCF06GN5h46b24GTmdOmftcjkmlpIjAhEvu+s3cnx\/Cwfkg+m7W+qhse0OcPbzPwI\/w+38xd\/kDOO+hN8Hh0MLdaCqYKatt6rVIFqnKJoiFPeYOlZir+9TLG7Xmsvq8rKhP4p9RGlL9SLfHpUspby14XYG5MOfNmjTnK0qzsNdzHkarzHW7zB3TwPAMDvbboYPVljkjmeaMSXOnZSRTEtU5lebn1MCURXgn03Nt3NvmoLUOODRjmBM0cJLTpmnCv\/xdg44lp2liJVyeK1dGrLIyZrPmUs8IG24YM1dPVhLr6XLkpSbvQE5yabgEPSVbC5Nw67B3esuIXwuXXRx9TJxXGG35ke0UWZN\/fedGdAuHTlCyS2t8MAqoobfTIpUfs5kgakj10+3mHrhgbgFl21YODkmSXwEGLhsXpDu+G5xroAqttXBJmJMX4jzVgX\/K0khQ0uIsoI\/u604HE0zT5VUANKlOcO\/FdGn2aZpWe5k2TUzCCM2u0miq\/pkMShBMU5KjAUiVWU2vTOjeiW8wd+fVpqmPabq41tw4nf4XXZ71M6nkctIFtbfMp1mpLsSxUiybAu7fAgenA2ithcu+J8TZzbv8yKasavLGCX5wMxyyMkv+hgmQZ2qKaWpkmubH\/P3yIKXRZLTSEy003Io6c\/cwgpLXTnpcNl2E2UyZ7qRsgtdaeKs4TJ32a3Rfhy9MtqNMoPyLI11RDJ5vriHPB9PTc84OH66xzJnJlKnx\/s80xT6ZPk1a\/+c0EZD8q2zKVPCDVMlW+mDi8bhVn+i2yPVEm8lNeNOovy90q0o0GcIluYz5GGUR3kzj3j7k8dvQOkDAoSdeDnFeZZpSnAYGRP7l62YmsLkA20ZKts4Ho1LV9561SPVWfmRE3ojTJ+l6pViyvZy\/K6eWFPCewh\/r9JfZGUpQj1OtU7YwZ1uIk0MrNHIIcTRRAYemnveT\/Q0AAP\/\/klC4AAAABLJJREFUxVVpT1xVGD4u04gfXdoqsXHJAFJNNGpM1BBToyYm\/gI\/uCa1pn5xX1KhVlvUutWGLoDQygebWJfGhKTRVkC2RimVnWGZgQHGmYFhkSXMDI\/Pc8+9M2OJid+8yZv3nue9z3ve8y7nGrhPa7gbvoVXYPA2TGoXzJ2TMAZWak8Sf81K3TdZvDAOs1RG\/A2YZWqtPU7Nt1lONd89\/LYI\/b9D25swyVKYophrSxJzn7ZQD3wDdBgrhwl9CLNtGObqRZhr\/4I58j1M\/D0rVd9Z\/Bra7gvBDO0nZy\/MMLXW4kgO53Aq+K7vJSWj9P+R5QSpxRF+1bQNJplcRWPzMHxbgjD58zC30HD6S5gJBhamPN8Ocz1xyXO\/Ed9nbQ1HebIo8TlmhVprcWTP5bzQRj8u5+cq6z+fHO3TUMnvP+Bh3rfBBAJ9qKs7g7xL3ZRdnobpOEgj0y95qiOb5ic6ib1u8b7PYK5ctbY8aq0dDkuay3nm9yznjy9g5F9l86XIOUCbSvYyNZ90OoWmlmFsyGfKNrMsN87A\/FQNE+FppnjS7edgNhJXyZQZ4RHiTUdg\/HGYTcSlm5gZ4X\/Svp3ZFEeyg+9TLucsM3NTgvssUHOfJmYmwsyMsg3clkFrqBe+3t00sF9GWMuHhrgJCSKp\/hH2haSK78Jke4BlHfyYODeS1lq45NAPWU4F3z3OgyP0v98eUloc2TayKplgNE3zrxLgNCV3\/bdp0iQs8gAqzRJ1ZjJYgn+bptsj9O9O02qZ7TmVzLDMXjBtykwXUxXmCYc+gXmYmVEzSw6dIs5USip5Sg8v4an62SdhZlO6hJPi2ZQZj1NBvodvY2bkP8zsB3I413EAFMzKyjLONgxgw+ZxO2Y3zMKcYS1j7HCJesYb2WfZjB7efBjmZtZdo6n6N7OHHBsPlcvRZHmcRvaV\/IuzhbqZa10N4+\/aYAKBXhyrPY28S9iEStllazDnD9LoTs2THRaXzZkmXYAsTf+nMHlJa7uCWmtnmlju3Gl6mgdwLk1yug5Y\/\/Klqer7nDZN00vUzpPGr+0j8G0dgClmH+j2PfUVTC8\/lOxs4z1CXD2xg1mSA0l9Dcw9YZhbmeK7qetrXRvTv7PVfq976EW+y484Px63\/ouJa5\/6Y8QZYAfbwwYDtI7xBh5n8y7uYdqY5vtDPDWbSvdIJW\/dJTadRI3p4XdNwExykhbZiBpdrfW97EdzOLrBhUvuZSuoZGp8lSfDmc8G0zLeBZNQ+jlJK6UwdzBqpVKif4uTfpbt+MksrmzNq9ZvwSxQa+1x9NtwykyODuPh+jetMHhN7bImkBlybAzUy8z5iQEU95ehaGwPCkb2wv\/4Bfj9k5QJ+KtPoGCyFIUTZfDXfO3itD3SjYLBcnJ2oyBQ7qwth7bKEyiaKkMheXrP4I91Of6dfYb3wf9ot2vjlHnBpFIpxOIxtLW0IhqNIpFIuDLr6GAwiN6enn9gicQs4tNxnGtvRzwep81+63EvdHZicHBwHUf7NP7SgGgsu8\/MTCIbjIJKp9MIjgaRTqW9GDN6bnYOsVgss\/Ze1tbWMBYag\/TFz9TkFKbj0xfDzj5DgcC6fTKZWcf4H4C\/Advq4LuWanEuAAAAAElFTkSuQmCC",
+              "output_type" : "display_data"
+            }
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "########################### TYPE 2 OF LOOP #############################################\n",
+            "        \n",
+            "pc = 20 #Good!\n",
+            "xinterval = 3\n",
+            "yinterval = 3\n",
+            "\n",
+            "pc = 25 #Good!\n",
+            "xinterval = 3\n",
+            "yinterval = 2\n",
+            "\n",
+            "pc = 15 #atoms distributed in lines\n",
+            "xinterval = 3\n",
+            "yinterval = 4\n",
+            "\n",
+            "pc = 12 #(not evenly distributed)\n",
+            "xinterval = 4\n",
+            "yinterval = 4\n",
+            "\n",
+            "pc = 50 #not evenly distributed!\n",
+            "xinterval = 2\n",
+            "yinterval = 2\n",
+            "\n",
+            "pc = 100\n",
+            "xinterval = 2\n",
+            "yinterval = 1\n",
+            "\n",
+            "pc = 50 #not evenly distributed!\n",
+            "xinterval = 3\n",
+            "yinterval = 1\n",
+            "\n",
+            "pc = 50 #not evenly distributed!\n",
+            "xinterval = 2\n",
+            "yinterval = 3\n",
+            "\n",
+            "pType = C_restart(Nx,Ny)\n",
+            "n_oxys = 0\n",
+            "for l in range(0,Ny,yinterval):\n",
+            "    for k in range(0,Nx,xinterval-1):\n",
+            "        pType[k,l] = 'O' \n",
+            "        n_oxys = n_oxys + 1\n",
+            "\n",
+            "plotheat(pType)\n",
+            " "
+          ],
+          "prompt_number" : 14,
+          "outputs" : [
+            {
+              "text" : [
+
+              ],
+              "png" : "iVBORw0KGgoAAAANSUhEUgAAACMAAAAiCAYAAADVhWD8AAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABxpRE9UAAAAAgAAAAAAAAARAAAAKAAAABEAAAARAAABueZnN0IAAAGFSURBVFgJzJVNSwJRFIZvyagR9E8CV0H9B1HwrxREtehjGQVRUG1alYa0qk2Bq7EwrEWpZX7k1BiGFlJ+xDTlvJ3rJJrkRuLagWdxDpz7vtx7DpfhR+iUvfcM1vCSSOTh8UTgcl3B7U4R6TbilHPa6zyPdqh36uHnx4imjtMZR92MqirwemUwViDQBcYf9FRNM+XyK44Oo7BZnrs4tBvzv\/Vophn+VKfpJCTfJtjBDtj+tli45t5W00zoIQapMk6FaWJKMFyTa39HKEtmCpNgtTliVjCkWeUXUA8DJ+cKpNEI2FiWuBeMCjaSMs0Ui3ns+mTY+\/7BAGtaFYFAHNbBPJhUA7N+isdSaTwTbZNyAymwDBbeINbFckaawZWmmfo2lfhEzxB8ukVCmsZEixmVtilHE60tEPOCIc0XfgkUhkHbFKZtctD\/4HgkcoIhzeE700wmk4Tffwx7\/1MPv4M304yu65CDt5CGyKH9A2ygB9hKLTOjXEOSF8Eu1ohVsVySZngJXwAAAP\/\/wbliMAAAAdxJREFUxZVdTxNBFIYHkyXptSHRYLxrbcrfU7hQ5KMlokZ\/gyb8Ci5UUNrCDRBodVnA3W1r435Qykcgdrev73T7te39dJInsz1nZt83s+dMBbqjUD2Gdv0cAq\/IS8VIzRekO4pWCZq+DOG8JeuKoaa9Gplptf5he+cM2lMTYrapnifUfOxEZgzjJzY2viDxwIXgWU2Gu8hMGAb4nj\/D9KxFh9fkSjHUnOFB9GqmYJWhlVcg6u8Jv6FS3kGY2SEzspuuZEVPqJvasW7iyRzlIKofISof1CI1T99EJ3N\/f4evWzqmH1X47W7JjWKo+dCPzBhGGZ8\/bSIx5U2ok2QHd7sJCPFj9xzanA6RYb9n\/qpljpope6iAbd7AFf4N3LJubljZKpGa\/uLATL5yBNGYZ+A1kQmVULO1MDCzX9OR+bWMtJVFqppDcphaDikrh2fMJfk8nEvV1pA2ma+uxeJyXdrmHpLkmtgevruzpxeX8\/nSwEwQBHA9F8V8AY7joNFoxDBNE+VSKRaTazzfw97uHjzPG8sdHhzg5EQfi0ud7W9bMZ0Lvqt\/A8ubOAxDmL9NhEHYu5j7c\/OyCdd1+797D+12G7ZlQ86jo\/6nDt\/zR8MdnVPDGNOJmRnbpTjwH09\/47UfPo6ZAAAAAElFTkSuQmCC",
+              "output_type" : "display_data"
+            }
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "plotgrid(pType, a0)"
+          ],
+          "prompt_number" : 15,
+          "outputs" : [
+            {
+              "text" : [
+
+              ],
+              "png" : "iVBORw0KGgoAAAANSUhEUgAAADQAAAAkCAYAAADGrhlwAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABxpRE9UAAAAAgAAAAAAAAASAAAAKAAAABIAAAASAAAG8xKYFJoAAAa\/SURBVFgJ3FfpUhNbEPYtvaAPIJZVWj6CP1xxA0pFULCupWUJskQWSRBcENnDFhKSQITEBE2CyWyZTIbvdvdkJol4qy5\/b1dN5sw5vZ7+us\/JKfzP6NRJ4lEUBVNTU4hEIkgkEkgmU\/Le3d3F5uYm+J1MJrG3t4dUKgXDMJDNZpHP57G0tITl5WXMzMwgFouJWX5vbW2JXCgUQiaTQTwex\/r6utjY39+XdZbTdf0\/uSoBaZqGg4MDVCoV2LZNgkfy8Lhiu3NAPpfH+\/fv8ebNAL0nMT8\/g6GhIUxMTGB8fBy+YR9ev3qNZ8+eYXp6WnSury\/h169D+P1+jI2NYXZ2Fv5xP9LptAQ4OjpKer5gePgNdnZ2MDc3h0AggMBEAJ8\/fUZgMoB3796hUDj0fGK\/HD+dGOvHElA4HBaneGe2t8Pk5CoGB4O0k1HEojGEI2E8GXmC+eC87G44vIWFhS10dS3QDkZkjne7f7IfL0dfYmVlRTIWjUbR2xukIDYRjW7TExUd3b5ubGxsyBMh3QMDqxTQiqyzL6GtEJ68fYKvK1+xubGJcDhEOkLo6Vki\/7Y9e4NTgxj6MITwVlhQweF5kOMoWZltG+jsPEBHR8YJn371ko5zf5\/D+v66kzzYBAsVLS37BCvL4+uY7EDXhy75tqwyTNMinj3KRNHjWU4s4\/yL8zDLJqyyI3v3bgZPn\/7weAzTQMvzFqwnyZ6QTVks4MKFPVhWo73O6U5YJUuCZFYvIP7gjDDuQQ47D89WiVEoVL9WcSedt4NUGR8duWvuu46VVRDVeOp1OmuCehnWr\/2mq+oTlwzXHpMExIW7srJM+F1BLlcgQ8RJj6qriGfiUltHtuNtJqNSwSskahML1RjVXSwTg2qokj2WLRZLZOBQcM487FzmMIN0Pl3lceSi0UNomil6WI51NNqz8f27Ss2CdLM9QhFnKJaOCWpYhp9CoSBwrQsoR7WwQVCboWJOega+bn\/F2UdnoWiKOA5YaGv7hqtXd0nWkjlFVdD8qBmz27OinHf948efOHs2Qp3JcOQooDsjd3DTd1MCqlQsckJDc3OEul+O5Crk7BHYHutinbxRbOPatQTu3ftG4wrN2cgX8mh+0Iy1xJrIMB93Ua4tpgbIhUIRKIomC\/xjkeFDlbtLjRSlJBmozUB4mNelcrlC7bqmh+fVkiqPy8PvbFalHa\/B6E\/2ONts0yXOCPvE3delY5Bz2yB3olKpBC5Ko8S1VKNi0aQd4hRXoUYKi1qt2JlT1y2vSdi2E2BRL1Z329HFu8y6mFwebjpss55+t8fBKjpDvUbckPg5FhAfhtzr+QwwdRO3x2\/j+tvrVXiQ40UNp09HqVXnyIkybMvGYnwRfz36C0XVddgiKO7h7t19CrosG6PpGpo6mzATmRF4MLS+fMmhqYlqTtWJx5D5K4NX0DbR5tlTFF14HHsmbNqE6dA0znSdkablwvHGjT3cuZOkjTxshByfwnyw8tmgazQ+PKgr4CPBbixWpJ0o05hqh2CilTQpTk49w4C9+f5dpwLWJYumSY5QEcfTcWdnmYV4FKVM3VSRNeZh2VQuhR+\/qG0TD39zFtmeqlbtUZ1wplkX63Ts2XQ4s9868RX\/pW3TIVoyanh1kiueOEN2iYrX6XjeFA24tTYSZ7GRnKDr547z8OrJ7akqdcd4XdvmDOWyObzwv8BcZM6zGQwWcenSN0pz2Zvr\/dCLB\/4H3jevMc\/qaq2eFncWcfnFZZTLrtwRurszePyYD2vHYc3QcOn5JYSSIU\/X2lrhmL2H\/ofome7xeLi2Ll5MEMRq9XQsIL5ofvr4CcP+YcT2YoRZbpEWXTQVjIwcSD2wc4zlxegiZsOzMuY5gzLKPHw2uXDc\/7GPkcURuinQbYDODS7+hYU8nfZ54XHkDPgWfEjn0gJhlk2lVNHFOl17bIttsm2+fWhaCW\/fHhDUuEM6R0cul5PLLEctbZuLjJ\/odvQPkPM252SDRuScTPaE3Mcy5Mrz4WRZBt2K83RZzLrTcu+6H7iPxM+EFCS37kRCo0M2TVmonQfDy8MYDY6KHO8en0ft7WkqWD7pHeJbRftkO8q028zDNDCQpctx3mGgX77ntQfasftzt2rviO6ZqtwvnQ7nsPqWfRhdHYVZMhtriFPG\/2eCwSA5qNFtO4u+vh+ijLsKn0m3xm7JFcfJJl8GFdy6xf95CIrVztM334ehpSGvg5lmGa2tSYJDUeaYL5wKo3W8FSWTYEXrPPfq1QF8vp8N9lrHWhHNRAU5bHNzs4jbt1MOFKv2+uf7xZ6hGV6X+wcAAP\/\/zxMSFAAABjpJREFU1Vf7TxNLFPbPFEkgBvwrRH9U4wM1RIwSCcYEMblcFa9IrkFCoCgY2oJYHi1dCn1Sun1ud7ev755vlt22gvjznWQ6O2e+Od+cOWfOTC9BSiqVQjAYlOpHpVISSVNqA61mi8NoNBqqZb\/Vqp1WyhpdYwokP81mXTDW6ZiDc8e6dVoKSz2szSZ5ZX7DaTv5XIy7FhdDfD6fRzgc5icuqd\/Tn\/n5n4hE8p4onotj6tsU6o26J\/P5dCws5Lw+x4iJ63FPFosZeP067S2QA0s7S1jcXvQwtVoTk5Np2UzTkyX0xBk+ci0v6x7GqlmYXJlEppjxZIZhYH9\/X\/WVQdwZWj49\/QN+\/4kHDMVDuDF9A3bN9mRv3mQwMZHy+rZtY+jvIYQSIU+2uVnEzZsx1OvtjeAiXvleeRjTrGNoKIa9vYon205sY2h6CNTplpcvU5iaai++YlZw\/a\/r2M84BhB3xqBEIoGVla9YX\/+OcrkISKTR3TSy1ZBWLYzhVZdqyUJNNUZco36KIbbl1EajJl6tOgYRI2MMEVbqYPiwrdeJkRBmKF\/AR04VaqKLm+SsyeHi8dB1Hbu7u2oPlIcqlQoymQy2trZgVAxoGQ2RdESFDL1HJX5\/HoWCrb7ZL1QK8Gt+1SeGNRIpIxotK3LuMnGBgwD0su7p0nULgUBBxhrKE1xoOBmGdqx5GI75\/QU5G9w8Gl5HrpRD8CCodHfyaZohTiidf4Z4sJr1JkY+j2B4blhZzB\/DsNHXF5WkId6jW6QEY0H0veiDYRqqz5\/795MYGUmqPhdq2Rb6x\/uxtr\/mYdbWCujv12CaNeUlDtz5eAdP5596GIdPE8PdBAX49ny4OnEVtVrNww0Pky8lBv9yhkzTlN0vYGd7B5bluLczEVCDbTNzOaHhZJ9W19kihjvL6oYiZVwA57mF37btLIrhykIPqJByQdIS8ytfpzHOPCfLnjlDmqbhy5cvWPItIZvLKuX1Wh3VqoXj47JaFGOdCvWijpPCyamsrlpiiCWG1agaSGVTHRgJ0YIhtXoqc3Qls0mZJ+dIuH7HRy5ykpuG1yRBkc80HT5uxMnJSfcZcuN04tMEFrfaqXV1tYDe3qiQtrPO47nHuPX+lreXHLtyJYrV1Xa6X95dRu+z3g4PtvDgQQJ37yZknuOtcrWMntEeBLSAp4vh2NMTVSHuCm\/P3AY53VIoWLh8eR8\/fjD8ncIc0JW23YHNn5vIF9sLq1Yb4J3SWbKFLDL5dhrlGDHEusWwDMSOY25XtdksvW15MobTQfoApt2+h0zzLB+5yOmWpmRD8llWm+9cg+LxODY2NpwQOM0szm7ydeCcF5VdTtMvv904d8haKiTobZWC5Xy454VY1zPOPFuNqZQvut0IuZiPWbHjPHbMK5VKkmEjahneS+Hw8FDCZlUsL2F0NIFHj44kjTqHtSRpcWB8AP6oX52vRsNWaXxgYB+lEu+kukq5Dz89xJN\/n6hvyzLlGWVicJDhmBOZ87RZDa8qXRWjAtuyFce9e0d49iyhvnkmSvL8Gnwx6PDJxvBeW17O4dq1qJwd5w7kxjAURz+PwigbckHvdRvEHoVcSDRaFYvbocbJ69o6itWiWiz7xWJNLmL22xmMd1c0E1WKuesc8\/uLcp+0U23eyKv7i94jhl7ha4H3iVs8PqPNp+s1SeNF5VkXF0k5fDQyGnV4PQ8RFA7ToHacuxO7WxrgPB675d09vhr+VBgBfy7kY\/19YaY8kxR2d7fx7t0Svn\/fQzqdRDqZRiAUwNjHMRwdHYHPI8pnZ0N4\/35LXhZJJeMYMcHtoHq1E+P3RzA+HlDjal4qjQ++D5hZmkFavhPJBA4P4xgbW5dspcm8JFJJefGLDuo6PDpUc8kxMxNSnC7fQewAz\/95jq3dLTWH+ukdTdOUxZ6H+B7y+b5JBonLfSHPnHwBJ7kTJI+T6nnOJzrlS0tfsbi44skoJ4ZYziEmFNqRzZlVG6HmiTyTzahKDGXpdAZv387K62PjDJ+e1xWGa5qbm8fCwrLHRxn5cnpO8VFXIBCQNS3Kma10\/32gtZ0v3fOc7Hir\/VfhPEwul5MQiFyoi4c\/EgmD2ItKTDzCDHxRoQ6ef67d89BFE\/5PY\/8BrweQTWSs+HgAAAAASUVORK5CYII=",
+              "output_type" : "display_data"
+            }
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "########################### TYPE 3 OF LOOP (NEW) #######################################\n",
+            "\n",
+            "pc = 20 #Good!\n",
+            "xinterval = 2\n",
+            "yinterval = 3\n",
+            "\n",
+            "pc = 25 # Good!\n",
+            "xinterval = 2\n",
+            "yinterval = 2\n",
+            "\n",
+            "pc = 40 # not evenly distributed!\n",
+            "xinterval = 3\n",
+            "yinterval = 1\n",
+            "\n",
+            "pc = 30 # not evenly distributed!\n",
+            "xinterval = 4\n",
+            "yinterval = 1\n",
+            "\n",
+            "pc = 20 # not evenly distributed!\n",
+            "xinterval = 3\n",
+            "yinterval = 2\n",
+            "\n",
+            "pc = 16 # not evenly distributed!\n",
+            "xinterval = 3\n",
+            "yinterval = 3\n",
+            "\n",
+            "pc = 15 # not evenly distributed!\n",
+            "xinterval = 4\n",
+            "yinterval = 2\n",
+            "\n",
+            "\n",
+            "# exchange Carbons with oxygens\n",
+            "pType = C_restart(Nx,Ny)\n",
+            "n_oxys =0\n",
+            "for l in range(0,Ny,yinterval):\n",
+            "    for k in range(0,Nx,xinterval):\n",
+            "        pType[k,l] = 'O' \n",
+            "        n_oxys = n_oxys +1\n",
+            "\n",
+            "plotheat(pType)"
+          ],
+          "prompt_number" : 53,
+          "outputs" : [
+            {
+              "text" : [
+
+              ],
+              "png" : "iVBORw0KGgoAAAANSUhEUgAAABIAAAAQCAYAAAAbBi9cAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABxpRE9UAAAAAgAAAAAAAAAIAAAAKAAAAAgAAAAIAAABmyhzat8AAAFnSURBVDgRlFFPL8NBEJ1j7ZWvIjj7Dpz5AOIitNSfCyoRnLRBmyqC9CqI+JdeEGXjIErbFElDo6WJpFXledOfJq42eZm3897Mzu4KuAqFMi7ir7DZLGz+Ada+waZysMV72Ou8A+Vp5ix96lFvvFiLl8UMBKgg4L9Dg+sdZmMFJjkF01iE6YnBlD0wbSmY1jS5G6b3GKaJWtIHsxmBcZVg1lfRUOrTRkAkcQnZCUByPkh5DHK4BEnMUfRCzvyQU0J5YtbR1JObhOyFnJpPN\/VvIJyLkWjXYWKEGCRYWONDjArNa0415epVzvihsQosZPYhFQ83avgvRnkLreVaK5xAqv1\/mujJ9emUK+pT1Lnuf7lO9M2RFqO3kOY07x+EPPHu7SnI9DaNNHTHHSif2XK0Z3qOliAtj5D9EJvoEPhCcPcG0nHuPOzLBKSLPBylyLfxHjjQRsvMdVPLj9M7D+m84kfwk74G8AMAAP\/\/V5nJSgAAATtJREFUlVDbSsNAFDzfoD+gP+MXqVCtF9QXfRBBsFCrYmqwCipYX1QQi6RizYuPxQsWLKVWE28tNq0Z52TTD+iB2TO7M2d3EgHL9q8hGCWmiRligkjGfJJdoed6ppryqZhzpk09DLpIPZxCgp5BTX3iV2dZWc8h6TeRptcL4kRAiG33DrJ6AHlahnwvQDaPIE6GJsY\/3DVQXlw32s+88abykMcVSDfBTwsDrGXKkIFPSD4LqS5BhjxIomBeHLmHKPT15CVkmFp1EXJiQQabkGOb2jjBsmo3FPkjW3y1zYHGHOSLkTvk3qyBcj1TTT1N+l+ZTGdaY+ai52Yd6coZcn4Je76LrVoB9lsR+x8urPpVBOU7DQcbLxeRR73pyjlnbpF7L5mLNBWCaDVLhy2M93\/sCi3tQU8gb\/cE4B+TjBc6ea\/oEwAAAABJRU5ErkJggg==",
+              "output_type" : "display_data"
+            }
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+            "plotgrid(pType, a0)"
+          ],
+          "prompt_number" : 54,
+          "outputs" : [
+            {
+              "text" : [
+
+              ],
+              "png" : "iVBORw0KGgoAAAANSUhEUgAAABoAAAASCAYAAABFGc6jAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABxpRE9UAAAAAgAAAAAAAAAJAAAAKAAAAAkAAAAJAAACfeeKiOEAAAJJSURBVEgNdJPbcqJAEIZ9\/wdK1d5FY9RErUiqICsgiCAnkTPDcNB\/e8ZNbW3V7lzQA\/90T\/fXzQT\/WWVZgnOOtm3BGib3wzDgNt5QVZX81vf9Q2s5mqZBy1pp\/xVyIpzDMESap4iuEaq6ghu6eFu9YfY6w3K1xPRliqcfT1BVFaquYrvdYrqYQvvS8Dx\/xvZji9X7Su7XmzW8yENd1zJeVmS43W6YiMclvkA\/6liba3DKbvY1Q9+32Bw2SPIEdmjj86igrHPMv+YYugHzn3OUVQmFvjuRgziLsbU2VHmDF+0FHe\/wbrzLuILKRKDQ9hoc30E\/9tA8TVauaSXoFafEQVJdUBZ36HotNdVVpd2f92CcIS5iuFeXEgBVWT38XQ3DOCDPctRNjcn9fkcUR\/AjH03XIMgD8J4jCBga1tElCbImo+xbQszQ9gxBFpBtpS3bElmdyXMNe\/jx3xrrGNI0lX2bjOOIg3mA5Vr4dD9lNgt9Ie3O2aHiBbzUhR7s0Q8cS2MltaWxhOivIBBScgXLoDgKQIl\/+ysnBQf3IIdEVnQOzvBoADi\/wzSZDGQEBqHk8P0O6XVA1RawI5vi3CE0Ya3IIgo1kmQgAh26oZWaCGCGpmxFkRd\/KtJNHSfqUcN62HZDbHsKYoMRSj9okVw5CsLnXKiPg9AsCtrhGB9RsoIuEsjoN6BLRTLfZ\/5CJ6YuiiLYZwvKaSerWRgPdB\/OB1VSSnR7X6DrsTAf2oLQjbceqqdSX31Cl2NHqMR6NV6lFegP3kFO8i8AAAD\/\/7ltcB4AAAIgSURBVFVSiW6rMBDM\/39YqzaK2qahR0go4TA4mBtzw7xdR6\/HSmhtdmaP8W7meYHrBvC8BHpo8HX9wjiPcJwGbTdB5AKqVih0ATdxMUwDzvKMYe6Jp1HVA5I6QZRH0L2GEzuGz5h2bJHnObTW2MzzjOPRhXdR6Kcep\/iEdV1h2zWGboHIQqR1ikpXcKSDZVlwjI5Y1tk009QzVEWFsgj92MMW9o0f2aYpU6ihQpw0SzN8CQd7fw+2e\/ve+KfLE+quRpAF+BSfmKYJ96dbjP28DHgLLURFhLIt8eK9GN6dfWf8s\/cMJ3DQtR02TP74\/EAQ+9Btjyjq0A0dRCrQdA11q5A3OcqmRJzHJCfFRIe278wUPCnHGcd45jE\/jjtowqpU3aTj0kIKXCIX4wBYljbdHLwDpnmCpzwkJE3VVmYqrMB+34D9e\/BOyTRkKeErH+M0wvKtG\/\/QgK6oyvKnkIylGdEiGTjD1tmaRK\/+q5GOF4LfbqRFMDFCbZ1HIyVLKgtpGjn4B+KteKQYmxUcfqTjHym9USAipGWKrMqMz6vcnPluvqKgDWoopr4xWUnY6sYxmDInjP6TRyby9kZcKAgEzucL8iKHK1yUNO72eYskSRDKEFdF0vgCu90bxWjNQ5ckqbB72cEPfEiKh9cQMk7w8PBq+IzhjTudTlBKYcOFePPWdeHjt40jCfzLeK0nFv2X8SLx\/\/\/GeUZ+6F\/GeRj3Dxt+411wI7zWAAAAAElFTkSuQmCC",
+              "output_type" : "display_data"
+            }
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        },
+        {
+          "collapsed" : "false",
+          "cell_type" : "code",
+          "input" : [
+
+          ],
+          "prompt_number" : 0,
+          "outputs" : [
+
+          ],
+          "metadata" : {
+
+          },
+          "language" : "python"
+        }
+      ],
+      "metadata" : {
+
+      }
+    }
+  ]
+}
