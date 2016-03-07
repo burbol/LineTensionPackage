@@ -72,6 +72,17 @@ yLengthCH2b = -0.810
 zLengthCH2b = -0.29
 """
 
+########################### FUNCTION SET ALL PARTICLE TYPES TO 'C' ###############################
+
+def C_restart(Nx,Ny):
+    pType = np.zeros([Nx,Ny],dtype=str) # particle type
+
+    # set standard particle type as Carbon
+    for i in range(Nx):
+        for j in range(Ny):
+            pType[i,j] = 'C'
+    return pType
+
 ########################### FUNCTION TO CREATE GRID ###########################
 def creategrid(a0, Nx, Ny):
     # set particle x- and y- coordinates
@@ -89,17 +100,17 @@ def creategrid(a0, Nx, Ny):
     xPos = np.zeros([Nx,Ny],dtype=float) # x positions of particles
     yPos = np.zeros([Nx,Ny],dtype=float) # y positions of particles
 
-    ########################### TYPE 1 OF GRID #############################################
+    ################# TYPE 1 OF GRID ################
 
     for j in range(Ny):
         for i in range(Nx):
             xPos[i,j] = i*Vx + j*Wx
             yPos[i,j] = i*Vy + j*Wy
 
-    #for j in range(1,Ny):
-        #for i in range(Nx):  # Here we move the last particles of almost each line to get a more rectangular surface shape
-            #if xPos[i,j]>xPos[-1,1]:
-                #xPos[i,j] = xPos[i-Nx+1,j-2]
+    for j in range(1,Ny):
+        for i in range(Nx):  # Here we move the last particles of almost each line to get a more rectangular surface shape
+            if xPos[i,j]>xPos[-1,1]:
+                xPos[i,j] = xPos[i-Nx+1,j-2]
 
     return xPos, yPos
 
@@ -214,6 +225,31 @@ def writeCHBOTTOM(openfile,atomtype,chaintype,chainNum,xoldC,yoldC,zoldC,totalpo
     """
     return xnew,ynew,znew,totalpos,indexC,indexH
 
+def namecarbons(indexC):
+	if indexC == 1:
+		atomtype = 'CAL'
+	if indexC == 2:
+		atomtype = 'CAK'
+	if indexC == 3:
+		atomtype = 'CAJ'
+	if indexC == 4:
+		atomtype = 'CAI'
+	if indexC == 5:
+		atomtype = 'CAH'
+	if indexC == 6:
+		atomtype = 'CAG'
+	if indexC == 7:
+		atomtype = 'CAF'
+	if indexC == 8:
+		atomtype = 'CAE'
+	if indexC == 9:
+		atomtype = 'CAD'
+	if indexC == 10:
+		atomtype = 'CAC'
+	if indexC == 11:
+		atomtype = 'CAB'
+	return atomtype
+
 def writepdb(pType,xPos,yPos,zlast,pc,a0,Nx,Ny):
 	#############################################  PDB FILE WRITTING    ###################################################
 	# Set box size
@@ -255,10 +291,11 @@ def writepdb(pType,xPos,yPos,zlast,pc,a0,Nx,Ny):
 			#OXYGEN CHAIN
 			if atomtype == 'O':
 				#chainlength = 63  # Old SAMs
+				#chaintype='OAM'  # Old SAMs
 				chainlength = 12
 				atomshead = 2 #number of atoms of head group molecule at the top
-				chaintype='OAM'
-				xnew,ynew,znew,totalpos,indexO,indexH = pdb.writeOH(f,chaintype,chainNum,xoldC,yoldC,(zoldC-pdb.zLengthCO),totalpos,indexO,indexH)
+				chaintype='XOH'
+				xnew,ynew,znew,totalpos,indexO,indexH = writeOH(f,chaintype,chainNum,xoldC,yoldC,(zoldC-zLengthCO),totalpos,indexO,indexH)
 
 			elif atomtype == 'C':    #CARBON CHAIN parameters
 			#Third H atom (H3)
@@ -266,41 +303,28 @@ def writepdb(pType,xPos,yPos,zlast,pc,a0,Nx,Ny):
 				chainlength = 11
 				atomshead = 1 #number of atoms of head group molecule at the top
 				chaintype = 'SAM'
-				atomtype = 'CAL'
-				xnew,ynew,znew,totalpos,indexC,indexH = pdb.writeCHTOP(f,atomtype,chaintype,chainNum,xoldC,yoldC,zoldC-pdb.zLengthCCb,totalpos,indexC,indexH)
+				atomtype = namecarbons(indexC)
+				xnew,ynew,znew,totalpos,indexC,indexH = writeCHTOP(f,atomtype,chaintype,chainNum,xoldC,yoldC,zoldC-zLengthCCb,totalpos,indexC,indexH)
 
 			#here comes the "body" of the chain
    			chainloop = (chainlength-atomshead-atomsbottom-atomschain)/atomschain
 			for d in range(chainloop/2):
 
-				if indexC == 2:
-					atomtype = 'CAK'
-				if indexC == 3:
-					atomtype = 'CAJ'
-				if indexC == 4:
-					atomtype = 'CAI'
-				if indexC == 5:
-					atomtype = 'CAH'
-				if indexC == 6:
-					atomtype = 'CAG'
-				if indexC == 7:
-					atomtype = 'CAF'
-				if indexC == 8:
-					atomtype = 'CAE'
-
 				######### CHb #######
-				xnew,ynew,znew,totalpos,indexC,indexH = pdb.writeCHb(f,atomtype,chaintype,chainNum,xnew,ynew,znew,totalpos,indexC,indexH)
+				atomtype = namecarbons(indexC)
+				xnew,ynew,znew,totalpos,indexC,indexH = writeCHb(f,atomtype,chaintype,chainNum,xnew,ynew,znew,totalpos,indexC,indexH)
 
 				######### CHa #######
-				xnew,ynew,znew,totalpos,indexC,indexH = pdb.writeCHa(f,atomtype,chaintype,chainNum,xnew,ynew,znew,totalpos,indexC,indexH)
+				atomtype = namecarbons(indexC)
+				xnew,ynew,znew,totalpos,indexC,indexH = writeCHa(f,atomtype,chaintype,chainNum,xnew,ynew,znew,totalpos,indexC,indexH)
 
 			# At the end of each chain we also write one last CH2 + the (BOTTOM) Head Group
 			######### CHb #######
-			atomtype = 'CAD'
-			xnew,ynew,znew,totalpos,indexC,indexH = pdb.writeCHb(f,atomtype,chaintype,chainNum,xnew,ynew,znew,totalpos,indexC,indexH)
+			atomtype = namecarbons(indexC)
+			xnew,ynew,znew,totalpos,indexC,indexH = writeCHb(f,atomtype,chaintype,chainNum,xnew,ynew,znew,totalpos,indexC,indexH)
 
 			######### CHBottom #######
-			atomtype = 'CAC'
-			xnew,ynew,znew,totalpos,indexC,indexH = pdb.writeCHBOTTOM(f,atomtype,chaintype,chainNum,xnew,ynew,znew,totalpos,indexC,indexH)
+			atomtype = namecarbons(indexC)
+			xnew,ynew,znew,totalpos,indexC,indexH = writeCHBOTTOM(f,atomtype,chaintype,chainNum,xnew,ynew,znew,totalpos,indexC,indexH)
 
 	f.close()
