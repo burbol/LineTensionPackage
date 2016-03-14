@@ -110,7 +110,7 @@ def creategrid(a0, Nx, Ny):
     for j in range(1,Ny):
         for i in range(Nx):  # Here we move the last particles of almost each line to get a more rectangular surface shape
             if xPos[i,j]>xPos[-1,1]:
-                xPos[i,j] = xPos[i-Nx+1,j-2]
+                xPos[i,j] = xPos[i-(Nx-1),j-2]
 
     return xPos, yPos
 
