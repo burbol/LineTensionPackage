@@ -85,9 +85,6 @@ def C_restart(Nx,Ny):
 
 ########################### FUNCTION TO CREATE GRID ###########################
 def creategrid(a0, Nx, Ny):
-    # set particle x- and y- coordinates
-    # !!!! later move to create_top_surface.ipynb !!!
-
 
     # First basis vector V = (Vx,Vy)
     Vx = a0
@@ -96,21 +93,17 @@ def creategrid(a0, Nx, Ny):
     Wx = a0*np.sin(np.pi/6)
     Wy = a0*np.cos(np.pi/6)
 
-    # create arrays that hold particle positions
+    # Create arrays that hold particle positions
     xPos = np.zeros([Nx,Ny],dtype=float) # x positions of particles
     yPos = np.zeros([Nx,Ny],dtype=float) # y positions of particles
-
-    ################# TYPE 1 OF GRID ################
 
     for j in range(Ny):
         for i in range(Nx):
             xPos[i,j] = i*Vx + j*Wx
             yPos[i,j] = i*Vy + j*Wy
-
-    for j in range(1,Ny):
-        for i in range(Nx):  # Here we move the last particles of almost each line to get a more rectangular surface shape
-            if xPos[i,j]>xPos[-1,1]:
-                xPos[i,j] = xPos[i-(Nx-1),j-2]
+            # Move last particles of (almost) each line to get rectangular grid shape
+            if xPos[i,j]>((Nx-1)*Vx + Wx):
+                xPos[i,j] = xPos[i,j] - (Nx*Vx)
 
     return xPos, yPos
 
