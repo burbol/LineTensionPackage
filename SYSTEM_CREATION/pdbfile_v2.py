@@ -17,20 +17,65 @@ Vy = 0
 Wx = a0*np.sin(np.pi/6)
 Wy = a0*np.cos(np.pi/6)
 
+################# Num of atoms in each chain ##################
 
-################# Head Groups  ##################
+chainlengthCH3 = 11
+chainlengthOH = 12
 
-####  OAM Head Groups  TOP ####
+#chainlengthCH3 = 65 # Old SAMs
+#chainlengthOH = 63  # Old SAMs
 
-xLengthCO = 0.22
-yLengthCO = 0.00
-zLengthCO = -1.42
+atomsheadCH3 = 1 #number of atoms of head group molecule at the top
+atomsheadOH = 2 #number of atoms of head group molecule at the top
+
+atomsbottom = 1 #number of atoms of molecule at the bottom
+atomschain = 1 #number of atoms of each molecule inside the chain
+
+################# Names of different chains ##################
+
+chaintypeOH='XOH'
+chaintypeCH3 = 'SAM'
+
+################# Names of different atoms/molecules ##################
+def namecarbons(indexC):
+	if indexC == 1:
+		atomtype = 'CAL'
+	if indexC == 2:
+		atomtype = 'CAK'
+	if indexC == 3:
+		atomtype = 'CAJ'
+	if indexC == 4:
+		atomtype = 'CAI'
+	if indexC == 5:
+		atomtype = 'CAH'
+	if indexC == 6:
+		atomtype = 'CAG'
+	if indexC == 7:
+		atomtype = 'CAF'
+	if indexC == 8:
+		atomtype = 'CAE'
+	if indexC == 9:
+		atomtype = 'CAD'
+	if indexC == 10:
+		atomtype = 'CAC'
+	if indexC == 11:
+		atomtype = 'CAB'
+	return atomtype
+
+################# Bond length: Head Groups  ##################
+
+""" New bond lengths """
+####  OH Head Groups  TOP ####
 
 xLengthOH = +0.87
 yLengthOH = 0.00
 zLengthOH = +0.39
 
-############## SAM & OAM CHAINS ##############
+xLengthCO = 0.22
+yLengthCO = 0.00
+zLengthCO = -1.42
+
+############## OH & CH3 CHAINS ##############
 xLengthCCa = -1.40
 yLengthCCa = 0.00
 zLengthCCa = -0.64
@@ -39,6 +84,27 @@ xLengthCCb = +0.15
 yLengthCCb = 0.00
 zLengthCCb = -1.53
 
+
+""" Old bond lengths 
+####  OH Head Groups  TOP ####
+
+xLengthOH = +0.87
+yLengthOH = 0.00
+zLengthOH = +0.39
+
+xLengthCO = 0.22
+yLengthCO = 0.00
+zLengthCO = -1.42
+
+############## OH & CH3 CHAINS ##############
+xLengthCCa = -1.40
+yLengthCCa = 0.00
+zLengthCCa = -0.64
+
+xLengthCCb = +0.15
+yLengthCCb = 0.00
+zLengthCCb = -1.53
+"""
 
 """ Not needed anymore
 
@@ -84,7 +150,7 @@ def C_restart(Nx,Ny):
     return pType
 
 ########################### FUNCTION TO CREATE GRID ###########################
-def creategrid(a0, Nx, Ny):
+def creategrid(Nx, Ny):
 
     # First basis vector V = (Vx,Vy)
     Vx = a0
@@ -97,9 +163,10 @@ def creategrid(a0, Nx, Ny):
     xPos = np.zeros([Nx,Ny],dtype=float) # x positions of particles
     yPos = np.zeros([Nx,Ny],dtype=float) # y positions of particles
 
+    shift =
     for j in range(Ny):
         for i in range(Nx):
-            xPos[i,j] = i*Vx + j*Wx
+            xPos[i,j] = i*Vx + j*Wx +shift
             yPos[i,j] = i*Vy + j*Wy
             # Move last particles of (almost) each line to get rectangular grid shape
             if xPos[i,j]>((Nx-1)*Vx + Wx):
@@ -218,42 +285,22 @@ def writeCHBOTTOM(openfile,atomtype,chaintype,chainNum,xoldC,yoldC,zoldC,totalpo
     """
     return xnew,ynew,znew,totalpos,indexC,indexH
 
-def namecarbons(indexC):
-	if indexC == 1:
-		atomtype = 'CAL'
-	if indexC == 2:
-		atomtype = 'CAK'
-	if indexC == 3:
-		atomtype = 'CAJ'
-	if indexC == 4:
-		atomtype = 'CAI'
-	if indexC == 5:
-		atomtype = 'CAH'
-	if indexC == 6:
-		atomtype = 'CAG'
-	if indexC == 7:
-		atomtype = 'CAF'
-	if indexC == 8:
-		atomtype = 'CAE'
-	if indexC == 9:
-		atomtype = 'CAD'
-	if indexC == 10:
-		atomtype = 'CAC'
-	if indexC == 11:
-		atomtype = 'CAB'
-	return atomtype
-
-def writepdb(pType,xPos,yPos,zlast,pc,a0,Nx,Ny):
-	#############################################  PDB FILE WRITTING    ###################################################
-	# Set box size
+#############################################  PDB FILE WRITTING    ###################################################
+def writepdb(pType,xPos,yPos,pc,Nx,Ny):
+	
 	Wx = a0*np.sin(np.pi/6)
 	Wy = a0*np.cos(np.pi/6)
-	xPos, yPos = creategrid(a0, Nx, Ny)
+	xPos, yPos = creategrid(Nx, Ny)
+	
+	# Set box size 
+	"""(In order for the protein to avoid seeing its image across the periodic boundary, 
+	it must be at least twice the cut-off distance from the next nearest image of itself.)"""
 	xbox = round(xPos.max() - xPos.min()+ Wx,3)
 	ybox = round(yPos.max() - yPos.min()+ Wy,3)
 	#zbox = round(zPos,3)-zlastPos.min() #zlastPos doesn't get a value until the end of this cell => run 2 times!
 	#zlastPos = zlast*np.ones([Nx,Ny],dtype=float) # zlastPos ONLY will serve to calculate the box height (z)
-	zbox = zlast + 2.0
+	#zbox = zlast
+	zbox =  abs(zLengthOH) + abs(zLengthCO) + (float(chainlengthOH)/2.)*(abs(zLengthCCa) + abs(zLengthCCb)) + 2.0 # Now zlast isn't used anymore!
 
 	title = 'sam ' + str(int(pc*100)) + '% OH-coverage'
 	f = open('start' + str(int(pc*100)) + '.pdb','w')
@@ -274,28 +321,26 @@ def writepdb(pType,xPos,yPos,zlast,pc,a0,Nx,Ny):
 			chainNum = chainNum +1
 			xoldC= round(xPos[i,j],3)
 			yoldC= round(yPos[i,j],3)
-			zoldC= zlast
+			zoldC= zbox
 			atomtype = pType[i,j]
 			indexC = 1
 			indexO = 1
 			indexH = 1
-			atomsbottom = 1 #number of atoms of molecule at the bottom
-			atomschain = 1 #number of atoms of molecules inside the chain
+
 			#OXYGEN CHAIN
 			if atomtype == 'O':
-				#chainlength = 63  # Old SAMs
 				#chaintype='OAM'  # Old SAMs
-				chainlength = 12
-				atomshead = 2 #number of atoms of head group molecule at the top
-				chaintype='XOH'
+				chainlength = chainlengthOH
+				atomshead = atomsheadOH
+				chaintype = chaintypeOH
 				xnew,ynew,znew,totalpos,indexO,indexH = writeOH(f,chaintype,chainNum,xoldC,yoldC,(zoldC-zLengthCO),totalpos,indexO,indexH)
 
-			elif atomtype == 'C':    #CARBON CHAIN parameters
+			#CARBON CHAIN
+			elif atomtype == 'C':
 			#Third H atom (H3)
-				#chainlength = 65 # Old SAMs
-				chainlength = 11
-				atomshead = 1 #number of atoms of head group molecule at the top
-				chaintype = 'SAM'
+				chainlength = chainlengthCH3
+				atomshead = atomsheadCH3
+				chaintype = chaintypeCH3
 				atomtype = namecarbons(indexC)
 				xnew,ynew,znew,totalpos,indexC,indexH = writeCHTOP(f,atomtype,chaintype,chainNum,xoldC,yoldC,zoldC-zLengthCCb,totalpos,indexC,indexH)
 
