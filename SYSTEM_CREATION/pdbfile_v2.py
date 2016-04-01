@@ -67,22 +67,22 @@ def namecarbons(indexC):
 """ New bond lengths """
 ####  OH Head Groups  TOP ####
 
-xLengthOH = +0.87
-yLengthOH = 0.00
-zLengthOH = +0.39
+xLengthOH = -0.054
+yLengthOH = -0.042
+zLengthOH = 0.073
 
-xLengthCO = 0.22
-yLengthCO = 0.00
-zLengthCO = -1.42
+xLengthCO = 0.088
+yLengthCO = -0.057
+zLengthCO = 0.098
 
 ############## OH & CH3 CHAINS ##############
-xLengthCCa = -1.40
-yLengthCCa = 0.00
-zLengthCCa = -0.64
+xLengthCCa = 0.089
+yLengthCCa = -0.063
+zLengthCCa = 0.109
 
-xLengthCCb = +0.15
-yLengthCCb = 0.00
-zLengthCCb = -1.53
+xLengthCCb = -0.086
+yLengthCCb = -0.064
+zLengthCCb = 0.11
 
 
 """ Old bond lengths 
