@@ -162,11 +162,10 @@ def creategrid(Nx, Ny):
     # Create arrays that hold particle positions
     xPos = np.zeros([Nx,Ny],dtype=float) # x positions of particles
     yPos = np.zeros([Nx,Ny],dtype=float) # y positions of particles
-
-    shift =
+    
     for j in range(Ny):
         for i in range(Nx):
-            xPos[i,j] = i*Vx + j*Wx +shift
+            xPos[i,j] = i*Vx + j*Wx
             yPos[i,j] = i*Vy + j*Wy
             # Move last particles of (almost) each line to get rectangular grid shape
             if xPos[i,j]>((Nx-1)*Vx + Wx):
@@ -300,7 +299,8 @@ def writepdb(pType,xPos,yPos,pc,Nx,Ny):
 	#zbox = round(zPos,3)-zlastPos.min() #zlastPos doesn't get a value until the end of this cell => run 2 times!
 	#zlastPos = zlast*np.ones([Nx,Ny],dtype=float) # zlastPos ONLY will serve to calculate the box height (z)
 	#zbox = zlast
-	zbox =  abs(zLengthOH) + abs(zLengthCO) + (float(chainlengthOH)/2.)*(abs(zLengthCCa) + abs(zLengthCCb)) + 2.0 # Now zlast isn't used anymore!
+
+	zbox = abs(zLengthCO) + (float(chainlengthOH)/2.)*(abs(zLengthCCa) + abs(zLengthCCb)) + abs(zLengthCCb) # Now zlast isn't used anymore!
 
 	title = 'sam ' + str(int(pc*100)) + '% OH-coverage'
 	f = open('start' + str(int(pc*100)) + '.pdb','w')
