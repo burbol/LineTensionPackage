@@ -71,18 +71,18 @@ xLengthOH = -0.054
 yLengthOH = -0.042
 zLengthOH = 0.073
 
-xLengthCO = 0.088
-yLengthCO = -0.057
-zLengthCO = 0.098
+xLengthCO = -0.088
+yLengthCO = 0.057
+zLengthCO = -0.098
 
 ############## OH & CH3 CHAINS ##############
-xLengthCCa = 0.089
-yLengthCCa = -0.063
-zLengthCCa = 0.109
+xLengthCCa = -0.089
+yLengthCCa = 0.063
+zLengthCCa = -0.109
 
-xLengthCCb = -0.086
-yLengthCCb = -0.064
-zLengthCCb = 0.11
+xLengthCCb = 0.086
+yLengthCCb = 0.064
+zLengthCCb = -0.11
 
 
 """ Old bond lengths 
