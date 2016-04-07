@@ -67,23 +67,22 @@ def namecarbons(indexC):
 """ New bond lengths """
 ####  OH Head Groups  TOP ####
 
-xLengthOH = -0.054
-yLengthOH = -0.042
-zLengthOH = 0.073
+xLengthOH = -0.54
+yLengthOH = -0.42
+zLengthOH = 0.73
 
-xLengthCO = -0.088
-yLengthCO = 0.057
-zLengthCO = -0.098
+xLengthCO = -0.88
+yLengthCO = 0.57
+zLengthCO = -0.98
 
 ############## OH & CH3 CHAINS ##############
-xLengthCCa = -0.089
-yLengthCCa = 0.063
-zLengthCCa = -0.109
+xLengthCCa = 0.89
+yLengthCCa = 0.63
+zLengthCCa = -1.09
 
-xLengthCCb = 0.086
-yLengthCCb = 0.064
-zLengthCCb = -0.11
-
+xLengthCCb = -0.86
+yLengthCCb = 0.64
+zLengthCCb = -1.1
 
 """ Old bond lengths 
 ####  OH Head Groups  TOP ####
@@ -104,38 +103,6 @@ zLengthCCa = -0.64
 xLengthCCb = +0.15
 yLengthCCb = 0.00
 zLengthCCb = -1.53
-"""
-
-""" Not needed anymore
-
-####  SAMs Head Groups  TOP ####
-
-xLengthCHTOP = -0.90
-yLengthCHTOP = 0.00
-zLengthCHTOP = +0.41
-
-####  Head Groups  BOTTOM  (a) ####
-
-xLengthCHBOTTOM = 0.10
-yLengthCHBOTTOM = 0.00
-zLengthCHBOTTOM = -0.99
-
-
-xLengthCH1a = -0.50
-yLengthCH1a = +0.81
-zLengthCH1a = +0.29
-
-xLengthCH2a = -0.50
-yLengthCH2a = -0.810
-zLengthCH2a = +0.29
-
-xLengthCH1b = +0.50
-yLengthCH1b = +0.81
-zLengthCH1b = -0.29
-
-xLengthCH2b = +0.50
-yLengthCH2b = -0.810
-zLengthCH2b = -0.29
 """
 
 ########################### FUNCTION SET ALL PARTICLE TYPES TO 'C' ###############################
