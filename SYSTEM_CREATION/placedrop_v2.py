@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[3]:
+# In[6]:
 
 #!/usr/bin/python
 
@@ -11,16 +11,16 @@ import os
 import pylab as pl
 
 
-# In[28]:
+# In[16]:
 
 # Cell copied from ExtendSam.ipynb
 
 pc=[0,11,22,33,44,50,37]
 molec = [1000, 2000, 3000, 4000, 5000, 6500, 8000, 9000, 10000]
 
-samsfolder = "/Users/burbol2/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/SAM_startfiles_v2_36x36"
+samsfolder1 = "/Users/burbol2/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/SAM_startfiles_v2_36x36"
 # WE CHECK THE BOXSIZE OF THE NEW FILE TO ENTER THEM IN placedrop.ipynb
-os.chdir(samsfolder)
+os.chdir(samsfolder1)
 for m in pc:
     newfile = 'start%d.gro'%(m, )   
     last_line = open(newfile, "r").readlines()[-1]
@@ -28,23 +28,23 @@ for m in pc:
     print newfile, ":", last_line
 
 
-# In[26]:
+# In[8]:
 
 mynumbers = []
 mynumbers.append([float(n) for n in last_line.split()])
 print mynumbers[0][2]
 
 
-# In[4]:
+# In[17]:
 
 ######## CHECK FOLDER PATHS AND NAME OF gro FILE startsamfile--> look also for os.chdir!!!!!! #########
 #folder with sams and water .gro files
 
 #Put surfaces in ../samsfolder!! (now: drop_placement)
-samsfolder = "/Users/eixeres/Dropbox/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/DropsGroTop"  #path to .gro files
+samsfolder = "/Users/burbol2/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/DropsGroTop"  #path to .gro files
 
 # folder where we will put the shifted sams: can be deleted if everything works fine
-unwantedfolder = "/Users/eixeres/Dropbox/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/reshaping_files" #path unwanted files
+unwantedfolder = "/Users/burbol2/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/reshaping_files" #path unwanted files
 
 # sam sizes in z-direction (not box size!!)
 sam={}
@@ -55,13 +55,11 @@ ybox={}
 zbox={}
 
 for i in pc:
-sam[i]= mynumbers[0][2]
+    sam[i]= mynumbers[0][2]
 
-xbox[i]=mynumbers[0][0]
-ybox[i]=mynumbers[0][1]
-zbox[i]=mynumbers[0][0]
-
-
+    xbox[i]=mynumbers[0][0]
+    ybox[i]=mynumbers[0][1]
+    zbox[i]=mynumbers[0][0]
 
 # water drop sizes in z-direction (they could also be read, look at script ExtendSam.ipynb)
 water={}
@@ -104,7 +102,7 @@ for i in pc:
     samfile='start'+str(i)+'_c.gro'
     
     #we copy the sams to the working folder
-    os.system("cp ../%s ." %(startsamfile, ))
+    os.system("cp %s/%s ." %(samsfolder1, startsamfile, ))
     #we move the sams down
     #os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -c" %(startsamfile, samfile, ))
     #os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate 0 0 %5.3f" %(samfile, samfile, sam[i]/(-2), ))
@@ -123,7 +121,7 @@ for i in pc:
         #os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -c" %(waterfile, waterfile, ))
                
         #we move the drops up 
-        os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate 0 0 %5.3f" %(waterfile, waterfile, 0.5+(sam[j]), ))
+        os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate 0 0 %5.3f" %(waterfile, waterfile, 0.5+(sam[i]), ))
         
 ##### WE START THE MERGING PROCESS OF water drops + sams #################
 
@@ -176,12 +174,12 @@ for i in pc:
         os.system("rm \#*")
 
 
-# In[6]:
+# In[18]:
 
 print("mv %s > %s"%(samfile,unwantedfolder+'/'))
 
 
-# In[9]:
+# In[19]:
 
 os.system("mkdir %s"% (str(unwantedfolder)+'/'))
 # We delete/move not needed files
@@ -197,15 +195,23 @@ for i in pc:
         os.system("rm \#*")
 
 
-# In[22]:
+# In[25]:
 
 ######### R E A D    T H I S!!!!!!! ##########
 ##Run topfile_creation.ipynb. There the files are moved. If not run this cell
 
 #Renaming and moving endfiles
 
-startfolder = "/Users/burbol/MEGAsync/scripts/SAM_CREATION/SAMs/NEW/drop_placement/DropsGroTop/"
-endfolder="/Users/burbol/MEGAsync/scripts/SAM_CREATION/SAMs/NEW/drop_placement/NewVersion3/NewVersionBIG_Backup/"
+#startfolder = "/Users/burbol/MEGAsync/scripts/SAM_CREATION/SAMs/NEW/drop_placement/DropsGroTop/"
+#endfolder="/Users/burbol/MEGAsync/scripts/SAM_CREATION/SAMs/NEW/drop_placement/NewVersion3/NewVersionBIG_Backup/"
+
+
+startfolder = samsfolder+ "/"
+endfolder=samsfolder + "/NewVersion_v2/"
+
+#os.system("mkdir %s"% (endfolder))
+os.chdir(endfolder)
+
 for i in pc:
     for j in molec:
         startname='NPT_sam'+str(i)+'_water'+str(j)+'.gro'
