@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[3]:
 
 #!/usr/bin/python
 
@@ -11,19 +11,28 @@ import os
 import pylab as pl
 
 
-# In[3]:
+# In[28]:
 
 # Cell copied from ExtendSam.ipynb
 
-pc=[21,25]
-samsfolder = "/Users/burbol/MEGAsync/scripts/SAM_CREATION/ExtendSAMs"
+pc=[0,11,22,33,44,50,37]
+molec = [1000, 2000, 3000, 4000, 5000, 6500, 8000, 9000, 10000]
+
+samsfolder = "/Users/burbol2/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/SAM_startfiles_v2_36x36"
 # WE CHECK THE BOXSIZE OF THE NEW FILE TO ENTER THEM IN placedrop.ipynb
 os.chdir(samsfolder)
 for m in pc:
-    newfile = '%sstart%d.gro'%('BIG',m, )   
+    newfile = 'start%d.gro'%(m, )   
     last_line = open(newfile, "r").readlines()[-1]
     Line_len = len(last_line)
     print newfile, ":", last_line
+
+
+# In[26]:
+
+mynumbers = []
+mynumbers.append([float(n) for n in last_line.split()])
+print mynumbers[0][2]
 
 
 # In[4]:
@@ -32,21 +41,27 @@ for m in pc:
 #folder with sams and water .gro files
 
 #Put surfaces in ../samsfolder!! (now: drop_placement)
-samsfolder = "/Users/burbol/MEGAsync/scripts/SAM_CREATION/SAMs/NEW/drop_placement/DropsGroTop" #path to .gro files
+samsfolder = "/Users/eixeres/Dropbox/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/DropsGroTop"  #path to .gro files
 
 # folder where we will put the shifted sams: can be deleted if everything works fine
-unwantedfolder = "/Users/burbol/MEGAsync/scripts/SAM_CREATION/SAMs/NEW/drop_placement/reshaping_files" #path unwanted files
+unwantedfolder = "/Users/eixeres/Dropbox/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/reshaping_files" #path unwanted files
 
-# sam sizes in z-direction (not box size!!) 
-""" PONER LAST POSITION, NOT SIZE!!! """
+# sam sizes in z-direction (not box size!!)
 sam={}
-#sam[21]=2.357  # small SAM
-#sam[25]=2.357  # small SAM
 
-sam[21]=2.310 # big SAM
-sam[25]=2.368 # big SAM
-sam[33]=2.312 
-sam[50]=2.310
+#sizes of simulation box of sams
+xbox={}
+ybox={}
+zbox={}
+
+for i in pc:
+sam[i]= mynumbers[0][2]
+
+xbox[i]=mynumbers[0][0]
+ybox[i]=mynumbers[0][1]
+zbox[i]=mynumbers[0][0]
+
+
 
 # water drop sizes in z-direction (they could also be read, look at script ExtendSam.ipynb)
 water={}
@@ -62,44 +77,7 @@ water[8000]=6.395
 water[9000]=6.665
 water[10000]=6.895  
 
-#sizes of simulation box of sams
-xbox={}
-ybox={}
-zbox={}
 
-#xbox[21]=10.0000 # small SAM
-#ybox[21]=13.1913
-#zbox[21]=12.0000
-
-#xbox[25]=10.0000 # small SAM
-#ybox[25]=13.1913
-#zbox[25]=12.0000
-
-#xbox[33]=13.500
-#ybox[33]=13.856
-#zbox[33]=12.000
-
-xbox[21]=20.00000
-ybox[21]=21.66500
-zbox[21]=20.00000
-
-xbox[25]=20.00000
-ybox[25]=21.66500
-zbox[25]=20.00000
-
-xbox[33]=18.00000  
-ybox[33]=17.33200 
-zbox[33]=20.00000 
-
-xbox[50]=20.00000
-ybox[50]=21.66500
-zbox[50]=20.00000
-
-#pc = [33,50]
-#molec = [216, 1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]
-pc = [21,25]
-#molec = [6500, 7000, 8000, 9000, 10000]
-molec = [216, 1000, 2000, 3000, 4000, 5000]
 
 # From here everything runs automatically...
 
@@ -122,17 +100,16 @@ for i in pc:
     
     #sam file names
     #startsamfile='start'+str(i)+'.gro'
-    startsamfile='%sstart%d.gro'%('BIG',i, )
+    startsamfile='start%d.gro'%(i, )
     samfile='start'+str(i)+'_c.gro'
     
     #we copy the sams to the working folder
     os.system("cp ../%s ." %(startsamfile, ))
     #we move the sams down
-    """ BORRAR prox. 2 lineas y hacer solo 1 copia para modificar en lugar del original: seria la primera
-    linea pero sin -c """
-    os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -c" %(startsamfile, samfile, ))
-    os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate 0 0 %5.3f" %(samfile, samfile, sam[i]/(-2), ))
+    #os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -c" %(startsamfile, samfile, ))
+    #os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate 0 0 %5.3f" %(samfile, samfile, sam[i]/(-2), ))
     
+    os.system("/usr/local/gromacs/bin/editconf -f %s -o %s" %(startsamfile, samfile, ))
     for j in molec:        
         
         #water file names
@@ -142,13 +119,11 @@ for i in pc:
         newsystfile='NPT_sam'+str(i)+'_water'+str(j)+'_c.gro'
         
         #we change the water box size to the same as the sams and we center every water system
-        """ poner el centro de la gota en la parte superior de la SAM """
         os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -box %5.3f %5.3f %5.3f" %(startwaterfile, waterfile, xbox[i], ybox[i], zbox[i], ))
-        os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -c" %(waterfile, waterfile, ))
+        #os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -c" %(waterfile, waterfile, ))
                
         #we move the drops up 
-        """ esta linea se keda igual """
-        os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate 0 0 %5.3f" %(waterfile, waterfile, 0.5+(water[j]/2), ))
+        os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate 0 0 %5.3f" %(waterfile, waterfile, 0.5+(sam[j]), ))
         
 ##### WE START THE MERGING PROCESS OF water drops + sams #################
 
@@ -156,7 +131,6 @@ for i in pc:
         creating = open(newsystfile, 'w+')
         creating.close()
         
-        """ poner mas comentarios cuando entianda ke se hace aki """
         #linecount
         linewater=linecount(waterfile)
         linesam=linecount(samfile)
