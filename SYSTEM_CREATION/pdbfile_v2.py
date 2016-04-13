@@ -9,13 +9,17 @@ import numpy as np
 # Lattice vector
 a0 = 5.0
 
-# First basis vector V = (Vx,Vy)
+#First basis vector V = (Vx,Vy)
 Vx = a0
 Vy = 0
 
-# Second basis vector W = (Wx,Wy)
-Wx = a0*np.sin(np.pi/6)
-Wy = a0*np.cos(np.pi/6)
+#Second basis vector W = (Wx,Wy)
+#Wx = a0*np.sin(np.pi/6)
+#Wy = a0*np.cos(np.pi/6)
+
+Wx = a0*np.sin(2*np.pi/3)
+Wy = a0*np.cos(2*np.pi/3)
+
 
 ################# Num of atoms in each chain ##################
 
