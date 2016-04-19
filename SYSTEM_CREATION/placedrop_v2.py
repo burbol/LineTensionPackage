@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[6]:
+# In[1]:
 
 #!/usr/bin/python
 
@@ -11,16 +11,16 @@ import os
 import pylab as pl
 
 
-# In[16]:
+# In[2]:
 
 # Cell copied from ExtendSam.ipynb
 
 pc=[0,11,22,33,44,50,37]
 molec = [1000, 2000, 3000, 4000, 5000, 6500, 8000, 9000, 10000]
 
-samsfolder1 = "/Users/burbol2/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/SAM_startfiles_v2_36x36"
+samsfolder = "/Users/burbol2/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/SAM_startfiles_v2_36x36"
 # WE CHECK THE BOXSIZE OF THE NEW FILE TO ENTER THEM IN placedrop.ipynb
-os.chdir(samsfolder1)
+os.chdir(samsfolder)
 for m in pc:
     newfile = 'start%d.gro'%(m, )   
     last_line = open(newfile, "r").readlines()[-1]
@@ -28,20 +28,20 @@ for m in pc:
     print newfile, ":", last_line
 
 
-# In[8]:
+# In[3]:
 
 mynumbers = []
 mynumbers.append([float(n) for n in last_line.split()])
 print mynumbers[0][2]
 
 
-# In[17]:
+# In[9]:
 
 ######## CHECK FOLDER PATHS AND NAME OF gro FILE startsamfile--> look also for os.chdir!!!!!! #########
 #folder with sams and water .gro files
 
-#Put surfaces in ../samsfolder!! (now: drop_placement)
-samsfolder = "/Users/burbol2/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/DropsGroTop"  #path to .gro files
+#Put SAMs in ../workingdir!!
+workingdir = "/Users/burbol2/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/DropsGroTop"  #path to .gro files
 
 # folder where we will put the shifted sams: can be deleted if everything works fine
 unwantedfolder = "/Users/burbol2/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/reshaping_files" #path unwanted files
@@ -80,7 +80,7 @@ water[10000]=6.895
 # From here everything runs automatically...
 
 os.system("mkdir %sdelete"% (str(unwantedfolder)+'/'))
-os.chdir(samsfolder)
+os.chdir(workingdir)
 
 def replace_line(file_name, line_num, text):
     lines = open(file_name, 'r').readlines()
@@ -102,12 +102,13 @@ for i in pc:
     samfile='start'+str(i)+'_c.gro'
     
     #we copy the sams to the working folder
-    os.system("cp %s/%s ." %(samsfolder1, startsamfile, ))
-    #we move the sams down
-    #os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -c" %(startsamfile, samfile, ))
-    #os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate 0 0 %5.3f" %(samfile, samfile, sam[i]/(-2), ))
+    os.system("cp %s/%s ." %(samsfolder, startsamfile, ))
     
-    os.system("/usr/local/gromacs/bin/editconf -f %s -o %s" %(startsamfile, samfile, ))
+    #we move the sams down
+    os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -c" %(startsamfile, samfile, ))
+    os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate 0 0 %5.3f" %(samfile, samfile, sam[i]/(-2), ))
+    
+    ###os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -box %5.3f %5.3f %5.3f" %(startsamfile, samfile, xbox[i], ybox[i], zbox[i], ))
     for j in molec:        
         
         #water file names
@@ -118,10 +119,11 @@ for i in pc:
         
         #we change the water box size to the same as the sams and we center every water system
         os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -box %5.3f %5.3f %5.3f" %(startwaterfile, waterfile, xbox[i], ybox[i], zbox[i], ))
-        #os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -c" %(waterfile, waterfile, ))
+        os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -c" %(waterfile, waterfile, ))
                
         #we move the drops up 
-        os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate 0 0 %5.3f" %(waterfile, waterfile, 0.5+(sam[i]), ))
+        ###os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate 0 0 %5.3f" %(startwaterfile, waterfile, 0.5+(sam[i]), ))
+        os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate 0 0 %5.3f" %(waterfile, waterfile, 0.5+(water[j]/2), ))
         
 ##### WE START THE MERGING PROCESS OF water drops + sams #################
 
@@ -158,8 +160,9 @@ for i in pc:
         replace_line(newsystfile, 0, "sam "+str(i)+"% OH-coverage + water "+str(j)+ "\n")
         
         endfile='NPT_sam'+str(i)+'_water'+str(j)+'.gro'
+        ###os.system("/usr/local/gromacs/bin/editconf -f %s -o %s" %(newsystfile, endfile, ))
         os.system("/usr/local/gromacs/bin/editconf -f %s -o %s" %(newsystfile, endfile, ))
-        os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate %8.5f %8.5f %8.5f" %(endfile, endfile, 0, 0,-5, ))
+        #os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -translate %8.5f %8.5f %8.5f" %(endfile, endfile, 0, 0,-5, ))
 
 # We delete/move not needed files
 os.system("mkdir %sdelete"% (str(unwantedfolder)+'/'))
@@ -174,12 +177,17 @@ for i in pc:
         os.system("rm \#*")
 
 
-# In[18]:
+# In[10]:
+
+print xbox[i], ybox[i], zbox[i]
+
+
+# In[11]:
 
 print("mv %s > %s"%(samfile,unwantedfolder+'/'))
 
 
-# In[19]:
+# In[12]:
 
 os.system("mkdir %s"% (str(unwantedfolder)+'/'))
 # We delete/move not needed files
@@ -195,7 +203,7 @@ for i in pc:
         os.system("rm \#*")
 
 
-# In[25]:
+# In[13]:
 
 ######### R E A D    T H I S!!!!!!! ##########
 ##Run topfile_creation.ipynb. There the files are moved. If not run this cell
@@ -206,8 +214,8 @@ for i in pc:
 #endfolder="/Users/burbol/MEGAsync/scripts/SAM_CREATION/SAMs/NEW/drop_placement/NewVersion3/NewVersionBIG_Backup/"
 
 
-startfolder = samsfolder+ "/"
-endfolder=samsfolder + "/NewVersion_v2/"
+startfolder = workingdir+ "/"
+endfolder=workingdir + "/NewVersion_v2/"
 
 #os.system("mkdir %s"% (endfolder))
 os.chdir(endfolder)
