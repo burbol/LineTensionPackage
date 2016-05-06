@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[1]:
 
 #!/usr/bin/python
 
@@ -11,7 +11,7 @@ import os
 import pylab as pl
 
 
-# In[3]:
+# In[2]:
 
 # Cell copied from ExtendSam.ipynb
 
