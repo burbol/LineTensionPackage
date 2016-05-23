@@ -1,0 +1,85 @@
+ITP FILES:
+;   nr      type  resnr resid  atom  cgnr   charge     mass
+     1         H     1  XOH     HAA     1    0.408   1.0000
+
+;   nr    type   resnr  residu    atom    cgnr       charge    mass;
+     1       C        1    SAM        C       1        0.000    12.0110
+   
+FILE T1.itp => no cambiar!! Y usar los nombres OT y CT!!  
+     
+• tipo de atomo/molecula: (type, 2ª columna)
+
+ELLOS (c10oh.itp):
+H
+OA
+CH2
+CH3
+
+YO (OHversion2.itp):
+OT
+H
+C
+
+YO (CH3.itp):
+CT
+C
+H
+
+• tipo de cadena (residue, 3ª columna):
+
+ELLOS (c10oh.itp):
+XOH
+
+YO (OHversion2.itp):
+OAM
+
+YO (CH3.itp):
+SAM
+
+• nombre del átomo (atom, 4ª columna):
+
+ELLOS (c10oh.itp):
+HAA
+OAA
+CAB
+CAC
+CAL
+etc.
+
+YO (OHversion2.itp & CH3.itp):
+O1
+H1
+C1
+C2
+H3
+etc.
+
+• número del átomo (cgnr, 5ª columna):
+
+ELLOS y YO:
+1
+2
+3
+etc.
+
+• carga del átomo (charge, 6ª columna) y masa del átomo (mass, 7ª columna):
+
+ELLOS:
+H     0.408   1.0000   
+OA    0.734  16.0000   
+CH2   0.286  14.0000   
+CH3   0.000  15.0000   
+
+YO (OHversion2.itp & CH3.itp):
+CH3:
+CT  0.000    12.0110
+H   0.000     1.0080
+H   0.000     1.0080
+H   0.000     1.0080
+CH2
+C   0.000    12.0110
+H   0.000     1.0080
+H   0.000     1.0080
+OH:
+OT -0.734    15.9990
+H   0.408     1.0080

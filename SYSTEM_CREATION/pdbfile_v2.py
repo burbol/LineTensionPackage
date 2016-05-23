@@ -180,10 +180,10 @@ def writeH(openfile,xLength,yLength,zLength,chaintype,chainNum,xoldC,yoldC,zoldC
     return totalpos,indexH
 
 def writeOH(openfile,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO,indexH):
-    ####### OXYGEN ######
-    xnew,ynew,znew,totalpos,indexO = writeO(openfile,xLengthCO,yLengthCO,zLengthCO,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO)
     ####### H1 ######
     totalpos,indexH = writeH(openfile,xLengthOH,yLengthOH,zLengthOH,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexH)
+    ####### OXYGEN ######
+    xnew,ynew,znew,totalpos,indexO = writeO(openfile,xLengthCO,yLengthCO,zLengthCO,chaintype,chainNum,xoldC,yoldC,zoldC,totalpos,indexO)
 
     return xnew,ynew,znew,totalpos,indexO,indexH
 
