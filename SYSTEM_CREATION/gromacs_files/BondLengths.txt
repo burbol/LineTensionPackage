@@ -14,7 +14,7 @@ Chain upside down in z-direction:
     1XOH    CAC   12   0.086  -0.504   3.925
 
 Correct z-direction:
-  101XOH    HAA 1201   0.282   0.072   1.391
+  101XOH    HAA 1201   0.282   0.072   1.391  
   101XOH    OAA 1202   0.336   0.114   1.318
   101XOH    CAL 1203   0.248   0.178   1.207
   101XOH    CAK 1204   0.332   0.241   1.099

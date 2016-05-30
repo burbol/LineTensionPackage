@@ -4,8 +4,8 @@ XOH      3
 
 [ atoms ]
 ;   nr      type  resnr resid  atom  cgnr   charge     mass
-      1      OA        1    XOH      OAA       1         0.000    16.0000
-      2       H        1    XOH      HAA       2         0.000    1.0000
+      1       H        1    XOH      HAA       1         0.000    1.0000
+      2      OA        1    XOH      OAA       2         0.000    16.0000
       3     CH2        1    XOH      CAL       3         0.000    14.0000
       4     CH2        1    XOH      CAL       4         0.000    14.0000
       5     CH2        1    XOH      CAL       5         0.000    14.0000
