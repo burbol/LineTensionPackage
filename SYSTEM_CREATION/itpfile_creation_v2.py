@@ -7,43 +7,77 @@ import numpy as np
 import os
 
 
-# In[24]:
+# In[2]:
 
-filesfolder='/Users/burbol/Desktop/scripts/SAM_CREATION/SAMs/NEW/drop_placement'
-CH3file= 's21singlechainCH3.gro'
-OHfile= 's21singlechainOH.gro'
-benchCH3itp = 'CH3.itp'
-benchOHitp = 'OH.itp'
-newCH3itp='CH3version2.itp'
-newOHitp='OHversion2.itp'
+# The function namecarbons() was copied from pdbfile_v2.py (could also be imported)
+def namecarbons(indexC):
+	if indexC == 1:
+		atomtype = 'CAL'
+	if indexC == 2:
+		atomtype = 'CAK'
+	if indexC == 3:
+		atomtype = 'CAJ'
+	if indexC == 4:
+		atomtype = 'CAI'
+	if indexC == 5:
+		atomtype = 'CAH'
+	if indexC == 6:
+		atomtype = 'CAG'
+	if indexC == 7:
+		atomtype = 'CAF'
+	if indexC == 8:
+		atomtype = 'CAE'
+	if indexC == 9:
+		atomtype = 'CAD'
+	if indexC == 10:
+		atomtype = 'CAC'
+	if indexC == 11:
+		atomtype = 'CAB'
+	else:
+		atomtype = 'CAL' # added this line because of python doesnt accept the function without it
+	return atomtype
+
+
+# In[4]:
+
+filesfolder='/Users/eixeres/Dropbox/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files'
+OHfile = 'singlechain_XOH_v2.gro'
+CH3file = 'singlechain_SAM_v2.gro'
+benchCH3itp = 'c10-ch3.itp'
+benchOHitp = 'c10oh.itp'
+newCH3itp='newCH3.itp'
+newOHitp='newOH.itp'
 
 os.chdir(filesfolder)
-
 
 #################### CH3.itp  ######################
 linecnt=0
 indexC=1
 indexH=1
 position=1
+# Open .itp files for CH3-ended chains
 with open(newCH3itp, 'w') as CH3new:
     with open(benchCH3itp, 'r') as CH3old:
+        #copy the first 5 lines
         for line in CH3old:
             if linecnt <= 5:
                 CH3new.write(line)
                 linecnt = linecnt+1
+    # Open .gro file with single CH3-ended chain
     with open(CH3file, 'r') as CH3gro:
         for line in CH3gro:
-            if "C" in line:
-                #CH3new.write("     %2d       %s        1    SAM      %s%d       %2d         0.000    12.0110\n" %(position,"C", "C",indexC,position))
-                CH3new.write("%7d%8s%9s%7s%9s%8d         0.000    12.0110\n" %(position,"C","1","SAM", "C"+str(indexC),position))               
+            # the first and last atom groups are the head groups with bigger mass
+            if ("CAL" in line) or ("CAB" in line):    
+                CH3new.write("%7d%8s%9s%7s%9s%8d         0.000    15.0000\n" %(position,"CH3","1","SAM", namecarbons(indexC) ,position))               
                 position = position +1
                 indexC = indexC +1
+                print "one"
 
-            elif "H" in line and "sam" not in line:
-                #CH3new.write("     %2d       %s        1    SAM      %s%d       %2d         0.000     1.0080\n" %(position,"H", "H",indexH,position))
-                CH3new.write("%7d%8s%9s%7s%9s%8d         0.000    1.0080\n" %(position,"H","1","SAM", "H"+str(indexH),position))
+            elif ("CAL" not in line) and ("CAB" not in line) and ("1SAM" in line):
+                CH3new.write("%7d%8s%9s%7s%9s%8d         0.000    14.0000\n" %(position,"CH2","1","SAM", namecarbons(indexC),position))
                 position = position +1
-                indexH = indexH +1
+                indexC = indexC +1
+                print "two"
             
 
 #################### OH.itp  ######################  
@@ -60,30 +94,34 @@ with open(newOHitp, 'w') as OHnew:
                 linecnt = linecnt+1
     with open(OHfile, 'r') as OHgro:
         for line in OHgro:
-            if "C" in line:
-                #OHnew.write("     %2d       %s        1    SAM      %s%d       %2d         0.000    12.0110\n" %(position,"C", "C",indexC,position))
-                OHnew.write("%7d%8s%9s%7s%9s%8d         0.000    12.0110\n" %(position,"C","1","OAM", "C"+str(indexC),position))
-                position = position +1
-                indexC = indexC +1
-
-            elif "H" in line and "sam" not in line:
-                #OHnew.write("     %2d       %s        1    SAM      %s%d       %2d         0.000     1.0080\n" %(position,"H", "H", indexH,position))
-                OHnew.write("%7d%8s%9s%7s%9s%8d         0.000    1.0080\n" %(position,"H","1","OAM", "H"+str(indexH),position))
+            print line
+            if "HAA" in line: # bonded hydrogen
+                print "if-statementnt HAA: indexC =", indexC
+                OHnew.write("%7d%8s%9s%7s%9s%8d         0.000    1.0000\n" %(position,"H","1","XOH", "HAA",position))
                 position = position +1
                 indexH = indexH +1
-                
-            elif "O" in line and "sam" not in line:
-                #OHnew.write("     %2d       %s        1    SAM      %s%d       %2d         0.000     1.0080\n" %(position,"OT", "O",indexO,position))
-                OHnew.write("%7d%8s%9s%7s%9s%8d         -0.734    15.9990\n" %(position,"OT","1","OAM", "O"+str(indexO),position))
+
+            elif "OAA" in line: # bonded oxygen
+                print "if-statementnt OAA: indexC =", indexC
+                OHnew.write("%7d%8s%9s%7s%9s%8d         0.000    16.0000\n" %(position,"OA","1","XOH", "OAA",position))
                 position = position +1
                 indexO = indexO +1
+                
+            elif "CAC" in line: # bottom head group (CH3)
+                print "if-statementnt CAC - CH3: indexC =", indexC
+                OHnew.write("%7d%8s%9s%7s%9s%8d         0.000    15.0000\n" %(position,"CH3","1","XOH", namecarbons(indexC),position))
+                position = position +1
+                indexC = indexC +1
+                
+            elif ("CAC" not in line) and ("OAA" not in line) and ("OAA" not in line) and ("1XOH" in line): # all other molecules in the chain (CH2)
+                print "if-statementnt CH2: indexC =", indexC
+                OHnew.write("%7d%8s%9s%7s%9s%8d         0.000    14.0000\n" %(position,"CH2","1","XOH", namecarbons(indexC),position))
+                position = position +1
+                indexC = indexC +1
     
 
 
 # In[ ]:
 
-#Change this cell to subtitute lines with "C" and "H" atoms with charges
-#if i!=33:
-    #os.system("sed -i -e 's/%s/%s/g' %s" %("CH3_long.itp",newCH3itp,newtop ))
-    #os.system("sed -i -e 's/%s/%s/g' %s" %("OH.itp",newOHitp,newtop ))
+
 
