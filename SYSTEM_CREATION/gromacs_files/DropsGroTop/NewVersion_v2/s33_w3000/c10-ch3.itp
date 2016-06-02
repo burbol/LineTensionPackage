@@ -1,0 +1,17 @@
+[ moleculetype ]
+; Name nrexcl
+SAM      3
+
+[ atoms ]
+;   nr      type  resnr resid  atom  cgnr   charge     mass
+     1       CH3     1  SAM     CAL     1    0.000  15.0000 
+     2       CH2     1  SAM     CAK     2    0.000  14.0000   
+     3       CH2     1  SAM     CAJ     3    0.000  14.0000   
+     4       CH2     1  SAM     CAI     4    0.000  14.0000   
+     5       CH2     1  SAM     CAH     5    0.000  14.0000   
+     6       CH2     1  SAM     CAG     6    0.000  14.0000   
+     7       CH2     1  SAM     CAF     7    0.000  14.0000   
+     8       CH2     1  SAM     CAE     8    0.000  14.0000   
+     9       CH2     1  SAM     CAD     9    0.000  14.0000   
+    10       CH2     1  SAM     CAC     10   0.000  14.0000   
+    11       CH3     1  SAM     CAB     11   0.000  15.0000

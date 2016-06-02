@@ -1,0 +1,6 @@
+[ atomtypes ]
+;name  at.num   mass      charge  ptype       c6           c12
+
+[ nonbond_params ]
+; i    j func          c6           c12
+OA       OA  1  0.0022619536  1.00000e-05
