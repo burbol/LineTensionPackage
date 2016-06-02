@@ -1,28 +1,28 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[5]:
 
 import os
 
 
-# In[2]:
+# In[6]:
 
 first_text = '; Include forcefield parameters'+ '\n' '#include "gromos53a6.ff/forcefield.itp"'+ '\n' + '\n' '; Include atomtype parameters (old T1.itp)'+ '\n' '#include "repelOH.itp"'+ '\n' + '\n' '; Include molecule parameters'+ '\n' '#include "c10-oh.itp"'+ '\n' '#include "c10-ch3.itp"'+ '\n' + '\n' '; Include water topology'+ '\n' '#include "gromos53a6.ff/spce.itp"'+ '\n' + '\n' '; Position restraint for each water oxygen'+ '\n' '#ifdef POSRES_WATER'+ '\n' '[ position_restraints ]'+ '\n' ';  i funct       fcx        fcy        fcz'+ '\n' '   1    1       1000       1000       1000'+ '\n' '#endif'+ '\n' + '\n' '[ system ]'+ '\n' 'Decanol SAM in water'+ '\n' + '\n' '[molecules]'+ '\n' 
 
 
-# In[3]:
+# In[7]:
 
 print first_text
 
 
-# In[7]:
+# In[11]:
 
 # New version using variable first_text (instead of copying from benchfile)
 #### copy bench top file to the working folder!!! ####
 
 #path to .gro files 
-samsfolder = "/Users/eixeres/Dropbox/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/DropsGroTop/NewVersion_v2/"
+samsfolder = "/Users/burbol/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/DropsGroTop/NewVersion_v2/"
 
 # All systems
 #pc = [0,11,22,33, 37, 44, 50]
@@ -68,26 +68,26 @@ for i in pc:
         # count number of atoms in c10-Ch3 and c10-oh chains, and number of solvent atoms
         f = open(samsfolder + grofile)
         totalSAM = 0
-        totalOAM = 0
+        totalXOH = 0
         totalSOL = 0
         for line in f:
             if "SAM" in line:
                 totalSAM += 1
             elif "XOH" in line:
-                totalOAM += 1
+                totalXOH += 1
             elif "SOL" in line:
                 totalSOL += 1
         f.close()
 
         # determine number of chains
         totalSAM = int(totalSAM/CH3len)
-        totalOAM = int(totalOAM/OHlen)
+        totalXOH = int(totalXOH/OHlen)
 
         # determine number of solvent molecules
         totalSOL = int(totalSOL/3)
 
         # print out calculated numbers
-        print "totalSAM=",totalSAM,"totalOAM=",totalOAM,"totalSOL=",totalSOL
+        print "totalSAM=",totalSAM,"totalXOH=",totalXOH,"totalSOL=",totalSOL
 
         # create new .top file
         with open(newtop, 'w') as f1:
@@ -101,7 +101,7 @@ for i in pc:
                 
                 # set counters to zero
                 lastcountsam=0
-                lastcountoam=0
+                lastcountXOH=0
                 
                 # write one line for each carbon chain
                 for line2 in h:
@@ -114,15 +114,15 @@ for i in pc:
                     # write one line for each chain with OH-head group
                     elif "XOH" in line2:
                         m = m + 1
-                        if m in range(1,(totalOAM*OHlen)+1,OHlen):
-                            f1.write("OAM	1\n")
-                            lastcountoam += 1
+                        if m in range(1,(totalXOH*OHlen)+1,OHlen):
+                            f1.write("XOH	1\n")
+                            lastcountXOH += 1
                 
             # write number of water molecules at the end of file
             f1.write("SOL	"+str(totalSOL)+"\n")
 
             # check number of chains and water molecules
-            print "lastcount:",lastcountsam,lastcountoam,totalSOL
+            print "lastcount:",lastcountsam,lastcountXOH,totalSOL
             print "just created ", newtop
 
         #os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -c" %(startsamfile, samfile ))
@@ -130,7 +130,7 @@ for i in pc:
         #os.system("sed -i -e 's/%s/%s/g' %s")% ("#include \"T1.itp\"","#include \"T1.itp\"\n#include \"T1_new.itp\"".itp,newtop, ))
 
 
-# In[4]:
+# In[10]:
 
 # Old version using benchfile
 #### copy bench top file to the working folder!!! ####
@@ -181,26 +181,26 @@ for i in pc:
         # count number of atoms in c10-Ch3 and c10-oh chains, and number of solvent atoms
         f = open(grofile)
         totalSAM = 0
-        totalOAM = 0
+        totalXOH = 0
         totalSOL = 0
         for line in f:
             if "SAM" in line:
                 totalSAM += 1
             elif "XOH" in line:
-                totalOAM += 1
+                totalXOH += 1
             elif "SOL" in line:
                 totalSOL += 1
         f.close()
 
         # determine number of chains
         totalSAM = int(totalSAM/CH3len)
-        totalOAM = int(totalOAM/OHlen)
+        totalXOH = int(totalXOH/OHlen)
 
         # determine number of solvent molecules
         totalSOL = int(totalSOL/3)
 
         # print out calculated numbers
-        print "totalSAM=",totalSAM,"totalOAM=",totalOAM,"totalSOL=",totalSOL
+        print "totalSAM=",totalSAM,"totalXOH=",totalXOH,"totalSOL=",totalSOL
 
         # create new .top file
         with open(newtop, 'w') as f1:
@@ -220,7 +220,7 @@ for i in pc:
                 
                 # set counters to zero
                 lastcountsam=0
-                lastcountoam=0
+                lastcountXOH=0
                 
                 # write one line for each carbon chain
                 for line2 in h:
@@ -233,15 +233,15 @@ for i in pc:
                     # write one line for each chain with OH-head group
                     elif "XOH" in line2:
                         m = m + 1
-                        if m in range(1,(totalOAM*OHlen)+1,OHlen):
-                            f1.write("OAM	1\n")
-                            lastcountoam += 1
+                        if m in range(1,(totalXOH*OHlen)+1,OHlen):
+                            f1.write("XOH	1\n")
+                            lastcountXOH += 1
                 
             # write number of water molecules at the end of file
             f1.write("SOL	"+str(totalSOL)+"\n")
 
             # check number of chains and water molecules
-            print "lastcount:",lastcountsam,lastcountoam,totalSOL
+            print "lastcount:",lastcountsam,lastcountXOH,totalSOL
             print "just created ", newtop
 
         #os.system("/usr/local/gromacs/bin/editconf -f %s -o %s -c" %(startsamfile, samfile ))
@@ -278,9 +278,9 @@ OHlen= 63      #length of chain with OH-head groups
 OHlen2= 63
 
 #totalSAM = int(totalSAM)
-#totalOAM = int(totalOAM)
+#totalXOH = int(totalXOH)
 #totalSAM2 = int(totalSAM)
-#totalOAM2 = int(totalOAM)
+#totalXOH2 = int(totalXOH)
 #totalSOL = int(totalSOL)
 
 systfile='sam'+str(i)+'_water'+str(j)+'.gro' #name of .gro files
@@ -296,11 +296,11 @@ for line in f:
             print line
         elif i==33 and k in range(1,(totalSAM*CH3len)+1,CH3len):
             print line
-    elif "OAM" in line:
+    elif "XOH" in line:
         l += 1
-        if i!=33 and l in range(1,(totalOAM*OHlen2)+1,OHlen2):
+        if i!=33 and l in range(1,(totalXOH*OHlen2)+1,OHlen2):
             print line
-        elif i==33 and l in range(1,(totalOAM*OHlen)+1,OHlen):
+        elif i==33 and l in range(1,(totalXOH*OHlen)+1,OHlen):
             print line
     elif "SOL" in line:
         print line
@@ -313,7 +313,7 @@ f.close()
 #k2 = (k)/CH3len2
 #l2 = l/OHlen2
 m = m/3
-print "last molec count:",totalSAM,totalOAM,totalSOL
+print "last molec count:",totalSAM,totalXOH,totalSOL
 print "new count:", k,l,m
 
 
