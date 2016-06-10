@@ -1,0 +1,63 @@
+
+; Running
+integrator               = md 
+nsteps                   = 10000000
+dt                       = 0.002
+
+; Linear: Remove center of mass translation
+comm_mode		 = linear
+
+comm_grps: group(s) for center of mass motion removal, default is the whole system
+comm_grps		 = XOH SOL
+
+; frequency to write coordinates to output trajectory file, the last coordinates are always written
+nstxout                  = 50000
+
+; frequency to write velocities to output trajectory, the last velocities are always written 
+nstvout                  = 50000
+
+; frequency to write forces to output trajectory. 
+nstfout                  = 50000
+
+; frequency to write coordinates to xtc trajectory 
+nstxtcout                = 5000
+
+; frequency to write energies to log file, the last energies are always written 
+nstlog                   = 10000
+
+; frequency to write energies to energy file, the last energies are always written, should be a multiple of nstcalcenergy.
+nstenergy                = 1000
+
+constraints              = hbonds 
+
+ns_type                  = grid
+nstlist                  = 10
+coulombtype              = pme
+pme_order                = 4
+
+; distance for the Coulomb cut-off
+rcoulomb                 = 0.9
+
+; cut-off distance for the short-range neighbor list
+rlist                    = 0.9
+
+; distance for the LJ or Buckingham cut-off
+rvdw                     = 0.9
+
+; group(s) to write to energy file 
+energygrps               = XOH SOL 
+
+tcoupl                   = berendsen
+tc_grps                  = XOH SOL
+tau_t                    = 0.2 0.2
+ref_t                    = 300 300
+
+; berendsen - Exponential relaxation pressure coupling with time constant tau_p [ps]
+pcoupl			 = no
+
+gen_vel                  = yes
+gen_seed                 = 24
+
+;periodic_molecules	 = yes
+pbc                      = xyz
+

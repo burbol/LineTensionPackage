@@ -1,0 +1,12 @@
+#include "ffG53a6.itp"
+#include "repelOH2.itp"
+#include "C10OHnew_06.itp"
+#include "posreCH3.itp"
+#include "spce.itp"
+
+[ system ]
+test 
+
+[ molecules ]
+XOH          1800
+SOL	     4142

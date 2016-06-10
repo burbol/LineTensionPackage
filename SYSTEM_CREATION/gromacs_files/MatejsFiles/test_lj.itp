@@ -1,0 +1,12 @@
+[ moleculetype ]
+; molname	nrexcl
+TPI		2
+
+[ atoms ]
+;   nr   type  resnr residue  atom   cgnr     charge       mass
+     1	   OW	   1	TPI     OW      1     0.0      15.99940
+
+
+
+
+
