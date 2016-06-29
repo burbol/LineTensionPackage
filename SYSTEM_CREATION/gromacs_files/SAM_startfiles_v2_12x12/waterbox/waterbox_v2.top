@@ -1,0 +1,21 @@
+; Include forcefield parameters
+#include "gromos53a6.ff/forcefield.itp"
+
+; Include water topology
+#include "gromos53a6.ff/spce.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+[ system ]
+; Name
+SAM and water slab
+
+
+[ molecules ]
+; Compound        #mols
+SOL		  1532
