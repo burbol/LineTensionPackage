@@ -2,7 +2,7 @@
 #include "gromos53a6.ff/forcefield.itp"
 
 ; Include atomtype parameters (old T1.itp)
-#include "repelOH.itp"
+#include "pairtypes.itp"
 
 ; Include molecule parameters
 #include "c10-oh.itp"
@@ -12,16 +12,6 @@
 #include "gromos53a6.ff/spce.itp"
 
 ; Position restraint for each water oxygen
-#ifdef POSRES_WATER
-[ position_restraints ]
-;  i funct       fcx        fcy        fcz
-   1    1       1000       1000       1000
-#endif
-
-[ system ]
-Decanol SAM in water
-
-[molecules]
 SAM	1
 SAM	1
 SAM	1

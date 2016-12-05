@@ -1,0 +1,9 @@
+[ atomtypes ]
+; name         mass    charge ptypes          c6      c12
+    O 		15.9990   -0.734	A	0.0022619536	1e-06
+    C 		12.0110    0.000	A	0.0096138025	2.6646244e-05
+    
+    
+[ nonbond_params ]
+; i    j func          c6           c12
+OA       OA  1  0.0022619536  1.00000e-05
