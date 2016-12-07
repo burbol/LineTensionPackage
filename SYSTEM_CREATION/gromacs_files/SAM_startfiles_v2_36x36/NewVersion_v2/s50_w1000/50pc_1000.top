@@ -11,7 +11,10 @@
 ; Include water topology
 #include "gromos53a6.ff/spce.itp"
 
-; Position restraint for each water oxygen
+[ system ]
+Droplet on SAM
+
+[molecules]
 XOH	1
 SAM	1
 XOH	1

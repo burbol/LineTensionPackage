@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#SBATCH -p main
+
+#SBATCH --mem=2048
+#SBATCH --job-name=1n_11_9000_4
+#SBATCH --output=1n_s11_w9000_4.out
+
+#SBATCH --mail-user=laila.e@fu-berlin.de
+#SBATCH --mail-type=end
+#SBATCH --mail-type=fail
+
+#SBATCH --tasks-per-node=8
+#SBATCH --nodes=1
+
+#SBATCH --time=200:00:00
+
+module load slurm 
+
+module load gromacs/single/2016
+
+STARTTIME=$(date +%s)
+
+#use sleep or testing... 
+
+cd /scratch/eixeres/Version_v2/s11_w9000
+
+mpirun -np 8 mdrun -cpi NVT_sam11_water9000.cpt -s NVT_sam11_water9000.tpr -deffnm  NVT_sam11_water9000 -maxh 200 -v 
+
+cp -r /scratch/eixeres/Version_v2/s11_w9000 /home/eixeres/Version_v2/FINISHED
