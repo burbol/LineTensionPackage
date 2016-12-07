@@ -2,7 +2,7 @@
 ;	File 'mdout.mdp' was generated
 ;	By user: eixeres (502)
 ;	On host: imac-schulzj.physik.fu-berlin.de
-;	At date: Wed Dec  7 18:08:28 2016
+;	At date: Wed Dec  7 18:06:51 2016
 
 ;
 
@@ -312,7 +312,7 @@ dh_hist_spacing          = 0.1
 acc-grps                 = 
 accelerate               = 
 freezegrps               = 
-freezedim                = 
+freezedim                = Y Y Y
 cos-acceleration         = 0
 deform                   = 
 
