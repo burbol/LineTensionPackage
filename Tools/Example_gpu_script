@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#SBATCH --mail-user=dreger@physik.fu-berlin.de
+#SBATCH --mail-type=end
+
+#SBATCH --output=job%j.out
+#SBATCH --error=job%j.err
+#SBATCH --ntasks=8
+#SBATCH --mem-per-cpu=1024
+#SBATCH --time=01:00:00
+#SBATCH --gres=gpu:2
+#SBATCH --nodes=1
+#SBATCH --partition=gpu-main
+
+module load gromacs/non-mpi/4.6.7-cuda
+
+TAG="${SLURM_JOB_ID}-$(hostname -s)-cuda"
+
+grompp -f run.mdp -c waterbox.gro -p topol.top -o output-$TAG
+mdrun -nt ${SLURM_CPUS_ON_NODE} -testverlet -v -deffnm output-$TAG

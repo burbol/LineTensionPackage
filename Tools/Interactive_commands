@@ -1,0 +1,23 @@
+# For normal nodes:
+
+srun --time=1-00:00:00 --nodes=1 --tasks=1 --mem=1G --pty /bin/bash
+
+# Normal node with multiple cores:
+
+srun --time=1-00:00:00 --nodes=2 --tasks-per-node=8 --mem=1G --pty /bin/bash
+
+# To log in to a single node:
+
+ssh x001
+
+# For gpu nodes:
+
+srun --time=02:00:00 --nodes=1 --tasks=8 --gres=gpu:2 --partition=gpu-test --mem=1G --pty /bin/bash
+
+# For information about used gpu (try to log in to node!):
+
+nvidia-smi
+
+# Example of gpu node name (to log in):
+
+ygpu01 #maybe wrong, needs testing
