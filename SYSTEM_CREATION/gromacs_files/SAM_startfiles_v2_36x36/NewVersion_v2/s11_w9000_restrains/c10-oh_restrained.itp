@@ -1,0 +1,33 @@
+[ moleculetype ]
+; Name nrexcl
+XOH      3
+
+[ atoms ]
+;   nr      type  resnr resid  atom  cgnr   charge     mass
+     1         H     1  XOH     HAA     1    0.408   1.0000   
+     2        OA     1  XOH     OAA     2   -0.734  16.0000   
+     3       CH2     1  XOH     CAL     3    0.286  14.0000   
+     4       CH2     1  XOH     CAK     4    0.020  14.0000   
+     5       CH2     1  XOH     CAJ     5    0.020  14.0000   
+     6       CH2     1  XOH     CAI     6    0.000  14.0000   
+     7       CH2     1  XOH     CAH     7    0.000  14.0000   
+     8       CH2     1  XOH     CAG     8    0.000  14.0000   
+     9       CH2     1  XOH     CAF     9    0.000  14.0000   
+    10       CH2     1  XOH     CAE     10   0.000  14.0000   
+    11       CH2     1  XOH     CAD     11   0.000  14.0000   
+    12       CH3     1  XOH     CAC     12   0.000  15.0000
+
+[ position_restraints ]
+;ai    5 func     fc5
+1     1     1000     1000     1000 ; restrain to a point
+2     1     1000     1000     1000 ;
+3     1     1000     1000     1000 ;
+4     1     1000     1000     1000 ;
+5     1     1000     1000     1000 ;
+6     1     1000     1000     1000 ;
+7     1     1000     1000     1000 ;
+8     1     1000     1000     1000 ;
+9     1     1000     1000     1000 ;
+10     1     1000     1000     1000 ;
+11     1     1000     1000     1000 ;
+12     1     1000     1000     1000 ;   

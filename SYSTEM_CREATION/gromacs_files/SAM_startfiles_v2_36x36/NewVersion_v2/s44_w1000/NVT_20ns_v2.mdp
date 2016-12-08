@@ -1,5 +1,5 @@
 integrator               = md
-nsteps                   = 40000000
+nsteps                   = 10000000
 nstlist                  = 10
 nstxout                  = 0
 nstvout                  = 0
