@@ -3,8 +3,9 @@
 #SBATCH -p main
 
 #SBATCH --mem=2048
-#SBATCH --job-name=1n_11_9000_4
+#SBATCH --job-name=1n_s11_w9_4
 #SBATCH --output=1n_s11_w9000_4.out
+#SBATCH --error=1n_s11_w9000_4.err
 
 #SBATCH --mail-user=laila.e@fu-berlin.de
 #SBATCH --mail-type=end
@@ -15,16 +16,13 @@
 
 #SBATCH --time=200:00:00
 
-module load slurm 
-
 module load gromacs/single/2016
 
 STARTTIME=$(date +%s)
 
-#use sleep or testing... 
 
 cd /scratch/eixeres/Version_v2/s11_w9000
 
-mpirun -np 8 mdrun -cpi NVT_sam11_water9000.cpt -s NVT_sam11_water9000.tpr -deffnm  NVT_sam11_water9000 -maxh 200 -v 
+gmx mdrun -cpi NVT_sam11_water9000.cpt -s NVT_sam11_water9000.tpr -deffnm  NVT_sam11_water9000 -maxh 200 -v 
 
-cp -r /scratch/eixeres/Version_v2/s11_w9000 /home/eixeres/Version_v2/FINISHED
+cp -r /scratch/eixeres/Version_v2/s11_w9000 /home/eixeres/Version_v2/FINISHED/

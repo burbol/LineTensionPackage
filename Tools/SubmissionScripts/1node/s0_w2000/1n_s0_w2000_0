@@ -1,0 +1,43 @@
+#!/bin/bash
+
+#SBATCH -p main
+
+#SBATCH --mem=2048
+#SBATCH --job-name=1n_s0_w2_0
+#SBATCH --output=1n_s0_w2000_0.out
+#SBATCH --error=1n_s0_w2000_0.err
+
+#SBATCH --mail-user=laila.e@fu-berlin.de
+#SBATCH --mail-type=end
+#SBATCH --mail-type=fail
+
+#SBATCH --tasks-per-node=8
+#SBATCH --nodes=1
+
+#SBATCH --time=200:00:00
+
+module load gromacs/single/2016
+
+STARTTIME=$(date +%s)
+
+
+cd /scratch/eixeres/Version_v2/s0_w2000
+
+gmx grompp -f Mini_v2.mdp -c sam0_water2000.gro -p 0pc_2000.top -o Mini_sam0_water2000.tpr -maxwarn 9
+gmx mdrun -deffnm Mini_sam0_water2000 -maxh 200 -v 
+gmx grompp -f NVT_60ns_v2.mdp -c Mini_sam0_water2000.gro -p 0pc_2000.top -o NVT_sam0_water2000.tpr -maxwarn 9
+
+gmx mdrun -s NVT_sam0_water2000.tpr -deffnm  NVT_sam0_water2000 -maxh 200 -v 
+
+RUNTIME=$(($(date +%s)-$STARTTIME))
+
+echo "the job took $RUNTIME seconds..."
+
+if [[ $RUNTIME -lt 10 ]]; then
+   echo "job took less than 10 seconds to run, aborting."
+   exit
+else
+   echo "everything fine..."
+   sbatch /scratch/eixeres/Version_v2/scripts/0_w2000/1n_s0_w2000_1
+   fi
+

@@ -3,8 +3,9 @@
 #SBATCH -p main
 
 #SBATCH --mem=2048
-#SBATCH --job-name=1n_11_9000_0
+#SBATCH --job-name=1n_s11_w9_0
 #SBATCH --output=1n_s11_w9000_0.out
+#SBATCH --error=1n_s11_w9000_0.err
 
 #SBATCH --mail-user=laila.e@fu-berlin.de
 #SBATCH --mail-type=end
@@ -15,21 +16,18 @@
 
 #SBATCH --time=200:00:00
 
-module load slurm 
-
 module load gromacs/single/2016
 
 STARTTIME=$(date +%s)
 
-#use sleep or testing... 
 
 cd /scratch/eixeres/Version_v2/s11_w9000
 
 gmx grompp -f Mini_v2.mdp -c sam11_water9000.gro -p 11pc_9000.top -o Mini_sam11_water9000.tpr -maxwarn 9
- mdrun -deffnm Mini_sam11_water9000 -maxh 200 -v 
-gmx grompp -f NVT_100ns_v2.mdp -c Mini_sam11_water9000.gro -p 11pc_9000.top -o NVT_sam11_water9000.tpr -maxwarn 9
+gmx mdrun -deffnm Mini_sam11_water9000 -maxh 200 -v 
+gmx grompp -f NVT_80ns_v2.mdp -c Mini_sam11_water9000.gro -p 11pc_9000.top -o NVT_sam11_water9000.tpr -maxwarn 9
 
- mdrun -s NVT_sam11_water9000.tpr -deffnm  NVT_sam11_water9000 -maxh 200 -v 
+gmx mdrun -s NVT_sam11_water9000.tpr -deffnm  NVT_sam11_water9000 -maxh 200 -v 
 
 RUNTIME=$(($(date +%s)-$STARTTIME))
 
@@ -40,6 +38,6 @@ if [[ $RUNTIME -lt 10 ]]; then
    exit
 else
    echo "everything fine..."
-   sbatch 1n_s11_w9000_1
+   sbatch /scratch/eixeres/Version_v2/scripts/11_w9000/1n_s11_w9000_1
    fi
 

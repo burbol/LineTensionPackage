@@ -5,7 +5,6 @@
 #include "pairtypes.itp"
 
 ; Include molecule parameters
-#include "c10-oh.itp"
 #include "c10-ch3.itp"
 
 ; Include water topology

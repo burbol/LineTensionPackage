@@ -9,16 +9,16 @@ import fnmatch # for filtering the file list to get the top,gro,mdp,ndx files.
 
 N = 5  # NUMBER OF SCRIPTS TO SUBMIT = total time running will be this number times the Walltime
 
-Walltime = '200:00:00'  # Walltime in format 'h:mm:ss'
-SimTime = 200   # maximum run length of simulation in hours, it can be also a fraction of an hour
+Walltime = '120:00:00'  # Walltime in format 'h:mm:ss'
+SimTime = 120   # maximum run length of simulation in hours, it can be also a fraction of an hour
 
 Email = 'laila.e@fu-berlin.de'
 
 #NodesNum =  2 
 Cpus = 8  # soroban = 12 cpus/node ; sheldon-ng = 8 cpus/node
-Memory = 2048
+MemPerCpu = 1024
 #SimLen = 60000  # total simulation time length in ps
-Partition = 'main' # use 'test' for testing and 'main' otherwise 
+Partition = 'gpu-main' # use 'test' for testing and 'main' otherwise 
 
 #next 3 lines only useful when running also grompp
 #IndexFile = ' 'mpi for one node
@@ -31,14 +31,14 @@ Nodes = {1000:1, 2000:1, 3000:1, 4000:1, 5000:1, 6500:1, 7000:1, 8000:1, 9000:1,
 #Nodes = {1000:2, 2000:2, 3000:2, 4000:2, 5000:2, 6500:2, 7000:2, 8000:2, 9000:2, 10000:2} # 2 nodes
 # old Nodes = {216:2, 1000:3, 2000:3, 3000:3, 4000:3, 5000:3, 6500:3, 7000:5, 8000:6, 9000:6, 10000:6} 
 
-pc = [11]  # For testing
-molec = [9000] #For testing
+#pc = [11]  # For testing
+#molec = [9000] #For testing
 
-#pc = [0, 11, 22, 33, 37, 44, 50]
-#molec = [1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]
+pc = [0, 11, 22, 33, 37, 44, 50]
+molec = [1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]
 
 
-BackupDir = '/home/eixeres/Version_v2/FINISHED'   # directory to copy (backup) simulation output
+BackupDir = '/home/eixeres/Version_v2/FINISHED/'   # directory to copy (backup) simulation output
 # old BackupDir = '/home/eixeres/Dec14_Last_Sims/FINISHED/'==>>> mpi for one node
 
 
@@ -62,8 +62,9 @@ for i in pc:
 		Dir = DirNode +'/s'+str(i)+'_w'+str(j)
 		
 		SimDir = '/scratch/eixeres/Version_v2/s'+str(i)+'_w'+str(j)   #directory from where to run simulation
+		ScriptDir = '/scratch/eixeres/Version_v2/scripts/'+str(i)+'_w'+str(j)+'/' # remote directory with submission scripts (forward slash at the end!!)
 		Filename = 'NVT_sam'+str(i)+'_water'+str(j)  # name of files #===>>>> WHY 2 DIFF. VARIABLES?? Filename and NVTfile??
-		Scriptname = str(NodesNum) + 'n_s'+str(i)+'_w'+str(j)  # name of script (when NOT testing, set equal to "Filename")??
+		Scriptname = str(NodesNum) + 'n_s'+str(i)+'_w'+str(j)+'_gpu' # name of script (when NOT testing, set equal to "Filename")??
 		
 		Startfile='sam'+str(i)+'_water'+str(j)
 		Minifile='Mini_sam'+str(i)+'_water'+str(j)
@@ -71,33 +72,40 @@ for i in pc:
 		topfile= str(i)+'pc_'+str(j)+'.top'
 		Minimdp = 'Mini_v2.mdp'
 		NVTmdp = 'NVT_'+str(Simns[j])+'ns_v2.mdp'
-	
-		os.system("mkdir "+ Dir)
+
+		if not os.path.exists(Dir):
+			os.system("mkdir "+ Dir)	
+
 		for k in range(N):
 		
-			Jobname = str(NodesNum) +'n_'+str(i)+'_'+str(j)+ '_'+str(k)  # Name of job
+			#Jobname = str(NodesNum) +'n_s'+str(i)+'_w'+str(int(j/1000))+ '_'+str(k) +'gpu' # Name of job
+			Jobname = 's'+str(i)+'_w'+str(int(j/1000))+ '_'+str(k) +'gpu' # Name of job
+
 			JobOut = open(Dir + '/' + Scriptname +'_'+ str(k),'w')
 			JobOut.write('#!/bin/bash\n')
 			JobOut.write('\n')
 			JobOut.write('#SBATCH -p '+ Partition +'\n')
+			JobOut.write('#SBATCH --gres=gpu:2' +'\n')
 			JobOut.write('\n')
-			JobOut.write('#SBATCH --mem=' + str(Memory) +'\n')
+			#JobOut.write('#SBATCH --mem=' + str(Memory) +'\n')
+			JobOut.write('#SBATCH --mem-per-cpu=' + str(MemPerCpu) +'\n')
 			JobOut.write('#SBATCH --job-name=' + Jobname + '\n')
 			JobOut.write('#SBATCH --output=' + Scriptname + '_' + str(k) + '.out\n')
+			JobOut.write('#SBATCH --error=' + Scriptname + '_' + str(k) + '.err\n')
 			JobOut.write('\n')
 			JobOut.write('#SBATCH --mail-user=' + Email + '\n')
 			JobOut.write('#SBATCH --mail-type=end\n')
 			JobOut.write('#SBATCH --mail-type=fail\n')
 			JobOut.write('\n')
-			#JobOut.write('#SBATCH --ntasks=' + str(CpuNum)+'\n')
-			JobOut.write('#SBATCH --tasks-per-node=' + str(Cpus)+'\n')
+			JobOut.write('#SBATCH --ntasks=' + str(CpuNum)+'\n')
+			#JobOut.write('#SBATCH --tasks-per-node=' + str(Cpus)+'\n')
 			JobOut.write('#SBATCH --nodes=' + str(NodesNum) +'\n')
 			#JobOut.write('#SBATCH --exclusive')  # we want to run on only 1 node
 			JobOut.write('\n')
 			JobOut.write('#SBATCH --time=' + Walltime  + '\n')
 			JobOut.write('\n')
-			JobOut.write('module load slurm \n')
-			JobOut.write('\n')
+			#JobOut.write('module load slurm \n')
+			#JobOut.write('\n')
 			JobOut.write('module load gromacs/single/2016\n')
 			JobOut.write('\n')
 			JobOut.write('STARTTIME=$(date +%s)\n' + '\n')
@@ -112,7 +120,7 @@ for i in pc:
 				#JobOut.write('mpirun -np ' + str(CpuNum) + ' mdrun -deffnm ' + Minifile + ' -maxh ' + str(SimTime) + ' -v \n')
 
 				# For only 1 node mpi not needed:
-				JobOut.write(' mdrun -deffnm ' + Minifile + ' -maxh ' + str(SimTime) + ' -v \n')
+				JobOut.write(' mdrun_gpu -deffnm ' + Minifile + ' -maxh ' + str(SimTime) + ' -v \n')
 				
 				JobOut.write('gmx grompp -f ' + NVTmdp + ' -c ' + Minifile + '.gro -p ' + topfile + ' -o '+ NVTfile +'.tpr -maxwarn 9\n')
 
@@ -125,11 +133,11 @@ for i in pc:
 				#JobOut.write('mpirun -np ' + str(CpuNum) + ' mdrun -s ' + Filename + '.tpr -deffnm  '+ Filename + ' -maxh ' + str(SimTime) + ' -v \n')
 				
 				# For only 1 node mpi not needed:
-				JobOut.write(' mdrun -s ' + Filename + '.tpr -deffnm  '+ Filename + ' -maxh ' + str(SimTime) + ' -v \n')
+				JobOut.write(' mdrun_gpu -s ' + Filename + '.tpr -deffnm  '+ Filename + ' -maxh ' + str(SimTime) + ' -v \n')
 
 			else:
-				JobOut.write('mpirun -np ' + str(CpuNum) + ' mdrun -cpi '+ Filename + '.cpt -s ' + Filename + '.tpr -deffnm  '+ Filename + ' -maxh ' +
-					str(SimTime) + ' -v \n')			
+				#JobOut.write('mpirun -np ' + str(CpuNum) + ' mdrun -cpi '+ Filename + '.cpt -s ' + Filename + '.tpr -deffnm  '+ Filename + ' -maxh ' + str(SimTime) + ' -v \n')
+				JobOut.write('mdrun_gpu -cpi '+ Filename + '.cpt -s ' + Filename + '.tpr -deffnm  '+ Filename + ' -maxh ' + str(SimTime) + ' -v \n')
 
 			JobOut.write('\n')	
 			
@@ -138,7 +146,7 @@ for i in pc:
 				# first N-1 jobscripts check if runtime is less then 15 sec, if not, submit next script 
 				JobOut.write( 'RUNTIME=$(($(date +%s)-$STARTTIME))\n' + '\n'+ 'echo \"the job took $RUNTIME seconds...\"\n' + '\n' + 'if [[ $RUNTIME -lt 10 ]]; then\n' +
 
-							'   echo "job took less than 10 seconds to run, aborting."\n' + '   exit\n' + 'else\n' + '   echo "everything fine..."\n' + '   sbatch ' + Scriptname +'_'+ str(k+1) + '\n') 
+							'   echo "job took less than 10 seconds to run, aborting."\n' + '   exit\n' + 'else\n' + '   echo "everything fine..."\n' + '   sbatch ' + ScriptDir + Scriptname +'_'+ str(k+1) + '\n') 
 				JobOut.write('   fi\n')
 				JobOut.write('\n')	
 					
