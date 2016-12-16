@@ -1,7 +1,7 @@
 ; Include forcefield parameters
 #include "gromos53a6.ff/forcefield.itp"
 
-; Include atomtype parameters (old T1.itp)
+; Set non-bonded interactions to zero
 #include "pairtypes.itp"
 
 ; Include molecule parameters
