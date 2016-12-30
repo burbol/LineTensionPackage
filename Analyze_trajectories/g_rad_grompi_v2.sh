@@ -6,7 +6,7 @@
 
 
 #######source /Volumes/UNI/SHELDON/CLOSEDsheldon/eixeres/gromacs_tpi_compiled/bin/GMXRC
-module load gromacs/single/openmpi1.4.5/4.6.5
+module load gromacs/single/2016
 
 
 # the round function:
@@ -19,17 +19,18 @@ echo $(printf %.$2f $(echo "scale=$2;(((10^$2)*$1)+0.5)/(10^$2)" | bc))
 n=4
 
 
-mkdir /net/data/eixeres/Version_v2/global_SAMS_densmaps
-mkdir /net/data/eixeres/Version_v2/global_NVT_densmaps
-mkdir /net/data/eixeres/Version_v2/radial_density
+#mkdir /net/data/eixeres/Version_v2/global_SAMS_densmaps
+#mkdir /net/data/eixeres/Version_v2/global_NVT_densmaps
+#mkdir /net/data/eixeres/Version_v2/radial_density
 
-for i in 0 11 22 33 37 44 50 # OH density of the SAM 
+#for i in 0 11 22 33 37 44 50 # OH density of the SAM
+for i in 0
 do
-  for j in 8000
   #for j in 1000 2000 3000 4000 5000 6500 7000 8000 9000 10000  # number of water molecules
+  for j in 1000
   do
 
-  cd /net/data02/eixeres/Version_v2/FINISHED/s${i}_w${j}
+  cd /net/data/eixeres/Version_v2/FINISHED/s${i}_w${j}
   
   if [ $i -eq 0 ]
   then 
@@ -65,7 +66,7 @@ do
     fi
     
     #echo "0"|/home/shavkat/GMX/bin/trjconv -f NVT_sam${i}_water${j}.xtc # watch output for last frame determination
-    #/home/shavkat/GMX/bin/grompp -f NVT.mdp -p ${i}pc_${j}.top -t NVT_sam${i}_water${j}.trr -c Mini_sam${i}_water${j}.gro -o NVT_sam${i}_water${j}_temp.tpr -maxwarn 2
+    #/home/shavkat/GMX/bin/grompp -f NVT_60ns_v2.mdp -p ${i}pc_${j}.top -t NVT_sam${i}_water${j}.trr -c Mini_sam${i}_water${j}.gro -o NVT_sam${i}_water${j}_temp.tpr -maxwarn 2
     #echo "0"|/home/shavkat/GMX/bin/trjconv -f NVT_sam${i}_water${j}.xtc  -s NVT_sam${i}_water${j}_temp.tpr -o NVT_sam${i}_water${j}_temp.gro -b $temp -sep
     #Afterwards look for the last .gro file, rename and delete the rest
     
@@ -80,16 +81,16 @@ do
     
     echo "0" "q"|make_ndx -f sam${i}_water${j}.gro -o index${i}_${j}.ndx 
  
-    /net/data/eixeres/sheldon-old/gromacs_tpi_compiled/bin/grompp -f NVT.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}.top -n index${i}_${j}.ndx -o g_rad_NVT_sam${i}_water${j}.tpr -maxwarn 1
-    #grompp -f NVT.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}.top -n index${i}_${j}.ndx -o g_rad_NVT_sam${i}_water${j}.tpr -maxwarn 1
+    #/net/data/eixeres/sheldon-old/gromacs_tpi_compiled/bin/grompp -f NVT_60ns_v2.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}.top -n index${i}_${j}.ndx -o g_rad_NVT_sam${i}_water${j}.tpr -maxwarn 1
+    grompp -f NVT_60ns_v2.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}.top -n index${i}_${j}.ndx -o g_rad_NVT_sam${i}_water${j}.tpr -maxwarn 11
     
     # Calculate mass densities
-    echo ${n} | g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_NVT_sam${i}_water${j}.xvg -sl 1000
-    echo "6" | g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_SAM_sam${i}_water${j}.xvg -sl 1000 # for SAMs density maps
+    #echo ${n} | g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_NVT_sam${i}_water${j}.xvg -sl 1000
+    #echo "6" | g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_SAM_sam${i}_water${j}.xvg -sl 1000 # for SAMs density maps
 
     # Calculate number densities   
-    echo ${n} | g_density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_NVT_sam${i}_water${j}.xvg -sl 1000 
-    echo "5" |g_density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_SAM_sam${i}_water${j}.xvg -sl 1000
+    #echo ${n} | g_density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_NVT_sam${i}_water${j}.xvg -sl 1000 
+    #echo "5" |g_density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_SAM_sam${i}_water${j}.xvg -sl 1000
 
 # Copy all files to same folder and delete originals
 cp ng_density_SAM_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_SAMS_densmaps/
@@ -107,8 +108,8 @@ rm g_density_SAM_sam${i}_water${j}.xvg
 
     #k=200
     k=0
-    #while [[ $k -le 395 ]]  # segments of time to be multiplied by 100 so that we get [ps]
-    while [[ $k -le 995 ]]  # segments of time to be multiplied by 100 so that we get [ps]
+    while [[ $k -le 5 ]]  # segments of time to be multiplied by 100 so that we get [ps]
+    #while [[ $k -le 995 ]]  # segments of time to be multiplied by 100 so that we get [ps]
     do    
         k2=$((k+5))
         nanosecs1=$(echo $(round $k/10 1))
