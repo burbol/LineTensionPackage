@@ -21,3 +21,7 @@ nvidia-smi
 # Example of gpu node name (to log in):
 
 ygpu01 #maybe wrong, needs testing
+
+# normal node
+
+x001

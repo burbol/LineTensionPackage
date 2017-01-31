@@ -2,10 +2,10 @@
 
 # Script to create horizontal and radial density maps
 # using g_density recursively and g_rad_density in time intervals of 500 ps
-# Run script from slurm server
+# Run script from sheldon or yoshi server using gromacs_tpi_compiled
+# Change "include" commands at the beginning of top files using "change_top_files.sh"
 
 
-#######source /Volumes/UNI/SHELDON/CLOSEDsheldon/eixeres/gromacs_tpi_compiled/bin/GMXRC
 module load gromacs/single/2016
 
 
@@ -21,13 +21,15 @@ n=4
 
 #mkdir /net/data/eixeres/Version_v2/global_SAMS_densmaps
 #mkdir /net/data/eixeres/Version_v2/global_NVT_densmaps
-#mkdir /net/data/eixeres/Version_v2/radial_density
+#mkdir /net/data/eixeres/Version_v2/radial_densmaps
 
 #for i in 0 11 22 33 37 44 50 # OH density of the SAM
+#do
+  #for j in 1000 2000 3000 4000 5000 6500 7000 8000 9000 10000  # number of water molecules
+  #do
 for i in 0
 do
-  #for j in 1000 2000 3000 4000 5000 6500 7000 8000 9000 10000  # number of water molecules
-  for j in 1000
+  for j in  5000 6500 7000 8000 9000 10000  
   do
 
   cd /net/data/eixeres/Version_v2/FINISHED/s${i}_w${j}
@@ -35,8 +37,10 @@ do
   if [ $i -eq 0 ]
   then 
     n=3
+    m=2
   else 
     n=4
+    m=6
   fi
   
 
@@ -81,35 +85,43 @@ do
     
     echo "0" "q"|make_ndx -f sam${i}_water${j}.gro -o index${i}_${j}.ndx 
  
-    #/net/data/eixeres/sheldon-old/gromacs_tpi_compiled/bin/grompp -f NVT_60ns_v2.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}.top -n index${i}_${j}.ndx -o g_rad_NVT_sam${i}_water${j}.tpr -maxwarn 1
     grompp -f NVT_60ns_v2.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}.top -n index${i}_${j}.ndx -o g_rad_NVT_sam${i}_water${j}.tpr -maxwarn 11
     
     # Calculate mass densities
-    #echo ${n} | g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_NVT_sam${i}_water${j}.xvg -sl 1000
-    #echo "6" | g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_SAM_sam${i}_water${j}.xvg -sl 1000 # for SAMs density maps
+    echo ${n} | g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_NVT_sam${i}_water${j}.xvg -sl 1000
+    #echo ${m} | g_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o g_density_SAM_sam${i}_water${j}.xvg -sl 1000 # for SAMs density maps
 
     # Calculate number densities   
     #echo ${n} | g_density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_NVT_sam${i}_water${j}.xvg -sl 1000 
-    #echo "5" |g_density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_SAM_sam${i}_water${j}.xvg -sl 1000
+    #echo ${m} |g_density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_SAM_sam${i}_water${j}.xvg -sl 1000
 
 # Copy all files to same folder and delete originals
 cp ng_density_SAM_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_SAMS_densmaps/
-cp g_density_SAM_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_NVT_densmaps
-cp ng_density_SAM_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_SAMS_densmaps/
-cp g_density_SAM_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_NVT_densmaps
+cp ng_density_NVT_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_NVT_densmaps
+
 rm ng_density_NVT_sam${i}_water${j}.xvg	
-rm g_density_SAM_sam${i}_water${j}.xvg
-rm ng_density_NVT_sam${i}_water${j}.xvg	
+rm ng_density_SAM_sam${i}_water${j}.xvg
+
+cp g_density_SAM_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_SAMS_densmaps/
+cp g_density_NVT_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_NVT_densmaps
+
+rm g_density_NVT_sam${i}_water${j}.xvg	
 rm g_density_SAM_sam${i}_water${j}.xvg
 
 #######################################################################
 
 # Make radial density maps every 500ps
 
+# Load old GROMACS for compatibility with g_rad_density 
+GMXLIB="/net/data/eixeres/sheldon-old/gromacs_tpi_compiled/share/gromacs/top/"
+
+# Use old version of grompp with old version of .top file
+/net/data/eixeres/sheldon-old/gromacs_tpi_compiled/bin/grompp -f NVT_60ns_v2.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}_old.top -n index${i}_${j}.ndx -o g_rad_NVT_sam${i}_water${j}.tpr -maxwarn 11
+
+
     #k=200
     k=0
-    while [[ $k -le 5 ]]  # segments of time to be multiplied by 100 so that we get [ps]
-    #while [[ $k -le 995 ]]  # segments of time to be multiplied by 100 so that we get [ps]
+    while [[ $k -le 995 ]]  # segments of time to be multiplied by 100 so that we get [ps]
     do    
         k2=$((k+5))
         nanosecs1=$(echo $(round $k/10 1))
@@ -117,7 +129,7 @@ rm g_density_SAM_sam${i}_water${j}.xvg
         start=$((k*100))
         ending=$((start+500))
 
-        #echo "Creating densmap from $start ps to $ending ps"
+        echo "Creating densmap from $start ps to $ending ps"
 
         echo ${n} ${n} | /net/data/eixeres/sheldon-old/g_rad_density -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -n index${i}_${j}.ndx -sz 200 -o g_rad_dmap_${i}pc_w${j}_${nanosecs1}ns_${nanosecs2}ns.xvg -b ${start} -e ${ending}
         

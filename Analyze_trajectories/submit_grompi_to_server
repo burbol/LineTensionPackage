@@ -1,0 +1,32 @@
+#!/bin/bash -x 
+
+#SBATCH -p main
+
+#SBATCH --mem=1024
+#SBATCH --job-name=g_rad_grompi_v2
+#SBATCH --output=g_rad_grompi_v2.out
+#SBATCH --error=g_rad_grompi_v2.err
+
+#SBATCH --mail-user=laila.e@fu-berlin.de
+#SBATCH --mail-type=end
+#SBATCH --mail-type=fail
+
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=8
+#SBATCH --ntasks=8
+
+#SBATCH --time=2:00:00
+
+#SBATCH --export=ALL 
+
+STARTTIME=$(date +%s)
+
+# Go to the directoy from which our job was launched 
+cd $SLURM_SUBMIT_DIR 
+
+export APP="g_rad_grompi_v2_parallel.sh"
+srun  ./$APP 
+
+RUNTIME=$(($(date +%s)-$STARTTIME))
+
+echo "the job took $RUNTIME seconds..."
