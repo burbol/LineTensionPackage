@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+#SBATCH --job-name=100pc
+#SBATCH --output=out.100pc
+#
+#SBATCH --mail-user=sliese@zedat.fu-berlin.de
+#SBATCH --mail-type=FAIL
+#
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --time=80:00:00
+#SBATCH --mem=1000
+
+module load gromacs/single/thread/4.6.5
+
+grompp -f ../Mini.mdp -c out.gro -p sam.top -maxwarn 1 -o Mini
+mdrun -nt 4 -deffnm Mini
+grompp -f ../NVT.mdp -c Mini.gro -p sam.top -maxwarn 1 -o NVT
+mdrun -nt 4 -deffnm NVT
+grompp -f ../NPT_PR1.mdp -c NVT.gro -p sam.top -maxwarn 1 -o NPT_PR1
+mdrun -nt 4 -deffnm NPT_PR1
+grompp -f ../NPT_PR2.mdp -c NPT_PR1.gro -p sam.top -maxwarn 1 -o NPT_PR2
+mdrun -nt 4 -deffnm NPT_PR2
+grompp -f ../NPT.mdp -c NPT_PR1.gro -p sam.top -maxwarn 1 -o NPT
+mdrun -nt 4 -deffnm NPT
+

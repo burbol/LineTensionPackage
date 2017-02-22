@@ -1,0 +1,34 @@
+;
+;	File 'topol.top' was generated
+;	By user: gu32sid (1032)
+;	On host: libra1
+;	At date: Fri May  9 10:11:12 2008
+;
+;	This is your topology file
+;	"It's Coming Right For Us !" (South Park)
+;
+; Include forcefield parameters
+#include "ffG53a6.itp"
+
+; Include water topology
+#include "CH3.itp"
+
+; Include water topology
+#include "spc.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+[ system ]
+; Name
+Protein in water
+
+
+[ molecules ]
+; Compound        #mols
+SAM 		  160
+SOL              4469
