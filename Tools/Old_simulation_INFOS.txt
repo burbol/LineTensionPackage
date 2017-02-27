@@ -1,0 +1,20 @@
+Old directories used to save submission scripts (taken from script "create_sheldon-ng_jobscripts.py")
+
+Dir = '/Volumes/Backup/YosemiteFiles/MEGAsync/scripts/Python/SCRIPT_CREATION/sheldon-ng/s'+str(i)+'_w'+str(j)
+Dir = '/Volumes/Backup/YosemiteFiles/Dropbox/Dropbox/scripts/Python/SCRIPT_CREATION/sheldon-ng/s'+str(i)+'_w'+str(j)+'/1node'
+Dir = '/home/eixeres/Downloads/SCRIPTS_JOBS_NewVersion4/' + str(NodesNum) + 'node'+'/s'+str(i)+'_w'+str(j)
+Dir = '/Users/burbol2/Downloads/SCRIPTS_JOBS_NewVersion4/' + str(NodesNum) + 'node'+'/s'+str(i)+'_w'+str(j)
+Dir = '/Users/eixeres/Dropbox/GitHub/LineTensionPackage/Tools/SubmissionScripts/' + str(NodesNum) + 'node'+'/s'+str(i)+'_w'+str(j)
+
+
+
+
+Old number of nodes:
+
+Nodes = {216:2, 1000:3, 2000:3, 3000:3, 4000:3, 5000:3, 6500:3, 7000:5, 8000:6, 9000:6, 10000:6}
+
+
+
+Old directory with backup of finished simulations
+
+BackupDir = '/home/eixeres/Dec14_Last_Sims/FINISHED/'==>>> mpi for one node
