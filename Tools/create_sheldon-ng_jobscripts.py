@@ -23,11 +23,11 @@ Partition = 'main' # use 'test' for testing and 'main' otherwise
 Simns = {216:200, 1000:200, 2000:200, 3000:200, 4000:200, 5000:200, 6500:200, 7000:200, 8000:200, 9000:200, 10000:200}  # total simulation time length in ns
 Nodes = {1000:1, 2000:1, 3000:1, 4000:1, 5000:1, 6500:1, 7000:1, 8000:1, 9000:1, 10000:1}
 
-pc = [11]  # For testing
-molec = [9000] #For testing
+#pc = [11]  # For testing
+#molec = [9000] #For testing
 
-#pc = [0, 11, 22, 33, 37, 44, 50]
-#molec = [1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]
+pc = [0, 11, 22, 33, 37, 44, 50]
+molec = [1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]
 
 
 BackupDir = '/home/eixeres/Version_v2/FINISHED_extended/'   # directory to copy (backup) simulation output
@@ -39,12 +39,11 @@ for i in pc:
 		NodesNum = Nodes[j]
 		CpuNum = NodesNum*Cpus
 
-		DirNode = '/Users/eixeres/Dropbox/GitHub/LineTensionPackage/Tools/SubmissionScripts/' + str(NodesNum) + 'node' # main local directory where scripts using same number of nodes will be saved 
-		DirNode = '/Users/eixeres/Desktop'
+		LocalDir = '/Users/eixeres/Dropbox/GitHub/LineTensionPackage/Tools/SubmissionScripts/Extend' # main local directory where scripts will be saved 
 
-		if not os.path.exists(DirNode):
-			os.system("mkdir "+ DirNode)
-		Dir = DirNode +'/s'+str(i)+'_w'+str(j)
+		if not os.path.exists(LocalDir):
+			os.system("mkdir "+ LocalDir)
+		Dir = LocalDir +'/s'+str(i)+'_w'+str(j)
 		
 		SimDir = '/scratch/eixeres/Version_v2/s'+str(i)+'_w'+str(j)   #directory from where to run simulation
 		ScriptDir = '/scratch/eixeres/Version_v2/scripts/s'+str(i)+'_w'+str(j)+'/' # remote directory with submission scripts (forward slash at the end!!)
