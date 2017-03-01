@@ -17,7 +17,7 @@
 
 #SBATCH --time=120:00:00
 
-module load gromacs/single/2016
+module load gromacs/single/2016.1
 
 STARTTIME=$(date +%s)
 
@@ -26,4 +26,15 @@ cd /scratch/eixeres/Version_v2/s33_w3000
 
 mdrun_gpu -cpi NVT_sam33_water3000.cpt -s NVT_sam33_water3000.tpr -deffnm NVT_sam33_water3000 -maxh 120 -v 
 
-cp -r /scratch/eixeres/Version_v2/s33_w3000 /home/eixeres/Version_v2/FINISHED_extended/
+RUNTIME=$(($(date +%s)-$STARTTIME))
+
+echo "the job took $RUNTIME seconds..."
+
+if [[ $RUNTIME -lt 10 ]]; then
+   echo "job took less than 10 seconds to run, aborting."
+   exit
+else
+   echo "everything fine..."
+   sbatch /scratch/eixeres/Version_v2/scripts/s33_w3000/s33_w3000_gpu_5
+   fi
+

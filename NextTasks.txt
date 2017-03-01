@@ -1,0 +1,12 @@
+1 March 2017: NEXT TASKS
+
+- [ ] Check simulations with VMD (version_v2)
+- [x] Extend simulations to 200ns (version_v2)
+- [ ] Submit simulations of planar systems (version_v2)
+- [ ] Calculate GDS (version_v2)
+- [ ] analyze first round (60-100ns) (version_v2)
+- [ ] Analyze second round (extension to 200ns) (version_v2)
+- [ ] Submit planar systems of NewVersion_4
+- [ ] Calculate GDS of NewVersion_4
+- [ ] Determine line tension of NewVersion_4
+- [ ] Write paper!!

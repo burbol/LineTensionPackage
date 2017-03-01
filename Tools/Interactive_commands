@@ -2,6 +2,10 @@
 
 srun --time=1-00:00:00 --nodes=1 --tasks=1 --mem=1G --pty /bin/bash
 
+# For test node:
+
+srun --time=02:00:00 --nodes=1 --tasks=8 --mem=1G --partition=test --pty /bin/bash
+
 # Normal node with multiple cores:
 
 srun --time=1-00:00:00 --nodes=2 --tasks-per-node=8 --mem=1G --pty /bin/bash

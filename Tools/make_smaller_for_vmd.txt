@@ -1,0 +1,1 @@
+gmx trjconv -f NVT_sam0_water6500.xtc -o NVT_sam0_water6500_dil.xtc -skip 50 

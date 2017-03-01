@@ -16,7 +16,7 @@
 
 #SBATCH --time=200:00:00
 
-module load gromacs/single/2016
+module load gromacs/single/2016.1
 
 STARTTIME=$(date +%s)
 

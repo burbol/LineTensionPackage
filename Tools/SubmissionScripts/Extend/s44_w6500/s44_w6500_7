@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#SBATCH -p main
+
+#SBATCH --mem=2048
+#SBATCH --job-name=s44_w6_7
+#SBATCH --output=s44_w6500_7.out
+#SBATCH --error=s44_w6500_7.err
+
+#SBATCH --mail-user=laila.e@fu-berlin.de
+#SBATCH --mail-type=end
+#SBATCH --mail-type=fail
+
+#SBATCH --tasks-per-node=8
+#SBATCH --nodes=1
+
+#SBATCH --time=200:00:00
+
+module load gromacs/single/2016.1
+
+STARTTIME=$(date +%s)
+
+
+cd /scratch/eixeres/Version_v2/s44_w6500
+
+gmx mdrun -cpi NVT_sam44_water6500.cpt -s NVT_sam44_water6500.tpr -deffnm  NVT_sam44_water6500 -maxh 200 -v 
+
+RUNTIME=$(($(date +%s)-$STARTTIME))
+
+echo "the job took $RUNTIME seconds..."
+
+if [[ $RUNTIME -lt 10 ]]; then
+   echo "job took less than 10 seconds to run, aborting."
+   exit
+else
+   echo "everything fine..."
+   sbatch /scratch/eixeres/Version_v2/scripts/s44_w6500/s44_w6500_8
+   fi
+

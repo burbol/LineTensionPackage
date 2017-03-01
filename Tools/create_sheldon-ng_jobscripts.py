@@ -9,7 +9,7 @@ import fnmatch # for filtering the file list to get the top,gro,mdp,ndx files.
 # If the simulation needs to be extended there is no need for equilibration or for running "grompp"
 Extend = 'yes' # use 'yes' or 'no'
 
-N = 5  # NUMBER OF SCRIPTS TO SUBMIT = total time running will be this number times the Walltime
+N = 10  # NUMBER OF SCRIPTS TO SUBMIT = total time running will be this number times the Walltime
 
 Walltime = '200:00:00' # Walltime in format 'h:mm:ss'
 SimTime = 200 # maximum run length of simulation in hours, it can be also a fraction of an hour
@@ -87,7 +87,7 @@ for i in pc:
 			JobOut.write('\n')
 			#JobOut.write('module load slurm \n')
 			#JobOut.write('\n')
-			JobOut.write('module load gromacs/single/2016\n')
+			JobOut.write('module load gromacs/single/2016.1\n')
 			JobOut.write('\n')
 			JobOut.write('STARTTIME=$(date +%s)\n' + '\n')
 			JobOut.write('\n')
