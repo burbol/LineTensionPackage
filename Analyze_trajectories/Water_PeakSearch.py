@@ -57,7 +57,8 @@ pk = peakdetect.peakdetect
 """
 
 #os.chdir('/Users/burbol/Downloads/global_density_maps')
-work_folder = '/net/data/eixeres/NewVersion4/FINISHED/'
+#work_folder = '/net/data/eixeres/NewVersion4/FINISHED/'
+work_folder = '/net/data/eixeres/Version_v2/global_NVT_densmaps/'
 os.chdir(work_folder)
 xvg = gromacs.formats.XVG()
 
@@ -117,25 +118,28 @@ def plot_dens(x, y, filename, point):
 #for testing
 #for b in [5]:
 #    for c in [2000]:
-for b in [5, 21, 25, 41]:
-    for c in [2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000]:
-        #os.chdir('/Users/burbol/Downloads/global_density_maps')
-        new_folder = work_folder + '/s'+  str(b) + '_w' + str(c)
+for b in [0, 11, 22, 33, 37, 44, 50]:
+    for c in [1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]:
+    
+        filename = 'g_density_NVT_sam%d_water%d.xvg'%(b,c, )
+        
+        #new_folder = work_folder + '/s'+  str(b) + '_w' + str(c)
         
         #print "nan' if folder doesn't exists (because the simulation hasn't been copied to the backup folder
         # and it is still on scratch probably not finished yet) 
-        if not os.path.isdir(new_folder):
-			print >> myfile, '{0}  {1}'.format(filename, 'nan')
+        #if not os.path.isdir(new_folder):
+        if not os.path.isfile(filename): 
+			print >> myfile1, '{0}  {1}'.format(filename, 'nan')
 			print >> myfile, '{0}'.format('nan') 
 			print b, c, "not ok"
 			continue 
 			
-        os.chdir(new_folder)
+        #os.chdir(new_folder)
         print b, c, "ok"
         
         print >> myfile1, '             '
-#        print >> myfile, '             '
-        filename = 'g_density_NVT_sam%d_water%d.xvg'%(b,c, ) 
+        print >> myfile, '             '
+        
         xvg.read(filename)
         input = xvg.array
         x = input[0]
