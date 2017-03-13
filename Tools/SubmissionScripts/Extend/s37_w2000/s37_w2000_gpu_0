@@ -26,7 +26,7 @@ cd /scratch/eixeres/Version_v2/s37_w2000
 
 gmx convert-tpr -s NVT_sam37_water2000.tpr -until 200000 -o NVT_sam37_water2000.tpr 
 
-mdrun_gpu -s NVT_sam37_water2000.tpr -deffnm NVT_sam37_water2000 -maxh 120 -v 
+mdrun_gpu -cpi NVT_sam37_water2000.cpt -s NVT_sam37_water2000.tpr -deffnm NVT_sam37_water2000 -maxh 120 -v 
 
 RUNTIME=$(($(date +%s)-$STARTTIME))
 

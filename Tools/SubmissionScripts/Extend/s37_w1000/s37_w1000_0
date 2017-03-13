@@ -25,7 +25,7 @@ cd /scratch/eixeres/Version_v2/s37_w1000
 
 gmx convert-tpr -s NVT_sam37_water1000.tpr -until 200000 -o NVT_sam37_water1000.tpr 
 
-gmx mdrun -s NVT_sam37_water1000.tpr -deffnm  NVT_sam37_water1000 -maxh 200 -v 
+gmx mdrun -cpi NVT_sam37_water1000.cpt -s NVT_sam37_water1000.tpr -deffnm  NVT_sam37_water1000 -maxh 200 -v 
 
 RUNTIME=$(($(date +%s)-$STARTTIME))
 

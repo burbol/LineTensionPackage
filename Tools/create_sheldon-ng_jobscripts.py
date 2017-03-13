@@ -99,6 +99,10 @@ for i in pc:
 				if Extend == 'yes':
 					#first jobscript changes "mdp" options with tpbconv to extend simulation
 					JobOut.write('gmx convert-tpr -s ' + Filename + '.tpr -until ' + str(SimLen) + ' -o ' + Filename + '.tpr \n')
+					
+					JobOut.write('\n')
+					
+					JobOut.write('gmx mdrun -cpi '+ Filename + '.cpt -s ' + Filename + '.tpr -deffnm  '+ Filename + ' -maxh ' + str(SimTime) + ' -v \n')
 				
 				elif Extend == 'no':
 					JobOut.write('gmx grompp -f ' + Minimdp + ' -c ' + Startfile + '.gro -p ' + topfile + ' -o '+ Minifile +'.tpr -maxwarn 9\n')
@@ -111,13 +115,13 @@ for i in pc:
 				
 					JobOut.write('gmx grompp -f ' + NVTmdp + ' -c ' + Minifile + '.gro -p ' + topfile + ' -o '+ Filename +'.tpr -maxwarn 9\n')
 
-				JobOut.write('\n')
+					JobOut.write('\n')
 				
-				# For more then 1 node use mpirun
-				#JobOut.write('mpirun -np ' + str(CpuNum) + ' mdrun -s ' + Filename + '.tpr -deffnm  '+ Filename + ' -maxh ' + str(SimTime) + ' -v \n')
+					# For more then 1 node use mpirun
+					#JobOut.write('mpirun -np ' + str(CpuNum) + ' mdrun -s ' + Filename + '.tpr -deffnm  '+ Filename + ' -maxh ' + str(SimTime) + ' -v \n')
 				
-				# For only 1 node mpi not needed:
-				JobOut.write('gmx mdrun -s ' + Filename + '.tpr -deffnm  '+ Filename + ' -maxh ' + str(SimTime) + ' -v \n')
+					# For only 1 node mpi not needed:
+					JobOut.write('gmx mdrun -s ' + Filename + '.tpr -deffnm  '+ Filename + ' -maxh ' + str(SimTime) + ' -v \n')
 
 			else:
 				# For more then 1 node use mpirun

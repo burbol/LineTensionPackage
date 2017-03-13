@@ -1,11 +1,15 @@
-1 March 2017: NEXT TASKS
+(1)->2 March 2017: NEXT TASKS
 
-- [ ] Check simulations with VMD (version_v2)
-- [x] Extend simulations to 200ns (version_v2)
-- [ ] Submit simulations of planar systems (version_v2)
-- [ ] Calculate GDS (version_v2)
-- [ ] analyze first round (60-100ns) (version_v2)
+- [x] Check simulations with VMD (Version_V2) => first dilute!!!
+- [x] Backup finished simulations (in 2 different places at least)
+- [ ] CORRECT ERROR: backup output of failed time extension + copy correct simul. output from backup to scratch
+- [ ] RUN: Extend simulations to 200ns (Version_V2)
+- [ ] RUN: Submit simulations of planar systems (Version_V2) => add vacuum!!!
+- [ ] RUN: A couple of simulations with 50% => first make surface bigger!!
+- [ ] Calculate GDS (Version_V2)
+- [ ] analyze first round (60-100ns) (Version_V2)
 - [ ] Analyze second round (extension to 200ns) (version_v2)
+- [ ] Determine line tension of Version_v2
 - [ ] Submit planar systems of NewVersion_4
 - [ ] Calculate GDS of NewVersion_4
 - [ ] Determine line tension of NewVersion_4
