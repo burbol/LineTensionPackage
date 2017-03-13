@@ -23,20 +23,10 @@ n=4
 #mkdir /net/data/eixeres/Version_v2/global_NVT_densmaps
 #mkdir /net/data/eixeres/Version_v2/radial_densmaps
 
-<<<<<<< Updated upstream
 
 for i in 44 37 33 22 11 0 50 # OH density of the SAM
 do
   for j in 10000 9000 8000 7000 6500 5000 4000 3000 2000 1000  # number of water molecules
-=======
-#for i in 0 11 22 33 37 44 # OH density of the SAM
-#do
-  #for j in 1000 2000 3000 4000 5000 6500 7000 8000 9000 10000  # number of water molecules
-  #do
-for i in 0
-do
-  for j in  5000  
->>>>>>> Stashed changes
   do
 
   cd /net/data/eixeres/Version_v2/FINISHED/s${i}_w${j}
@@ -102,21 +92,12 @@ do
     #echo ${n} | gmx density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_NVT_sam${i}_water${j}.xvg -sl 1000 
     #echo ${m} |gmx density -dens number -f NVT_sam${i}_water${j}.xtc -s g_rad_NVT_sam${i}_water${j}.tpr -o ng_density_SAM_sam${i}_water${j}.xvg -sl 1000
 
-<<<<<<< Updated upstream
 # Copy all files to same folder and delete originals
 #mv ng_density_SAM_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_SAMS_densmaps/ng_density_NVT_sam${i}_water${j}.xvg
 #mv ng_density_NVT_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_NVT_densmaps/ng_density_SAM_sam${i}_water${j}.xvg
 
 #mv g_density_SAM_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_SAMS_densmaps/g_density_SAM_sam${i}_water${j}.xvg
 #mv g_density_NVT_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_NVT_densmaps/g_density_NVT_sam${i}_water${j}.xvg
-=======
-# Move all files to same folder
-mv ng_density_SAM_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_SAMS_densmaps/ng_density_SAM_sam${i}_water${j}.xvg
-mv ng_density_NVT_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_NVT_densmaps/ng_density_NVT_sam${i}_water${j}.xvg
-
-mv g_density_SAM_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_SAMS_densmaps/g_density_SAM_sam${i}_water${j}.xvg
-mv g_density_NVT_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_NVT_densmaps/g_density_NVT_sam${i}_water${j}.xvg
->>>>>>> Stashed changes
 
 #######################################################################
 
@@ -126,7 +107,7 @@ mv g_density_NVT_sam${i}_water${j}.xvg  /net/data/eixeres/Version_v2/global_NVT_
 GMXLIB="/net/data/eixeres/sheldon-old/gromacs_tpi_compiled/share/gromacs/top/"
 
 # Use old version of grompp with old version of .top file
-/net/data/eixeres/sheldon-old/gromacs_tpi_compiled/bin/grompp -f NVT_60ns_v2.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}_old.top -n index${i}_${j}.ndx -o g_rad_NVT_sam${i}_water${j}.tpr -maxwarn 11
+#/net/data/eixeres/sheldon-old/gromacs_tpi_compiled/bin/grompp -f NVT_60ns_v2.mdp -c NVT_sam${i}_water${j}.gro -p ${i}pc_${j}_old.top -n index${i}_${j}.ndx -o g_rad_NVT_sam${i}_water${j}.tpr -maxwarn 11
 
 
     #k=200
