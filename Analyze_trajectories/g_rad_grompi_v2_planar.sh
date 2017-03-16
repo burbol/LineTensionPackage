@@ -43,17 +43,17 @@ do
 # Water number density -> name:  ndens_NVT_sam${i}_water_ptensor.xvg 
 # Water mass density   -> name:  dens_NVT_sam${i}_water_ptensor.xvg 
     
-    # Calculate mass densities
+    # Calculate mass densities (for the last 4ns of the 8ns-simulations)
     # For water
-    echo ${n} | gmx density -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o dens_NVT_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000
+    echo ${n} | gmx density -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o dens_NVT_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000 -center
     # For SAMs 
-    echo ${m} | gmx density -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o dens_SAM_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000
+    echo ${m} | gmx density -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o dens_SAM_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000 -center
     
-    # Calculate number densities
+    # Calculate number densities (for the last 4ns of the 8ns-simulations)
     # For water
-    echo ${n} | gmx density -dens number -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o ndens_NVT_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000
+    echo ${n} | gmx density -dens number -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o ndens_NVT_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000 -center
     # For SAMs 
-    echo ${m} |gmx density -dens number -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o ndens_SAM_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000
+    echo ${m} |gmx density -dens number -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o ndens_SAM_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000 -center
 
 # Move all files to same folder
 mv dens_SAM_sam${i}_water_ptensor.xvg  /net/data/eixeres/Version_v2/planar_densmaps/dens_SAM_sam${i}_water_ptensor.xvg
