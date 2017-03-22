@@ -34,6 +34,6 @@ if [[ $RUNTIME -lt 10 ]]; then
    exit
 else
    echo "everything fine..."
-   sbatch /scratch/eixeres/Version_v2/scripts/s11_w4000/s11_w4000_2
+   sbatch /scratch/eixeres/Version_v2/scripts_sheldon-ng/s11_w4000/s11_w4000_2
    fi
 

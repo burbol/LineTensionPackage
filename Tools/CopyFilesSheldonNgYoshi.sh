@@ -19,7 +19,8 @@ do
   	# copy to sheldon-ng
   	#scp s${i}_w${j}/* eixeres@sheldon-ng.physik.fu-berlin.de:/scratch/eixeres/Version_v2/scripts/s${i}_w${j}/
   	# copy to yoshi
-  	scp s${i}_w${j}/pairtypes.itp eixeres@yoshi.physik.fu-berlin.de:/scratch/eixeres/Version_v2/scripts/s${i}_w${j}/
+  	#scp s${i}_w${j}/pairtypes.itp eixeres@yoshi.physik.fu-berlin.de:/scratch/eixeres/Version_v2/scripts/s${i}_w${j}/
+  	cp {${i}pc_${j}_old.top,index${i}_${j}.ndx} /scratch/eixeres/Version_v2/s${i}_w${j}/
 
   done
 done
