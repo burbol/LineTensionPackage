@@ -1,0 +1,21 @@
+File  Water Peaks
+             
+g_density_NVT_sam22_water1000.xvg  [1.1819999999999999, 80.390699999999995]
+             
+g_density_NVT_sam22_water2000.xvg  [1.1819999999999999, 130.34100000000001]
+             
+g_density_NVT_sam22_water3000.xvg  [1.1819999999999999, 166.96799999999999]
+             
+g_density_NVT_sam22_water4000.xvg  [1.1819999999999999, 208.072]
+             
+g_density_NVT_sam22_water5000.xvg  [1.1819999999999999, 227.44999999999999]
+             
+g_density_NVT_sam22_water6500.xvg  [1.1819999999999999, 267.50599999999997]
+             
+g_density_NVT_sam22_water7000.xvg  [1.1819999999999999, 286.28100000000001]
+             
+g_density_NVT_sam22_water8000.xvg  [1.1819999999999999, 303.44999999999999]
+             
+g_density_NVT_sam22_water9000.xvg  [1.1819999999999999, 337.28699999999998]
+             
+g_density_NVT_sam22_water10000.xvg  [1.1819999999999999, 357.452]

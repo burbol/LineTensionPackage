@@ -15,10 +15,13 @@ import gromacs.formats
 from matplotlib.backends.backend_pdf import PdfPages
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 
-#copy first peakdetect.py to the work folder!!
+#copy first peakdetect.py to the work folder on sheldon-ng!! (only there is peakdetect installed)
 #os.chdir('/eixeres/Dropbox/scripts/Python') 
 import peakdetect
 pk = peakdetect.peakdetect
+
+#For the first peak use "1" and for the second peak change to "2"
+peakpos = 1
 
 # The function "peakdetect" is included in the module "peakdetect.py", 
 # which can be found at https://gist.github.com/sixtenbe/1178136.
@@ -116,9 +119,9 @@ def plot_dens(x, y, filename, point):
 # Loop through all the density files in the main directory
 
 #for testing
-#for b in [5]:
+for b in [22]:
 #    for c in [2000]:
-for b in [0, 11, 22, 33, 37, 44, 50]:
+#for b in [0, 11, 22, 33, 37, 44, 50]:
     for c in [1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]:
     
         filename = 'g_density_NVT_sam%d_water%d.xvg'%(b,c, )
@@ -145,7 +148,7 @@ for b in [0, 11, 22, 33, 37, 44, 50]:
         x = input[0]
         y = input[1]
         [MAXTAB, MINTAB] = pk(y, x, 1, 8)
-        point = MAXTAB[0]
+        point = MAXTAB[peakpos]
 
 # The results are printed to the opened file.
         print >> myfile1, '{0}  {1}'.format(filename, MAXTAB[0])
