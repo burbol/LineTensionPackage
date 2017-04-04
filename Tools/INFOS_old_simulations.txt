@@ -18,3 +18,15 @@ Nodes = {216:2, 1000:3, 2000:3, 3000:3, 4000:3, 5000:3, 6500:3, 7000:5, 8000:6, 
 Old directory with backup of finished simulations
 
 BackupDir = '/home/eixeres/Dec14_Last_Sims/FINISHED/'==>>> mpi for one node
+
+
+Old directories used in C_AnglesScript.py:
+
+#parentfolder = "/Volumes/UNI/SHELDON/g_rad_densmaps/"
+#peaksfolder = "/Users/burbol2/Dropbox/Apps/Computable/Definitions_Interface/NewNames/"
+
+#parentfolder = "/net/data/eixeres/NewVersion4/FINISHED/"
+parentfolder = "/Volumes/UNI/Densmaps_NewVersion4/"
+peaksfolder = parentfolder
+outputfolder = parentfolder
+
