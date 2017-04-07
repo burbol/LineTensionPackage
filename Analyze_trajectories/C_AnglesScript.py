@@ -54,8 +54,8 @@ outputfolder = parentfolder
 
 # Percentage of -OH coverage (polarity) of the SAMs 
 
-SAMs=[0]
-#SAMs=[0, 11, 22, 33, 37, 44]
+#SAMs=[0]
+SAMs=[11, 22, 33, 37, 44]
 #Number of water molecules in the droplets
 
 #Waters=[1000]
