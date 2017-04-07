@@ -7,31 +7,18 @@
 
 module load gromacs/single/2016.1
 
-
-# the round function:
-round()
-{
-echo $(printf %.$2f $(echo "scale=$2;(((10^$2)*$1)+0.5)/(10^$2)" | bc))
-};
-
-
-n=4
-
-
-#mkdir /net/data/eixeres/Version_v2/global_SAMS_densmaps
-#mkdir /net/data/eixeres/Version_v2/global_NVT_densmaps
-#mkdir /net/data/eixeres/Version_v2/radial_densmaps
 mkdir /net/data/eixeres/Version_v2/planar_densmaps
 
-for i in 44 37 33 22 11 0 50 # OH density of the SAM
+for i in 44 37 33 22 11 0 50 # OH density of the SAM 
 do
 
   cd /net/data/eixeres/Version_v2/FINISHED/Planar_Systems/s${i}
   
+  n=4
   if [ $i -eq 0 ]
   then 
     n=3
-    m=2
+    m=5
   else 
     n=4
     m=6
@@ -45,15 +32,15 @@ do
     
     # Calculate mass densities (for the last 4ns of the 8ns-simulations)
     # For water
-    echo ${n} | gmx density -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o dens_NVT_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000 -center
+    echo 0 ${n} | gmx density -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o dens_NVT_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000 -center
     # For SAMs 
-    echo ${m} | gmx density -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o dens_SAM_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000 -center
+    echo 0 ${m} | gmx density -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o dens_SAM_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000 -center
     
     # Calculate number densities (for the last 4ns of the 8ns-simulations)
     # For water
-    echo ${n} | gmx density -dens number -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o ndens_NVT_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000 -center
+    echo 0 ${n} | gmx density -dens number -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o ndens_NVT_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000 -center
     # For SAMs 
-    echo ${m} |gmx density -dens number -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o ndens_SAM_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000 -center
+    echo 0 ${m} |gmx density -dens number -f NVT_sam${i}_water_ptensor_v2.xtc -s NVT_sam${i}_water_ptensor_v2.tpr -o ndens_SAM_sam${i}_water_ptensor.xvg -sl 1000 -b 4000 -e 8000 -center
 
 # Move all files to same folder
 mv dens_SAM_sam${i}_water_ptensor.xvg  /net/data/eixeres/Version_v2/planar_densmaps/dens_SAM_sam${i}_water_ptensor.xvg
