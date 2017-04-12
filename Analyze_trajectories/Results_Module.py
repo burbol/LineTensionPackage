@@ -227,13 +227,13 @@ def equil_results(Waters, angles, pc, Nrows, Ncolumns, blocksNum, beg, t, minblo
 
 # Plot whole simulation and return results
 # Uncomment lines for MiddlePoint/GDS  when results are provided
-#def whole_results(Waters, angles_w, angles_m, angles_s, pc, Nrows, Ncolumns, blocksNum, beg, t, minblocksize, mylabel, pltname): # with the 3 interface positions
-def whole_results(Waters, angles_w, angles_s, pc, Nrows, Ncolumns, blocksNum, beg, t, minblocksize, mylabel, pltname): # only 2 interface positions
+def whole_results(Waters, angles_w, angles_m, angles_s, pc, Nrows, Ncolumns, blocksNum, beg, t, minblocksize, mylabel, pltname): # with the 3 interface positions
+#def whole_results(Waters, angles_w, angles_s, pc, Nrows, Ncolumns, blocksNum, beg, t, minblocksize, mylabel, pltname): # only 2 interface positions
 
     # Interface at MiddlePoint/GDS
-    #errortheta_m=[]
-    #theta_m=[]
-    #equil_theta_m=[]
+    errortheta_m=[]
+    theta_m=[]
+    equil_theta_m=[]
 
     # Interface at SAM peak
     errortheta_s=[]
@@ -257,7 +257,7 @@ def whole_results(Waters, angles_w, angles_s, pc, Nrows, Ncolumns, blocksNum, be
         ax = plt.subplot(Nrows, Ncolumns, i+1)
 
         theta2_w = np.array(angles_w[(pc, c)])
-        #theta2_m = np.array(angles_m[(pc, c)])
+        theta2_m = np.array(angles_m[(pc, c)])
         theta2_s = np.array(angles_s[(pc, c)])
 
         end=endpoint(theta2_w)
@@ -271,12 +271,12 @@ def whole_results(Waters, angles_w, angles_s, pc, Nrows, Ncolumns, blocksNum, be
 
             # Empty arrays to store averages (for plots)
             avrg_w = np.ones(end - start)
-            #avrg_m = np.ones(end - start)
+            avrg_m = np.ones(end - start)
             avrg_s = np.ones(end - start)
 
             # Arrays with time variables (for plots)
             t_avrg_w = t[start:end]
-            #t_avrg_m = t[start:end]
+            t_avrg_m = t[start:end]
             t_avrg_s = t[start:end]
 
             # Interface at first water peak (calculated only for plot)
@@ -284,12 +284,12 @@ def whole_results(Waters, angles_w, angles_s, pc, Nrows, Ncolumns, blocksNum, be
             avrg_w = thetamean*avrg_w
 
             # Interface at MiddlePoint/GDS
-            #thetamean, errrorbar =blockAverage((theta2_m[start:end]),blocksNum)
-            #avrg_m = thetamean*avrg_m
+            thetamean, errrorbar =blockAverage((theta2_m[start:end]),blocksNum)
+            avrg_m = thetamean*avrg_m
 
-            #(errortheta_m).append(errrorbar)
-            #(theta_m).append(thetamean)
-            #(equil_theta_m).append(c)
+            (errortheta_m).append(errrorbar)
+            (theta_m).append(thetamean)
+            (equil_theta_m).append(c)
 
             # Interface at SAM peak
             thetamean, errrorbar =blockAverage((theta2_s[start:end]),blocksNum)
@@ -300,7 +300,7 @@ def whole_results(Waters, angles_w, angles_s, pc, Nrows, Ncolumns, blocksNum, be
             (equil_theta_s).append(c)
 
             ax.plot(t_avrg_w, avrg_w,'-',color='orange',linewidth=4)
-            #ax.plot(t_avrg_m, avrg_m,'-',color='black', linewidth=4)
+            ax.plot(t_avrg_m, avrg_m,'-',color='black', linewidth=4)
             ax.plot(t_avrg_s, avrg_s,'g-',linewidth=4)
 
 
@@ -312,7 +312,7 @@ def whole_results(Waters, angles_w, angles_s, pc, Nrows, Ncolumns, blocksNum, be
             titletext = titletext + ': Not equilibrated'
 
         ax.plot(t, theta2_w,'^',label="Water Peak",color='orange',markersize=7.0)
-        #ax.plot(t, theta2_m,'h', color='gray',label="GDS",markersize=6.0)
+        ax.plot(t, theta2_m,'h', color='gray',label="GDS",markersize=6.0)
         ax.plot(t,theta2_s,'s',label="SAM Peak",color='lightgreen',markersize=5.0)
         ax.set_xlim([t[0],t[end-1]])
 
@@ -339,6 +339,6 @@ def whole_results(Waters, angles_w, angles_s, pc, Nrows, Ncolumns, blocksNum, be
     plt.show()
     fig.savefig(pltname +'_t_s'+str(pc)+'.jpg', bbox_inches='tight',dpi=400)
 
-    #return #theta_m,errortheta_m,equil_theta_m, theta_s,errortheta_s,equil_theta_s -> uncomment if needed
-    return theta_s,errortheta_s,equil_theta_s
+    return theta_m,errortheta_m,equil_theta_m, theta_s,errortheta_s,equil_theta_s
+    #return theta_s,errortheta_s,equil_theta_s
 

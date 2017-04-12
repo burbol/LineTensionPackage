@@ -55,7 +55,7 @@ outputfolder = parentfolder
 # Percentage of -OH coverage (polarity) of the SAMs 
 
 SAMs=[44]
-#SAMs=[11, 22, 33, 37, 44]
+#SAMs=[0, 11, 22, 33, 37, 44]
 #Number of water molecules in the droplets
 
 #Waters=[1000]
@@ -81,7 +81,7 @@ boxlength={0: 12.0, 11: 12.0, 22: 12.0, 33: 12.0, 37: 12.0, 44: 12.0}
 # d) for Middle Point
 # e) for highest carbon in SAM
 
-option= 'b'
+option= 'a'
 if option == 'a':
     interface='WaterPeak'
 elif option == 'b':
