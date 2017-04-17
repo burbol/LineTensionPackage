@@ -18,10 +18,11 @@ def func(x, a, b):
 
 # endpoint returns the integer "end": the last data point different then "nan"
 def endpoint(theta):
-	for end in range(20, len(theta)):
-		 if math.isnan(theta[end]):
-			    break
-	return (end-1)
+    global end
+    for end in range(20, len(theta)):
+        if math.isnan(theta[end]):
+            break
+    return (end-1)
 
 # The following functions will be used to calculate the block averages and the errorbars
 # The function naive_variance will only be used inside the function blockAverage
