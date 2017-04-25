@@ -7,9 +7,9 @@ import math
 import fnmatch # for filtering the file list to get the top,gro,mdp,ndx files.
 
 # If the simulation needs to be extended there is no need for equilibration or for running "grompp"
-Extend = 'yes' # use 'yes' or 'no'
+Extend = 'no' # use 'yes' or 'no'
 
-N = 10  # NUMBER OF SCRIPTS TO SUBMIT = total time running will be this number times the Walltime
+N = 5  # NUMBER OF SCRIPTS TO SUBMIT = total time running will be this number times the Walltime
 
 Walltime = '120:00:00'  # Walltime in format 'h:mm:ss'
 SimTime = 120   # maximum run length of simulation in hours, it can be also a fraction of an hour
@@ -30,7 +30,7 @@ pc = [0, 11, 22, 33, 37, 44, 50]
 molec = [1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]
 
 
-BackupDir = '/home/eixeres/Version_v2/FINISHED_extended/'   # directory to copy (backup) simulation output
+#BackupDir = '/home/eixeres/Version_v2/FINISHED_extended/'   # directory to copy (backup) simulation output
 
 for i in pc:
 	for j in molec:
@@ -39,14 +39,14 @@ for i in pc:
 		NodesNum = Nodes[j]
 		CpuNum = NodesNum*Cpus
 		
-		LocalDir = '/Users/eixeres/Dropbox/GitHub/LineTensionPackage/Tools/SubmissionScripts/Extend' # main local directory where scripts will be saved 
+		LocalDir = '/Users/eixeres/Dropbox/GitHub/LineTensionPackage/Tools/SubmissionScripts/v2.2' # main local directory where scripts will be saved 
 
 		if not os.path.exists(LocalDir):
 			os.system("mkdir "+ LocalDir)
 		Dir = LocalDir +'/s'+str(i)+'_w'+str(j)
 		
-		SimDir = '/scratch/eixeres/Version_v2/s'+str(i)+'_w'+str(j)   #directory from where to run simulation
-		ScriptDir = '/scratch/eixeres/Version_v2/scripts/s'+str(i)+'_w'+str(j)+'/' # remote directory with submission scripts (forward slash at the end!!)
+		SimDir = '/scratch/eixeres/Version_v2.2/s'+str(i)+'_w'+str(j)   #directory from where to run simulation
+		ScriptDir = '/scratch/eixeres/Version_v2.2/scripts/s'+str(i)+'_w'+str(j)+'/' # remote directory with submission scripts (forward slash at the end!!)
 		Filename = 'NVT_sam'+str(i)+'_water'+str(j)  # name of files 
 		Scriptname ='s'+str(i)+'_w'+str(j)+'_gpu'  # name of script
 		
@@ -55,7 +55,7 @@ for i in pc:
 		#NVTfile = 'NVT_sam'+str(i)+'_water'+str(j) #since we run only NVT we don't need a different name for NVT and NPT simulation, we use directly "Filename"
 		topfile= str(i)+'pc_'+str(j)+'.top'
 		Minimdp = 'Mini_v2.mdp'
-		NVTmdp = 'NVT_'+str(Simns[j])+'ns_v2.mdp'
+		NVTmdp = 'NVT_'+str(Simns[j])+'ns_v2.2.mdp'
 	
 		if not os.path.exists(Dir):
 			os.system("mkdir "+ Dir)	
@@ -143,8 +143,8 @@ for i in pc:
 				JobOut.write('\n')	
 					
 			# after the last run, we also want to backup the simulation files
-			elif k == N-1:
+			#elif k == N-1:
 				#JobOut.write("mkdir " + BackupDir + '\n')
-				JobOut.write('cp -r ' + SimDir + ' ' + BackupDir + '\n')
+				#JobOut.write('cp -r ' + SimDir + ' ' + BackupDir + '\n')
 				
 			JobOut.close()

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /Users/eixeres/Dropbox/GitHub/LineTensionPackage/Tools/SubmissionScripts/Extend/ 
+cd /Users/eixeres/Dropbox/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files 
 
 #################################
 # For testing:
@@ -20,7 +20,7 @@ do
   	#scp s${i}_w${j}/* eixeres@sheldon-ng.physik.fu-berlin.de:/scratch/eixeres/Version_v2/scripts/s${i}_w${j}/
   	# copy to yoshi
   	#scp s${i}_w${j}/pairtypes.itp eixeres@yoshi.physik.fu-berlin.de:/scratch/eixeres/Version_v2/scripts/s${i}_w${j}/
-  	cp {${i}pc_${j}_old.top,index${i}_${j}.ndx} /scratch/eixeres/Version_v2/s${i}_w${j}/
+  	cp NVT_200ns_v2.2.mdp /Users/eixeres/Dropbox/GitHub/LineTensionPackage/SYSTEM_CREATION/gromacs_files/SAM_startfiles_v2_36x36/Version_v2/s${i}_w${j}/
 
   done
 done
