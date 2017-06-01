@@ -45,7 +45,8 @@ from gromacs.formats import XVG
 # the interface positions, and "outputfolder" the output files
 
 #parentfolder = "/net/data/eixeres/Version_v2/radial_densmaps/" #densmaps on server
-parentfolder = "/Volumes/UNI/radial_densmaps_Version_v2/" #densmaps locally
+#parentfolder = "/Volumes/UNI/radial_densmaps_Version_v2/" #densmaps locally
+parentfolder = "/Volumes/UNI/radial_densmaps_Version_v2.2/" #densmaps locally
 peaksfolder = parentfolder #interface positions
 outputfolder = parentfolder
 
@@ -54,12 +55,12 @@ outputfolder = parentfolder
 
 # Percentage of -OH coverage (polarity) of the SAMs 
 
-SAMs=[44]
-#SAMs=[0, 11, 22, 33, 37, 44]
+#SAMs=[44]
+SAMs=[11, 22, 33, 37, 44]
 #Number of water molecules in the droplets
 
 #Waters=[1000]
-Waters=[1000, 2000, 3000, 4000, 5000, 6500, 7000, 8000, 9000, 10000]
+Waters=[1000, 2000, 3000, 4000, 5000, 6500]
 
 # Length of longest interval analyzed. In the shorter simulations
 # 'NaN' will be returned for each time step that does not exist
@@ -81,7 +82,7 @@ boxlength={0: 12.0, 11: 12.0, 22: 12.0, 33: 12.0, 37: 12.0, 44: 12.0}
 # d) for Middle Point
 # e) for highest carbon in SAM
 
-option= 'a'
+option= 'e'
 if option == 'a':
     interface='WaterPeak'
 elif option == 'b':
