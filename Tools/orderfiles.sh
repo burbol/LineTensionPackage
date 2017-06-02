@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# This script moves the .xvg files (density profiles) to different folders corresponding to each system
+# This script moves files to different folders corresponding to each system
 
 #folder where the .xvg files are saved together
-cd /Volumes/UNI/radial_densmaps_Version_v2
+cd /Volumes/Version_v2/Version_v2.2/Simulations_xtc_distilled
 
 for i in 0 11 22 33 37 44 50
 do
@@ -11,8 +11,11 @@ do
   do
 	mkdir s${i}_w${j}
 	# using "cp" and "rm" instead of "mv" because of wildcard character "*"
-	cp g_rad_dmap_${i}pc_w${j}_*ns.xvg ./s${i}_w${j}/
-	rm g_rad_dmap_${i}pc_w${j}_*ns.xvg
+	cp NVT_sam${i}_water${j}.gro ./s${i}_w${j}/
+	cp NVT_sam${i}_water${j}_dil.xtc ./s${i}_w${j}/
+		
+	#rm NVT_sam${i}_water${j}.gro
+	#rm NVT_sam${i}_water${j}_dil.xtc
   
   done
 done
